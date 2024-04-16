@@ -4,6 +4,7 @@ import connectDB from "./lib/database.js"
 import  serviceRouter  from "./src/router/serviceRouter.js"
 import productRouter from "./src/router/productRouter.js"
 import cors from "cors"
+import cartRouter from "./src/router/cartRouter.js"
 
 const app = express()
 config()
@@ -16,6 +17,7 @@ const port = process.env.PORT
 
 app.use("/services",serviceRouter )
 app.use("/products",productRouter)
+app.use("/carts",cartRouter)
 
 
 
