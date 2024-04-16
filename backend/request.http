@@ -1,5 +1,9 @@
-Get http://localhost:6000/services
+GET http://localhost:6000/services
 
 
 ###
-Get http://localhost:6000/products
+GET http://localhost:6000/products
+
+
+###
+POST http://localhost:6000/appointments/book
