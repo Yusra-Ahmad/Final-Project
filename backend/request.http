@@ -7,3 +7,10 @@ GET http://localhost:6000/products
 
 ###
 POST http://localhost:6000/appointments/book
+Content-Type: application/json
+
+{
+     "service": "661d1d7229cdf33978148a91",
+                "date": "01-12-2024",
+                "startTime": "10:00 am"
+}

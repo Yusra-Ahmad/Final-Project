@@ -4,13 +4,15 @@ import Appointment from "../models/Appointment.js";
 const appointmentController = {
     bookAppointment: async (req, res) => {
         try {
-            const { serviceId, date, startTime, endTime } = req.body;
+            const { service, date, startTime,  } = req.body;
+            if(!service){
+                throw new error()
+            }
             const newAppointment = new Appointment({
-                service: serviceId,
+                service: service,
                 date,
-                startTime,
-                
-                customer: req.user._id // Assuming user is authenticated
+                startTime
+                // user: req.user._id // Assuming user is authenticated
             });
             await newAppointment.save();
             res.status(201).json({ message: "Appointment booked successfully", appointment: newAppointment });
@@ -21,7 +23,7 @@ const appointmentController = {
 
     getUserAppointments: async (req, res) => {
         try {
-            const appointments = await Appointment.find({ customer: req.user._id }).populate('service');
+            const appointments = await Appointment.find({ user: req.user._id }).populate('service');
             res.status(200).json(appointments);
         } catch (error) {
             res.status(500).json({ message: error.message });
