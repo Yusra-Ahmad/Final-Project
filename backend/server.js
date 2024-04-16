@@ -2,6 +2,7 @@ import express from "express"
 import { config } from "dotenv"
 import connectDB from "./lib/database.js"
 import  serviceRouter  from "./src/router/serviceRouter.js"
+import productRouter from "./src/router/productRouter.js"
 import cors from "cors"
 
 const app = express()
@@ -13,8 +14,8 @@ const port = process.env.PORT
 
 
 
-app.use("/service",serviceRouter )
-
+app.use("/services",serviceRouter )
+app.use("/products",productRouter)
 
 
 
