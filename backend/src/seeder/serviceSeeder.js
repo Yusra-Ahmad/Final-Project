@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Services from "../models/Services.js";
-
+import { config } from "dotenv"
 
 const servicesData = [
   {
@@ -57,10 +57,10 @@ async function seedServices() {
     mongoose.connection.close();
   }
 }
-
+config()
 // Connect to the database and run the seeder function
 mongoose
-  .connect("mongodb+srv://sadhanasingh:sweethome@wd23.gklhd9p.mongodb.net/beauty")
+  .connect(process.env.CONNECTION_STRING)
   .then(() => {
     console.log("Connected to the database.");
     seedServices();
