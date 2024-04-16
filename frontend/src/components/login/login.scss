@@ -1,0 +1,21 @@
+.login-form {
+  background-color: #1c1919;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  input {
+    background-color: #1c1919;
+    color: white;
+    border: none;
+    border-bottom: 2px solid #b08568;
+    padding: 20px;
+    width: 50%;
+    &::placeholder {
+      color: white;
+    }
+  }
+}

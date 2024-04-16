@@ -1,5 +1,6 @@
 GET http://localhost:6000/services
 
+Get http://localhost:6000/service
 
 ###
 GET http://localhost:6000/products
@@ -14,3 +15,49 @@ Content-Type: application/json
                 "date": "01-12-2024",
                 "startTime": "10:00 am"
 }
+
+GET http://localhost:6000/auth/users
+
+###
+
+POST http://localhost:6000/auth/register
+Content-Type: application/json
+
+
+{
+    "email":"hetal@gmail.com",
+    "password":"12345678"
+}
+
+###
+
+POST http://localhost:6000/auth/login
+Content-Type: application/json
+
+
+{
+    "email":"hetal@gmail.com",
+    "password":"12345678"
+}
+
+###
+
+DELETE  http://localhost:6000/auth/users
+
+Get http://localhost:3020/services
+###
+Get http://localhost:3020/products/
+
+
+###
+ POST http://localhost:3020/carts/add-to-cart/661e4349d31012d4555d7be8
+Content-Type: application/json
+
+ {
+  "userId": "661e4349d31012d4555d7bea"
+}
+
+
+###
+Get http://localhost:3020/carts/661e4349d31012d4555d7bea
+
