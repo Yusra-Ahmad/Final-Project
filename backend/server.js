@@ -14,7 +14,7 @@ const port = process.env.PORT
 
 
 
-app.use("/service",serviceRouter )
+app.use("/services",serviceRouter )
 app.use("/products",productRouter)
 
 
