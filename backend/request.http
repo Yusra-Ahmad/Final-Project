@@ -1,5 +1,16 @@
-Get http://localhost:6000/services
+Get http://localhost:3020/services
+###
+Get http://localhost:3020/products/
 
 
 ###
-Get http://localhost:6000/products
+ POST http://localhost:3020/carts/add-to-cart/661e4349d31012d4555d7be8
+Content-Type: application/json
+
+ {
+  "userId": "661e4349d31012d4555d7bea"
+}
+
+
+###
+Get http://localhost:3020/carts/661e4349d31012d4555d7bea
