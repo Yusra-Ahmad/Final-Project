@@ -1,11 +1,11 @@
-import Hero from "../hero/Hero";
-
-const Header = () => {
+import "./header.scss";
+import Navbar from "../navbar/Navbar";
+const Hero = () => {
   return (
-    <header>
-      <Hero />
-    </header>
+    <div className="hero">
+      <Navbar />
+    </div>
   );
 };
 
-export default Header;
+export default Hero;
