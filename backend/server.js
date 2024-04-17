@@ -16,6 +16,7 @@ app.use(express.json())
 connectDB()
 app.use(cors())
 const port = process.env.PORT || 6000;
+app.use('/uploads', express.static('uploads'));
 
 
 
