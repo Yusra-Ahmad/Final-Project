@@ -1,21 +1,28 @@
 GET http://localhost:6000/services
 
-Get http://localhost:6000/service
 
-###
+### bn0appointmentController.boappointmentController.bookAppointment.okAppointment.
 GET http://localhost:6000/products
 
 
 ###
 POST http://localhost:6000/appointments/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjIwMTgyNjEwY2EyYjc5YmIwN2YwMmYiLCJpYXQiOjE3MTMzNzkzNzIsImV4cCI6MTcxMzQyMjU3Mn0.cZJK5UzhcWTfhZfDThkAX9RWv-uHJ88SrPG5Y9vOfMU
 Content-Type: application/json
 
 {
      "service": "661d1d7229cdf33978148a91",
-                "date": "01-12-2024",
-                "startTime": "10:00 am"
+                "startTime": "2024-04-30T10:00:00",
+            "user":"661fb39a7a665b08d70b4c1e"
 }
+###
+DELETE http://localhost:6000/appointments/deleteall
 
+###
+
+GET http://localhost:6000/appointments/661fb39a7a665b08d70b4c1e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjIwMTgyNjEwY2EyYjc5YmIwN2YwMmYiLCJpYXQiOjE3MTMzNzkzNzIsImV4cCI6MTcxMzQyMjU3Mn0.cZJK5UzhcWTfhZfDThkAX9RWv-uHJ88SrPG5Y9vOfMU
+###
 GET http://localhost:6000/auth/users
 
 ###
@@ -25,7 +32,7 @@ Content-Type: application/json
 
 
 {
-    "email":"hetal@gmail.com",
+    "email":"asa@gmail.com",
     "password":"12345678"
 }
 
@@ -36,7 +43,7 @@ Content-Type: application/json
 
 
 {
-    "email":"hetal@gmail.com",
+    "email":"asa@gmail.com",
     "password":"12345678"
 }
 
@@ -44,6 +51,7 @@ Content-Type: application/json
 
 DELETE  http://localhost:6000/auth/users
 
+###
 Get http://localhost:3020/services
 ###
 Get http://localhost:3020/products/
