@@ -1,5 +1,7 @@
 import { TfiAlignLeft } from "react-icons/tfi";
 import { AiOutlineClose } from "react-icons/ai";
+import logo from "../../assets/bliss-logo1.svg";
+import bliss from "../../assets/bliss2.png";
 
 import "./navbar.scss";
 import { useState } from "react";
@@ -10,20 +12,23 @@ const Navbar = () => {
     setDropMenu((prevDropMenu) => !prevDropMenu);
   };
   return (
-    <div className="navbar">
-      <p>Saloon & Spa</p>
-      <li onClick={handleDropMenu} className="menu-li">
-        {dropMenu ? (
-          <div className={`menu-icon ${dropMenu ? "active" : ""}`}>
-            Menu <TfiAlignLeft />
-          </div>
-        ) : (
-          <div className={`menu-icon ${dropMenu ? "open" : ""}`}>
-            <AiOutlineClose />
-            <Menu />
-          </div>
-        )}
-      </li>
+    <div>
+      <img src={logo} alt="" className="logo" />
+      <div className="navbar">
+        <img src={bliss} alt="" />
+        <ul>
+          {dropMenu ? (
+            <li onClick={handleDropMenu} className="menu-icon">
+              Menu <TfiAlignLeft />
+            </li>
+          ) : (
+            <li className="menu-icon">
+              <AiOutlineClose onClick={handleDropMenu} />
+            </li>
+          )}
+          <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />
+        </ul>
+      </div>
     </div>
   );
 };

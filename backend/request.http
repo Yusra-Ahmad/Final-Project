@@ -31,9 +31,16 @@ POST http://localhost:6000/auth/register
 Content-Type: application/json
 
 
+<<<<<<< HEAD
+{ "username":"hetal24",
+    "email":"hetal24@gmail.com",
+    "password":"12345678",
+    "confirmPassword":"12345678"
+=======
 {
     "email":"asa@gmail.com",
     "password":"12345678"
+>>>>>>> ec011bf276e4bb06bd115f5f7696ef404847727f
 }
 
 ###

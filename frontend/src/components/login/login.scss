@@ -2,12 +2,16 @@
   background-color: #1c1919;
   color: white;
   height: 100vh;
+  font-family: serif;
+  font-style: italic;
+  letter-spacing: 0.2rem;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 40px;
-  input {
+  .login-input {
     background-color: #1c1919;
     color: white;
     border: none;
@@ -17,5 +21,10 @@
     &::placeholder {
       color: white;
     }
+  }
+  .login-button {
+    padding: 20px;
+    width: 50%;
+    background-color: #b08568;
   }
 }
