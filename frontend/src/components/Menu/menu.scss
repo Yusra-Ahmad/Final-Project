@@ -15,6 +15,9 @@
   align-items: center;
   justify-content: center;
 
+  transition: transform 0.7s, opacity 0.7s;
+  transform-origin: top;
+
   ul {
     display: flex;
     list-style: none;
@@ -54,4 +57,17 @@
       }
     }
   }
+}
+
+.active {
+  transform: translateY(0%);
+  opacity: 1;
+  // transition: ;
+}
+
+.hidden {
+  transform: translateY(-70%);
+  opacity: 0;
+  // transition: ;
+  // display: none;
 }

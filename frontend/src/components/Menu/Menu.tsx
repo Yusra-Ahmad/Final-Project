@@ -2,16 +2,18 @@ import { useState } from "react";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+interface MenuProps {
+  handleDropMenu: () => void;
+  dropMenu: Boolean;
+}
+
+const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  const toggleLoginStatus = () => {
-    setIsLoggedIn((prevIsLoggedIn) => !prevIsLoggedIn);
-  };
   return (
-    <div className="menu">
+    <div className={`menu ${dropMenu ? "hidden" : "active"}`}>
       <ul>
-        <Link to="/" className="link">
+        <Link to="/" className="link" onClick={handleDropMenu}>
           <li>Home </li>
         </Link>
         <Link to="/products" className="link">
@@ -28,11 +30,18 @@ const Menu = () => {
         </Link>
 
         {isLoggedIn ? (
-          <Link to="/login" onChange={toggleLoginStatus} className="link">
+          <Link to="/login" className="link" onClick={handleDropMenu}>
             <li>Login</li>
           </Link>
         ) : (
-          <li onChange={toggleLoginStatus}>Logout</li>
+          <li
+            onClick={() => {
+              // do big reset of everything here
+              // reset the user of the store (in the context)
+            }}
+          >
+            Logout
+          </li>
         )}
       </ul>
     </div>
