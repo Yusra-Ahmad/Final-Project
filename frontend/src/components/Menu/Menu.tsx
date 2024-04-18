@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./menu.scss";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const toggleLoginStatus = () => {
     setIsLoggedIn((prevIsLoggedIn) => !prevIsLoggedIn);
@@ -10,15 +11,28 @@ const Menu = () => {
   return (
     <div className="menu">
       <ul>
-        <li>Home</li>
-        <li>Products</li>
-        <li>Services</li>
-        <li>About</li>
-        <li>Register</li>
+        <Link to="/" className="link">
+          <li>Home </li>
+        </Link>
+        <Link to="/products" className="link">
+          <li>Products</li>
+        </Link>
+        <Link to="services" className="link">
+          <li>Services</li>
+        </Link>
+        <Link to="about" className="link">
+          <li>About</li>
+        </Link>
+        <Link to="register" className="link">
+          <li>Register</li>
+        </Link>
+
         {isLoggedIn ? (
-          <li onClick={toggleLoginStatus}>Login</li>
+          <Link to="/login" onChange={toggleLoginStatus} className="link">
+            <li>Login</li>
+          </Link>
         ) : (
-          <li onClick={toggleLoginStatus}>Logout</li>
+          <li onChange={toggleLoginStatus}>Logout</li>
         )}
       </ul>
     </div>

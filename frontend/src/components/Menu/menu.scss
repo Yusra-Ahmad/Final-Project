@@ -3,7 +3,7 @@
   color: white;
   font-family: serif;
   font-style: italic;
-  letter-spacing: 4px;
+  letter-spacing: 0.2rem;
   font-size: 2rem;
   height: 100vh;
   position: absolute;
@@ -14,13 +14,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   ul {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 3rem;
+
     @media (max-width: 768px) {
       flex-direction: column;
       text-align: center;
+      gap: 2rem;
+    }
+    @media (max-width: 1024px) {
+      font-size: 1.7rem;
+      gap: 2rem;
+    }
+    .link {
+      text-decoration: none;
+      color: white;
+      li {
+        position: relative;
+        padding-bottom: 10px;
+        &::before {
+          // Pseudo-element for the border animation
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0; // Initial position at left
+          width: 0; // Initial width 0
+          height: 2px; // Border height
+
+          background-color: #b08568; // Border color
+          transition: width 0.3s ease; // Transition effect
+        }
+        &:hover::before {
+          // Change width on hover
+          width: 100%; // Full width on hover
+        }
+      }
     }
   }
 }

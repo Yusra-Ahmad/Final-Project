@@ -12,18 +12,21 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <p>Saloon & Spa</p>
-      <li onClick={handleDropMenu} className="menu-li">
+      <ul>
         {dropMenu ? (
-          <div className={`menu-icon ${dropMenu ? "active" : ""}`}>
+          <li
+            onClick={handleDropMenu}
+            className={`menu-icon ${dropMenu ? "active" : ""}`}
+          >
             Menu <TfiAlignLeft />
-          </div>
+          </li>
         ) : (
-          <div className={`menu-icon ${dropMenu ? "open" : ""}`}>
-            <AiOutlineClose />
+          <li className={`menu-icon ${dropMenu ? "open" : ""}`}>
+            <AiOutlineClose onClick={handleDropMenu} />
             <Menu />
-          </div>
+          </li>
         )}
-      </li>
+      </ul>
     </div>
   );
 };
