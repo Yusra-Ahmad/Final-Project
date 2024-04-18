@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 const { model, Schema } = mongoose;
 import bcrypt from "bcrypt";
@@ -44,4 +43,3 @@ userSchema.methods.toJSON = function () {
 };
 
 export const User = model("User", userSchema);
-
