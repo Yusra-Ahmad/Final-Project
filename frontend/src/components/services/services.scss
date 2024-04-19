@@ -1,0 +1,45 @@
+.servicebody{
+    background-color: #1c1919;
+    height: 100vh;
+    color: white;
+    font-family: serif;
+    display: flex;
+    flex-direction: column;
+    
+    .serviceheader{
+        height: 100vh;
+        width:90vw ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: justify;
+        // margin-top: 15rem;
+.header-p{
+    
+    margin-left: 60rem;
+    margin-top: 10rem;
+    h1{
+        margin: 1rem;
+        padding: 2rem;
+    }
+    .text-on-image{
+        position: absolute;
+        right: 30%;
+  left: 30%;
+  
+    }
+}
+   
+
+        img{
+      
+            margin-right: 0;
+            height: 50vh;
+          
+            margin-right: 5rem;
+opacity: 0.5;
+
+        }
+ 
+    }
+}
