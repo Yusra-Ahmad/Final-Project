@@ -32,8 +32,6 @@ authRouter
         return;
       }
 
-      // res.json(user);
-
       /// sign token
       const token = jwt.sign({ userID: user._id }, process.env.SECRET, {
         expiresIn: "12h",
