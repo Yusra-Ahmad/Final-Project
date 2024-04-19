@@ -1,6 +1,7 @@
 import { TfiAlignLeft } from "react-icons/tfi";
 import { AiOutlineClose } from "react-icons/ai";
-import logo from "../../assets/bliss-logo1.svg";
+import { Link } from "react-router-dom";
+
 import bliss from "../../assets/bliss2.png";
 
 import "./navbar.scss";
@@ -13,9 +14,11 @@ const Navbar = () => {
   };
   return (
     <div>
-      <img src={logo} alt="" className="logo" />
       <div className="navbar">
-        <img src={bliss} alt="" />
+        <Link to="/">
+          <img src={bliss} alt="" />
+        </Link>
+
         <ul>
           {dropMenu ? (
             <li onClick={handleDropMenu} className="menu-icon">

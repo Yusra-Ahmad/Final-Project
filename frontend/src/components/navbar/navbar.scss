@@ -1,15 +1,10 @@
 div {
-  .logo {
-    width: 400px;
-    position: fixed;
-    bottom: 0;
-  }
   .navbar {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    background-color: #220e07;
+    background-color: #1c19195a;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,15 +12,18 @@ div {
     font-size: 1.5rem;
     font-family: serif;
     list-style: none;
+    padding-inline: 15px;
 
     img {
-      padding-top: 10px;
-      width: 120px;
+      margin-top: 10px;
+      width: 80%;
+      max-width: 10rem;
     }
     .menu-icon {
       display: flex;
       gap: 10px;
-      padding-right: 15px;
+      margin-right: 7px;
+
       .icon {
         color: black;
       }
