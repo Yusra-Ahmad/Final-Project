@@ -1,0 +1,114 @@
+body {
+  background-color: #1c1919;
+  color: white;
+  font-family: serif;
+  font-style: italic;
+  letter-spacing: .5px;
+  font-size: 1rem;
+}
+
+
+
+$primary-color:white;
+$secondary-color: #ad8b50;
+$background-color:rgb(44, 38, 31);
+.product-list {
+  padding: 40px 40px;
+  margin: 50px 40px;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 60px 50px;
+}
+
+.product-item {
+  background-color: $background-color; 
+  border: 1px solid $secondary-color;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(202, 196, 173, 0.1);
+  transition: transform 0.6s ease, box-shadow 0.5s ease;
+  position: relative;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(177, 160, 137, 0.2);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .6;
+
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    opacity: 0;
+    background: radial-gradient(circle, rgba(188, 106, 225, 0) 0%,rgba(251, 200, 104, 0.984) 60%, rgba(207, 204, 40, 0) 100%);
+    transition: opacity .6s ease;
+
+
+
+  }
+}
+
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product-title {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: $primary-color;
+  text-align: center; 
+}
+
+.product-description {
+  margin-top: 5px;
+  text-align: center; 
+}
+
+.product-price {
+  margin-top: 10px;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center; 
+}
+
+// Media queries for responsiveness
+@media screen and (max-width: 768px) {
+  .products-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .product-item {
+    padding: 10px;
+  }
+
+  .product-image {
+    height: 150px;
+  }
+
+  .product-title {
+    font-size: 1rem;
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+  }
+}
