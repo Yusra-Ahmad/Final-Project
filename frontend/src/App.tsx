@@ -9,12 +9,12 @@ function App() {
     <>
       <Homepage />
       <Login />
-      <Services/>
       <Navbar />
 
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/services" element={<Services/>}/>
       </Routes>
     </>
   );

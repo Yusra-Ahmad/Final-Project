@@ -1,21 +1,26 @@
-import "./services.scss"
-import ServiceBackground from "../../assets/ServiceBackground.jpeg"
+import "./servicesAnimation.scss"
+import"./services.scss"
+import service from "../../assets/Service1.jpeg"
 const Services =()=>{
     return(
 <>
+<div className="backgroundAnim">
 <div className="servicebody">
-    <div className="serviceheader">
+    <div className="serviceheader" >
         <div className="header-p">
     <h1 >Services </h1>
-    <p className="text-on-image">
-Step into a realm of unparalleled beauty and relaxation at our salon. From personalized services tailored to your unique needs to indulgent spa treatments designed to rejuvenate your senses, every visit promises a delightful escape from the ordinary. With expert stylists and therapists dedicated to your satisfaction, discover the perfect blend of luxury, expertise, and tranquility that awaits you.</p>
+    <p className="text-on-image animate__fadeInLeftBig">
+    Enter our peaceful place. Enjoy personal services and spa treatments to refresh your senses. Book now for a break from the everyday.</p>
         </div>
-<div className="imagediv">
-<img src={ServiceBackground} alt="" />
+<div className="imagediv "> 
+<img src={service} alt="" />
 </div>
     </div>
-
     </div>
+</div>
+{/* <div className="content-body">
+<h2>Our Menu</h2>
+</div> */}
 </>
     );
 };
