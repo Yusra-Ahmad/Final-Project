@@ -2,74 +2,82 @@ import mongoose from "mongoose";
 import Products from "../models/Products.js";
 import { config } from "dotenv";
 
-// Load environment variables from .env file
 config();
-
 const productsData = [
   {
     title: "Face Wash",
-    description:
-      "Refresh and cleanse your skin with our gentle yet effective face wash. Formulated with natural ingredients, it removes impurities while leaving your skin feeling smooth and rejuvenated.",
+    description: "Gentle face wash to remove impurities and rejuvenate skin.",
     image: "uploads/facewash.jpg",
     price: 30,
   },
   {
     title: "Face Serum",
-    description:
-      "Revitalize your skin with our luxurious face serum. Packed with nourishing botanicals and powerful antioxidants, it helps to reduce fine lines and wrinkles, giving you a radiant and youthful complexion.",
+    description: "Luxurious serum to reduce wrinkles and revitalize skin.",
     image: "uploads/faceserum.jpg",
     price: 20,
   },
   {
     title: "Night Cream",
-    description:
-      "Indulge in overnight skin renewal with our deeply hydrating night cream. Enriched with moisturizing ingredients, it replenishes lost moisture and repairs skin while you sleep, waking up to soft and supple skin every morning.",
+    description: "Hydrating night cream for soft and supple morning skin.",
     image: "uploads/nightcream.jpg",
     price: 25,
   },
   {
     title: "Body Wash",
-    description:
-      "Treat yourself to a spa-like experience with our invigorating body wash. Infused with aromatic fragrances and moisturizing agents, it gently cleanses and hydrates your skin, leaving you feeling refreshed and revitalized.",
+    description: "Invigorating body wash for refreshed and revitalized skin.",
     image: "uploads/bodywash.jpg",
     price: 50,
   },
   {
     title: "Hair Spray",
-    description:
-      "Achieve salon-worthy styles with our versatile hair spray. Whether you're looking for volume, hold, or shine, our non-sticky formula provides long-lasting results without weighing your hair down.",
+    description: "Versatile hair spray for salon-worthy styles.",
     image: "uploads/hairspray.jpg",
     price: 40,
   },
   {
     title: "Foot Cream",
-    description:
-      "Pamper tired feet with our soothing foot cream. Enriched with nourishing botanicals and cooling menthol, it softens rough skin, relieves dryness, and revitalizes tired feet, leaving them feeling refreshed and rejuvenated.",
+    description: "Soothing foot cream for tired and rejuvenated feet.",
     image: "uploads/footcream.jpg",
     price: 40,
   },
   {
     title: "Hand Cream",
-    description:
-      "Nourish and protect your hands with our hydrating hand cream. Infused with vitamin-rich oils and Shea butter, it absorbs quickly to replenish moisture and soften skin, keeping your hands smooth and supple throughout the day.",
+    description: "Hydrating hand cream for smooth and supple hands.",
     image: "uploads/handcream.jpg",
     price: 40,
   },
   {
     title: "Face Oil",
-    description:
-      "Restore radiance to your complexion with our luxurious face oil. Lightweight and fast-absorbing, it deeply nourishes and revitalizes dry skin, leaving it looking dewy, luminous, and beautifully hydrated.",
+    description: "Luxurious face oil for radiant and hydrated complexion.",
     image: "uploads/faceoil.jpg",
     price: 40,
   },
   {
     title: "Body Scrub",
-    description:
-      "Reveal softer, smoother skin with our exfoliating body scrub. Formulated with natural exfoliants and moisturizing oils, it buffs away dead skin cells, unclogs pores, and promotes cell renewal for a healthy, radiant glow.",
+    description: "Exfoliating body scrub for softer and smoother skin.",
     image: "uploads/bodyscrub.jpg",
     price: 40,
   },
+  {
+    title: "Lip Balm",
+    description: "Moisturizing lip balm for soft and nourished lips.",
+    image: "uploads/lipbalm.jpg",
+    price: 10,
+  },
+  {
+    title: "Sunscreen Lotion",
+    description: "Protective sunscreen lotion with SPF 50 for all-day sun protection.",
+    image: "uploads/sunscreen.jpg",
+    price: 15,
+  },
+  {
+    title: "Eye Cream",
+    description: "Revitalizing eye cream to reduce dark circles and puffiness.",
+    image: "uploads/eyecream.jpg",
+    price: 35,
+  }
 ];
+
 
 // Function to seed products
 async function seedProducts() {
