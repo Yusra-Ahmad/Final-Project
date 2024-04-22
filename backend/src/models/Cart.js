@@ -5,25 +5,25 @@ const { Schema } = mongoose;
 const cartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model
+    ref: 'User', 
     required: true
   },
   products: [
     {
       product: {
         type: Schema.Types.ObjectId,
-        ref: 'Product', // Reference to the Product model
+        ref: 'Product', 
         required: true
       },
       quantity: {
         type: Number,
-        default: 1 // Default quantity is 1
+        default: 1 
       }
     }
   ],
   totalPrice: {
     type: Number,
-    default: 0 // Default total price is 0
+    default: 0 
   }
 });
 
