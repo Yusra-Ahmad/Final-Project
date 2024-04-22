@@ -1,6 +1,6 @@
 import "./header.scss";
 import Navbar from "../navbar/Navbar";
-import logo from "../../assets/bliss3.svg";
+import logo from "../../assets/logo.svg";
 const Hero = () => {
   return (
     <div className="hero">
