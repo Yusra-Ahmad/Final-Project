@@ -27,31 +27,25 @@ GET http://localhost:6000/auth/users
 
 ###
 
-POST http://localhost:6000/auth/register
+POST http://localhost:3020/auth/register
 Content-Type: application/json
 
 
-<<<<<<< HEAD
 { "username":"hetal24",
-    "email":"hetal24@gmail.com",
-    "password":"12345678",
-    "confirmPassword":"12345678"
-=======
-{
-    "email":"asa@gmail.com",
-    "password":"12345678"
->>>>>>> ec011bf276e4bb06bd115f5f7696ef404847727f
-}
+    "email":"hetal@gmail.com",
+    "password":"Vritti@143",
+    "confirmPassword":"Vritti@143"}
+
 
 ###
 
-POST http://localhost:6000/auth/login
+POST http://localhost:3020/auth/login
 Content-Type: application/json
 
 
 {
-    "email":"asa@gmail.com",
-    "password":"12345678"
+    "email":"hetal@gmail.com",
+    "password":"Vritti@143"
 }
 
 ###

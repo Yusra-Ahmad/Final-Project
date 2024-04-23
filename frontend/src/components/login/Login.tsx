@@ -3,22 +3,64 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import { useUser, UserContext } from "../../context/UserContext";
+
+interface UserContext {
+  setToken: (value: string) => void;
+  setUser: (value: UserType) => void;
+  token: string; // Assuming token is of type string
+}
+
+type UserType = {
+  id: number;
+  email: string;
+  password: string;
+};
 
 const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
+
   const navigate = useNavigate();
+  const { setToken, setUser, token }: UserContext = useUser();
+
   const handleShowPassword = () => {
     setShowpassword((prev) => !prev);
   };
 
-  const submitHandler = () => {
-    const loginInfo = {
-      email: emailInput.current.value.trim(),
-      password: passwordInput.current.value.trim(),
-    };
-    console.log(loginInfo);
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
+
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = emailInput.current.value.trim() || "";
+    const password = passwordInput.current.value.trim() || "";
+    console.log(email, password);
+    try {
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      };
+      const request = await fetch("http://localhost:3020/auth/login", config);
+      const result = await request.json();
+      console.log(result);
+      if (!result.error) {
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        setToken(result.token);
+        setUser(result.user);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
