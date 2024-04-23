@@ -12,8 +12,6 @@ import { ServiceProvider } from "./context/serviceContext";
 function App() {
   return (
     <>
-      <Homepage />
-      <Login />
       <CartProvider>
         <ServiceProvider>
           <Navbar />

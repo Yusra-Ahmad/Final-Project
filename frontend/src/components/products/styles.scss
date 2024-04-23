@@ -19,9 +19,9 @@ body {
   margin-left: 40rem;
   max-width: 60vw;
   padding: 5rem 0;
-  background: url("../../assets/product-background.jpg") no-repeat 100% center;
   background-size: cover;
-  animation: slideBackgroundFromRight 2s ease-out forwards, fadeInBackground 1s ease-out forwards;
+  animation: slideBackgroundFromRight 2s ease-out forwards,
+    fadeInBackground 1s ease-out forwards;
 
   /* Heading styles for main screen */
   .heading {
@@ -55,19 +55,33 @@ body {
 
 /* Keyframes */
 @keyframes slideBackgroundFromRight {
-  from { background-position: 100% center; }
-  to { background-position: right center; }
+  from {
+    background-position: 100% center;
+  }
+  to {
+    background-position: right center;
+  }
 }
 
 @keyframes fadeInBackground {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Keyframes */
 @keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Products Container Styles */
@@ -95,7 +109,7 @@ body {
 
 /* Product Item Styles */
 .product-item {
-  border: 1px solid #B08568;
+  border: 1px solid #b08568;
   padding: 1.5rem;
   border-radius: 20px;
   transition: all 0.3s ease;
@@ -130,7 +144,9 @@ body {
     }
   }
 
-  .product-title, .product-description, .product-price {
+  .product-title,
+  .product-description,
+  .product-price {
     margin-top: 1rem;
     text-align: center; /* Center text within product item */
   }
@@ -140,7 +156,9 @@ body {
       height: 150px; /* Adjust image height for smaller screens */
     }
 
-    .product-title, .product-description, .product-price {
+    .product-title,
+    .product-description,
+    .product-price {
       font-size: 0.9rem; /* Decrease font size for smaller screens */
     }
 
@@ -163,7 +181,7 @@ body {
   right: 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   color: #333;
-  padding:  1rem;
+  padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 9999;
@@ -202,3 +220,130 @@ body {
     min-height: 100vh;
   }
 }
+
+
+@keyframes myImgBackAnim {
+  0% {
+    animation-timing-function: ease-in-out;
+    opacity: 0;
+    transform: translateX(68px);
+  }
+  100% {
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes myImgAnim {
+    0% {
+      animation-timing-function: linear;
+      transform: translateX(0px);
+    }
+    100% {
+      animation-timing-function: linear;
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+//   text Animation
+@keyframes myTextAnim {
+  0% {
+    animation-timing-function: ease-out;
+    opacity: 0;
+    transform: translateY(605px);
+  }
+
+50%{
+    animation-timing-function: ease-out;
+    opacity: 0.5;
+}
+  100% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+// background Animation
+  @keyframes myBackgroundAnim {
+    0% {
+      animation-timing-function: ease-in-out;
+      opacity: 0;
+      transform: translateY(900px);
+    }
+    100% {
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+//   Animation Implementation
+.backgroundAnim{
+    background-color: #343332;
+}
+.product-body {
+    opacity: 0;
+    animation: myBackgroundAnim 1s ease 0s 1 normal forwards;
+ 
+    .header-p {
+        opacity: 0;
+      animation: myTextAnim 1s ease 0s 1 normal forwards;
+      animation-delay: 2s;
+    }
+
+.imagediv{
+    opacity: 0;
+    background-color: #C68F68;
+    animation: myImgBackAnim 1s ease 0s 1 normal forwards;
+    animation-delay: 1s;
+}
+    img {
+        opacity: 0;
+      animation: myImgAnim 1s ease 0s 1 normal forwards;
+      animation-delay: 2s;
+  
+    }
+  }
+
+  .product-body {
+    height: 100vh;
+    background-color: #1c1919;
+    color: white;
+    font-family: serif;
+    display: flex;
+    flex-direction: column;
+    .product-header {
+      height: 100vh;
+      width: 90vw;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: justify;
+      .header-p {
+        position: absolute;
+        left: 6%;
+        transform: translateY(-50%);
+        width: 40%;
+        z-index: 1;
+        letter-spacing: normal;
+        font-size: 1.5rem;
+        h1 {
+          letter-spacing: 1.5rem;
+          font-size: 3em;
+          text-align: center;
+        }
+      }
+      .imagediv {
+        height: 60vh;
+        width: 60vw;
+        margin-right: -5rem;
+      }
+      img {
+        z-index: 0;
+        height: 60vh;
+        width: 60vw;
+      }
+    }
+  }
+  
