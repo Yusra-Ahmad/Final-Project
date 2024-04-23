@@ -13,7 +13,7 @@ config();
 app.use(express.json());
 connectDB();
 app.use(cors());
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 app.use('/uploads', express.static('uploads'));
 
 app.use("/services", serviceRouter);
