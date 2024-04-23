@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+// Define color palette
+$dark-background: #1a1a1a; // A dark shade for the background
+$gold: #bdaa59; // A golden shade for accents
+$light-gold: lighten($gold, 20%); // Lighter gold for hover states
+$cream: #f5f5f5; // A light cream for text
+$shadow: rgba(0, 0, 0, 0.3); // Shadow for some depth
+
+// Mixin for golden buttons
+@mixin golden-button {
+  background-color: $gold;
+  color: $cream;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $light-gold;
+    cursor: pointer;
+  }
+}
+
+.cart {
+  font-family: "Playfair Display", serif;
+  color: $cream;
+  background-color: $dark-background;
+  padding: 2rem;
+  position: fixed;
+  inset: 0;
+  left: 25%;
+  overflow-y: auto;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: $gold;
+  }
+
+  .cart-item {
+    background: $dark-background;
+    box-shadow: 0 2px 5px $shadow;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+
+    .item-details {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .item-info {
+        flex-grow: 1;
+
+        h2 {
+          font-size: 1.5rem;
+          color: $gold;
+        }
+
+        p {
+          font-size: 1rem;
+          color: lighten($cream, 10%);
+        }
+      }
+
+      .item-actions {
+        button {
+          @include golden-button;
+        }
+      }
+    }
+  }
+
+  .cart-total {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-top: 1px solid $gold;
+
+    span {
+      color: $gold;
+    }
+  }
+
+  .empty-cart {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.5rem;
+  }
+}
+
+// Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .cart {
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
