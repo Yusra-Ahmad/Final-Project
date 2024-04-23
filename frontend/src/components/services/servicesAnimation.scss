@@ -1,0 +1,84 @@
+@keyframes myImgBackAnim {
+  0% {
+    animation-timing-function: ease-in-out;
+    opacity: 0;
+    transform: translateX(68px);
+  }
+  100% {
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes myImgAnim {
+    0% {
+      animation-timing-function: linear;
+      transform: translateX(0px);
+    }
+    100% {
+      animation-timing-function: linear;
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+//   text Animation
+@keyframes myTextAnim {
+  0% {
+    animation-timing-function: ease-out;
+    opacity: 0;
+    transform: translateY(605px);
+  }
+
+50%{
+    animation-timing-function: ease-out;
+    opacity: 0.5;
+}
+  100% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+// background Animation
+  @keyframes myBackgroundAnim {
+    0% {
+      animation-timing-function: ease-in-out;
+      opacity: 0;
+      transform: translateY(900px);
+    }
+    100% {
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+//   Animation Implementation
+.backgroundAnim{
+    background-color: #343332;
+}
+.servicebody {
+    opacity: 0;
+    animation: myBackgroundAnim 1s ease 0s 1 normal forwards;
+ 
+    .header-p {
+        opacity: 0;
+      animation: myTextAnim 1s ease 0s 1 normal forwards;
+      animation-delay: 2s;
+    }
+
+.imagediv{
+    opacity: 0;
+    background-color: #C68F68;
+    animation: myImgBackAnim 1s ease 0s 1 normal forwards;
+    animation-delay: 1s;
+}
+    img {
+        opacity: 0;
+      animation: myImgAnim 1s ease 0s 1 normal forwards;
+      animation-delay: 2s;
+  
+    }
+  }
+
