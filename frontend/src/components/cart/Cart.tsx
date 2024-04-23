@@ -1,16 +1,16 @@
-import  { useContext } from "react";
-import "./Cart.css";
+import { useContext } from "react";
+import "./Cart.scss";
 import { CartContext } from "../../context/Cart";
 
 export default function Cart() {
   const Base_Url = 'http://localhost:3020';
- 
+
   const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
 
   return (
     <div className="flex-col flex items-center fixed inset-0 left-1/4 bg-white dark:bg-black gap-8 p-10 text-black dark:text-white font-normal uppercase text-sm">
       <h1 className="text-2xl font-bold">Cart</h1>
-      
+
       <div className="flex flex-col gap-4">
         {cartItems.map((product) => (
           <div className="flex justify-between items-center" key={product.id}>

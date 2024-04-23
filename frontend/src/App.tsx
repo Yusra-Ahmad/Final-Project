@@ -14,22 +14,22 @@ function App() {
     <>
       <Homepage />
       <Login />
-    <CartProvider>
-<ServiceProvider>
-      <Navbar />
-      <Routes>
-      {/* <div className="backgroundAnim"> */}
-        {/* <div className="main"> */}
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/services" element={<Services/>}/>
-        <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
-        {/* </div> */}
-        {/* </div> */}
-      </Routes>
-</ServiceProvider>
-    </CartProvider>
+      <CartProvider>
+        <ServiceProvider>
+          <Navbar />
+          <Routes>
+            {/* <div className="backgroundAnim"> */}
+            {/* <div className="main"> */}
+            <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+            {/* </div> */}
+            {/* </div> */}
+          </Routes>
+        </ServiceProvider>
+      </CartProvider>
     </>
   );
 }
