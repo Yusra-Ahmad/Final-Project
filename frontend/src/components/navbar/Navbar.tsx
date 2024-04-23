@@ -1,5 +1,8 @@
 import { TfiAlignLeft } from "react-icons/tfi";
 import { AiOutlineClose } from "react-icons/ai";
+import { PiShoppingCart } from "react-icons/pi";
+import { MdOutlineCalendarMonth } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 import "animate.css";
 
@@ -18,10 +21,6 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar">
-        <Link to="/">
-          <img src={bliss} alt="" />
-        </Link>
-
         <ul>
           {dropMenu ? (
             <li
@@ -40,6 +39,18 @@ const Navbar = () => {
             </li>
           )}
           <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />
+        </ul>
+        <Link to="/">
+          <img src={bliss} alt="" />
+        </Link>
+
+        <ul className="cart-ul">
+          <Link className="cart-li" to="/cart">
+            <PiShoppingCart className="cart-icon" />
+          </Link>
+          <Link className="cart-li" to="/services">
+            <MdOutlineCalendarMonth className="cart-icon" />
+          </Link>
         </ul>
       </div>
     </div>

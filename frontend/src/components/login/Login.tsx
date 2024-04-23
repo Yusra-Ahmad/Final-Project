@@ -8,7 +8,7 @@ import { useUser, UserContext } from "../../context/UserContext";
 interface UserContext {
   setToken: (value: string) => void;
   setUser: (value: UserType) => void;
-  token: string; // Assuming token is of type string
+  token: string | null; // Assuming token is of type string
 }
 
 type UserType = {

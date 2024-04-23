@@ -22,8 +22,8 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
         <Link to="services" className="link">
           <li>Services</li>
         </Link>
-        <Link to="about" className="link">
-          <li>About</li>
+        <Link to="contact" className="link" onClick={handleDropMenu}>
+          <li>Contact</li>
         </Link>
         <Link to="register" className="link">
           <li>Register</li>

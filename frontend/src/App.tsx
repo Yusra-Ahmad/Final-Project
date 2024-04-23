@@ -8,28 +8,28 @@ import Products from "./components/products";
 import Cart from "./components/cart/Cart";
 import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
+import Contact from "./components/contact/Contact";
 
 function App() {
   return (
     <>
-      <Homepage />
-      <Login />
-    <CartProvider>
-<ServiceProvider>
-      <Navbar />
-      <Routes>
-      {/* <div className="backgroundAnim"> */}
-        {/* <div className="main"> */}
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/services" element={<Services/>}/>
-        <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
-        {/* </div> */}
-        {/* </div> */}
-      </Routes>
-</ServiceProvider>
-    </CartProvider>
+      <CartProvider>
+        <ServiceProvider>
+          <Navbar />
+          <Routes>
+            {/* <div className="backgroundAnim"> */}
+            {/* <div className="main"> */}
+            <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* </div> */}
+            {/* </div> */}
+          </Routes>
+        </ServiceProvider>
+      </CartProvider>
     </>
   );
 }

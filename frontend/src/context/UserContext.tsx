@@ -1,10 +1,28 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+
+interface User {
+  id: number;
+  email: string;
+}
+
+interface UserContexType {
+  user: User | null;
+  setUser: (user: User | null) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
+}
 
 const defaultUser = JSON.parse(localStorage.getItem("user"));
-const defaultToken = JSON.parse(localStorage.getItem("token"));
+const defaultToken = localStorage.getItem("token");
 
-export const UserContext = createContext();
-export const UserProvider = ({ children }) => {
+export const UserContext = createContext<UserContexType>({
+  user: defaultUser,
+  setUser: () => {},
+  token: defaultToken,
+  setToken: () => {},
+});
+
+export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(defaultUser);
   const [token, setToken] = useState(defaultToken);
   return (

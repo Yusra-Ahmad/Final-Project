@@ -8,7 +8,6 @@ const Hero = () => {
         <Navbar />
       </div>
       <img src={logo} alt="" className="logo" />
-      {/* <video src={logo} className="logo" autoPlay loop muted></video> */}
     </div>
   );
 };
