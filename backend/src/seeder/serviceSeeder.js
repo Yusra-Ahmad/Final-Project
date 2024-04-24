@@ -15,7 +15,6 @@ const servicesData = [
     description: "Nail care and manicure service",
     price: 20,
     duration: "1 hour",
-
   },
 
   {
@@ -30,7 +29,6 @@ const servicesData = [
     description: "Relaxing full body massage",
     price: 50,
     duration: "1 hour",
-
   },
   {
     title: "Facial",
