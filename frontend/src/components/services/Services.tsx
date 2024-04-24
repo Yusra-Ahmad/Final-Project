@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import "./servicesAnimation.scss";
+import { useNavigate } from "react-router-dom"; 
+import "./servicesAnimation.scss";
 import "./services.scss";
 import { useServiceContext } from "../../context/serviceContext";
 import service from "../../assets/Service1.jpeg";
@@ -11,15 +13,20 @@ const Services = () => {
         loading,
         error,
         fetchServices,
-        addService,
-        removeService,
+        // addService,
+        // removeService,
       } = useServiceContext();
     
       useEffect(() => {
         fetchServices();
       }, []);
     
-  
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  const handleBookAppointment = () => {
+ 
+    navigate("/book-appointment");
+  };
   
   return (
     <>
@@ -52,16 +59,17 @@ const Services = () => {
               <h3 className="service-title">{service.title}</h3>
               <div className="service-content">
                 <p className="service-description">{service.description}</p>
-                <p>-----------------------------------------</p>
+                <p>-----------------------------------</p>
                 <p className="service-duration">{service.duration}</p>
                 <p className="service-price">${service.price}</p>
-                <button className="handle-service" onClick={()=>addService}>+</button>
-                <button className="handle-service" onClick={() => removeService(service._id)}>
-                  -
-                </button>
               </div>
             </div>
           ))}
+          <div className="service-
+          button">
+
+          <button onClick={handleBookAppointment}>Book Now</button>
+          </div>
       </div>
     </>
   );

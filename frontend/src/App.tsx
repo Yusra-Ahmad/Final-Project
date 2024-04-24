@@ -8,12 +8,13 @@ import Products from "./components/products";
 import Cart from "./components/cart/Cart";
 import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
+import Appointment from "./components/services/appointments/Appointments";
 
 function App() {
   return (
     <>
       <Homepage />
-      <Login />
+      {/* <Login /> */}
     <CartProvider>
 <ServiceProvider>
       <Navbar />
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services/>}/>
+        <Route path="/book-appointment" element={<Appointment/>}/>
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         {/* </div> */}

@@ -13,17 +13,19 @@
     justify-content: flex-end;
     text-align: justify;
     .header-p {
+      margin-left: 5rem;
       position: absolute;
       left: 6%;
       transform: translateY(-50%);
-      width: 40%;
+      width: 35%;
       z-index: 1;
       letter-spacing: normal;
       font-size: 1.5rem;
       h1 {
-        letter-spacing: 1.5rem;
+        letter-spacing: 1.8rem;
         font-size: 3em;
         text-align: center;
+        padding: 2rem;
       }
     }
     .imagediv {
@@ -53,24 +55,35 @@
     padding-left: 5rem;
   }
   .service-item {
-    padding: 3rem;
+    padding: 2rem;
     .service-content {
       display: flex;
       gap: 1rem;
-      padding-top: 2rem;
-      .handle-service {
-        padding: 1rem;
-        border-radius: 50%;
-        border: none;
-        font-size: 1rem;
-        font-weight: 1000;
-        background-color: #323131;
-        color: white;
-        align-items: center;
-        box-shadow: #8e6c41 2px 2px 9px;
-        margin: 0 1rem;
-        margin-top: -1rem;
-      }
+      padding-top: 1rem;
+     
     }
   }
+  .service-button{
+    width: 50%;
+text-align: end;
+    button{
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #B08568;
+      // font-weight: bolder;
+      // text-decoration: underline solid 5px ;
+      border-bottom: solid 4px  #B08568;
+      text-align: start;
+      width:10rem;
+      margin: 2rem;
+      padding: 1px;
+    }
+    button:hover{
+      font-size: 1.6rem;
+      border: none;
+    }
+  }
+
 }
