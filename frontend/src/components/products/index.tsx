@@ -1,29 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './styles.scss';
 import { CartContext } from '../../context/Cart';
+import ProductBackgroundImage from "../../assets/product-background.jpg";
 
-interface Product {
-    _id: string;
-    title: string;
-    description: string;
-    image: string;
-    price: number;
-}
 
-const Base_Url = 'http://localhost:3020';
+const BaseUrl = 'http://localhost:3020';
 
 const Products: React.FC = () => {
-    const [products, setProducts] = useState<Product[]>([]);
-    const { addToCart } = useContext(CartContext)
+    const [products, setProducts] = useState<any[]>([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`${Base_Url}/products`);
+                const response = await fetch(`${BaseUrl}/products`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }
-                const data: Product[] = await response.json();
+                const data = await response.json();
                 setProducts(data);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -33,28 +28,62 @@ const Products: React.FC = () => {
         fetchProducts();
     }, []);
 
+    const handleAddToCart = (product: any) => {
+        addToCart(product);
+        setShowPopup(true);
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 3000);
+    };
+
     return (
-        <div className='product-list'>
-            <h1>Products</h1>
-            <div className='products-container'>
-                {products.map(product => (
-                    <div className='product-item'>
-                        <img className='product-image' src={`${Base_Url}/${product.image}`} alt={product.title} />
-                        <h2 className='product-title'>{product.title}</h2>
-                        <p className='product-description'>{product.description}</p>
-                        <p className='product-price'>${product.price}</p>
-                        <button
-                            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                            onClick={() => {
-                                addToCart(product)
-                            }}
-                        >
-                            Add to cart
-                        </button>
+        <>
+            <div className="backgroundAnim">
+                <div className="product-body">
+                    <div className="product-header">
+                        <div className="header-p">
+                            <h1>Products </h1>
+                            <p className="text-on-image animate__fadeInLeftBig" >
+                                Step into a realm of opulence and grace with our exquisite line of spa and salon products,
+                                where every indulgence is a journey of self-discovery.
+                            </p>
+                        </div>
+                        <div className="imagediv ">
+                            <img src={ProductBackgroundImage} alt="" />
+                        </div>
                     </div>
-                ))}
+                </div>
             </div>
-        </div>
+
+
+            <div className='products-container'>
+
+                <div className='product-list'>
+                    {products.map((product: any) => (
+                        <div className='product-item' key={product._id}>
+                            <img className='product-image' src={`${BaseUrl}/${product.image}`} alt={product.title} />
+                            <h2 className='product-title'>{product.title}</h2>
+                            <p className='product-description'>{product.description}</p>
+                            <p className='product-price'>€{product.price}</p>
+                            <button
+                                className="cart-button"
+                                onClick={() => handleAddToCart(product)}
+                            >
+                                Add to cart
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                {showPopup && (
+                    <div className="popup">
+                        <br />
+                        <br />
+                        <span className="popup-close" onClick={() => setShowPopup(false)}>&times;</span>
+                        Product added to the cart successfully!
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
