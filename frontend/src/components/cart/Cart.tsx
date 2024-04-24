@@ -1,57 +1,67 @@
-import  { useContext } from "react";
-import "./Cart.css";
-import { CartContext } from "../../context/Cart";
+import React, { useContext } from 'react';
+import './Cart.scss';
+import { CartContext } from '../../context/Cart';
+import Login from '../login/Login';
 
-export default function Cart() {
+const Cart = () => {
+
   const Base_Url = 'http://localhost:3020';
- 
+
   const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
 
+
   return (
-    <div className="flex-col flex items-center fixed inset-0 left-1/4 bg-white dark:bg-black gap-8 p-10 text-black dark:text-white font-normal uppercase text-sm">
-      <h1 className="text-2xl font-bold">Cart</h1>
-      
-      <div className="flex flex-col gap-4">
-        {cartItems.map((product) => (
-          <div className="flex justify-between items-center" key={product.id}>
-            <div className="flex gap-4">
-              <img src={`${Base_Url}/${product.image}`} alt={product.title} className="rounded-md h-24" />
-              <div className="flex flex-col">
-                <h1 className="text-lg font-bold">{product.name}</h1>
-                <p className="text-gray-600">{product.price}</p>
+    <div className="cart-container">
+      <div className="cart-header">
+        <h1>Shopping cart</h1>
+      </div>
+      <div className="cart-items">
+        <div className="cart-item" >
+          <div className="product-details">
+
+            <div>
+              <h2>Product</h2>
+
+            </div>
+          </div>
+          <div className="price">Price</div>
+          <div className="quantity">Quantity</div>
+          <div className="total">Total</div>
+        </div>
+        {cartItems.map(product => (
+          <div className="cart-item" key={product.id}>
+            <div className="product-details">
+              <img src={`${Base_Url}/${product.image}`} alt={product.title} />
+              <div>
+                <h2>{product.title}</h2>
+                <button className="remove-button">Remove</button>
               </div>
             </div>
-            <div className="flex gap-4">
-              <button
-                className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                onClick={() => addToCart(product)}
-              >
-                +
-              </button>
-              <p>{product.quantity}</p>
-              <button
-                className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                onClick={() => removeFromCart(product)}
-              >
-                -
-              </button>
-            </div>
+            <div className="price">€{product.price}</div>
+            <div className="quantity">{product.quantity}</div>
+            <div className="total">€{product.quantity * product.price}</div>
           </div>
         ))}
       </div>
-      {cartItems.length > 0 ? (
-        <div className="flex flex-col justify-between items-center">
-          <h1 className="text-lg font-bold">Total: €{getCartTotal()}</h1>
-          <button
-            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-            onClick={clearCart}
-          >
-            Clear cart
-          </button>
+
+      <div className="order-summary">
+        <h2>Order summary</h2>
+        <div className="subtotal">
+          <span>Subtotal</span>
+          <span>€{cartItems.reduce((previousValue, item) => previousValue + (item.quantity * item.price), 0).toFixed(2)}</span>
         </div>
-      ) : (
-        <h1 className="text-lg font-bold">Your cart is empty</h1>
-      )}
+        <div className="total">
+          <span>Total (Inclusive of tax €0.00)</span>
+          <span>€{cartItems.reduce((previousValue, item) => previousValue + (item.quantity * item.price), 0).toFixed(2)}</span>
+        </div>
+        <button className="checkout-button">Checkout</button>
+      </div>
+      <div >
+        <p>You need to login first to continue checkout</p>
+        <Login></Login>
+      </div>
     </div>
   );
-}
+};
+
+export default Cart;
