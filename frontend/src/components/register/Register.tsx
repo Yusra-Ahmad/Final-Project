@@ -21,7 +21,7 @@ const Register = () => {
     }
   }
   return (
-    <>
+    <div className="register-container">
       <pre>
         {" "}
         {register ? (
@@ -34,35 +34,42 @@ const Register = () => {
         <p>Registration </p>
         <input
           type="text"
-          placeholder="Your Name"
+          placeholder="First Name*"
+          name="name"
+          value={inputData.name}
+          onChange={handleData}
+        />
+        <input
+          type="text"
+          placeholder="Last Name*"
           name="name"
           value={inputData.name}
           onChange={handleData}
         />
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Email*"
           name="email"
           value={inputData.email}
           onChange={handleData}
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password*"
           name="password"
           value={inputData.password}
           onChange={handleData}
         />
         <input
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Confirm Password*"
           name="password"
           value={inputData.password}
           onChange={handleData}
         />
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -13,9 +13,6 @@ import { ServiceProvider } from "./context/serviceContext";
 function App() {
   return (
     <>
-      <Homepage />
-      <Login />
-      <Register />
       <CartProvider>
         <ServiceProvider>
           <Navbar />
@@ -27,6 +24,8 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/register" element={<Register />} />
+
             {/* </div> */}
             {/* </div> */}
           </Routes>
