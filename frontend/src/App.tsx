@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 // import"./App.scss";
 import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
+import Register from "./components/register/Register";
 import Services from "./components/services/Services";
 import Navbar from "./components/navbar/Navbar";
 import Products from "./components/products";
@@ -25,6 +26,8 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+
             {/* </div> */}
             {/* </div> */}
           </Routes>
