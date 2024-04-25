@@ -59,15 +59,13 @@ const Services = () => {
               <h3 className="service-title">{service.title}</h3>
               <div className="service-content">
                 <p className="service-description">{service.description}</p>
-                <p>-----------------------------------</p>
+                <p>--------------------</p>
                 <p className="service-duration">{service.duration}</p>
                 <p className="service-price">${service.price}</p>
               </div>
             </div>
           ))}
-          <div className="service-
-          button">
-
+          <div className="service-button-div">
           <button onClick={handleBookAppointment}>Book Now</button>
           </div>
       </div>

@@ -7,34 +7,34 @@ const servicesData = [
     title: "Haircut",
     description: "Professional haircut service",
     price: 30,
-    duration: "1 hour",
+    duration: "1 hr",
     
   },
   {
     title: "Manicure",
     description: "Nail care and manicure service",
     price: 20,
-    duration: "1 hour",
+    duration: "1 hr",
   },
 
   {
     title: "Pedicure",
     description: "Nail care and pedicure service",
     price: 25,
-    duration: "1 hour",
+    duration: "1 hr",
   
   },
   {
     title: "Massage",
     description: "Relaxing full body massage",
     price: 50,
-    duration: "1 hour",
+    duration: "1 hr",
   },
   {
     title: "Facial",
     description: "Skin rejuvenation facial treatment",
     price: 40,
-    duration: "1 hour",
+    duration: "1 hr",
     
   },
 ];
