@@ -35,6 +35,7 @@
         border-bottom: 2px solid #b08568;
         width: fit-content;
         font-size: 2.5rem;
+        letter-spacing: 0.3rem;
       }
       p {
         margin-block: 2rem;
@@ -86,19 +87,22 @@
     }
     .location-div {
       width: 50%;
+
       margin-top: 5rem;
       margin-bottom: 2rem;
       @media screen and (max-width: 768px) {
         width: 75%;
       }
       h2 {
+        text-shadow: 1px 1px 5px black;
+        background-color: #b085686c;
         margin-bottom: 2rem;
-        width: fit-content;
-        padding-bottom: 1rem;
-        border-bottom: 2px solid #b08568a4;
+        letter-spacing: 0.3rem;
+        padding: 0.2rem;
+        line-height: 2rem;
       }
       p {
-        line-height: 1.8rem;
+        line-height: 2rem;
         font-size: 1.3rem;
       }
     }
