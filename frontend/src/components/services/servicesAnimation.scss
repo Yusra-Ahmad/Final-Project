@@ -61,11 +61,18 @@
 .servicebody {
     opacity: 0;
     animation: myBackgroundAnim 1s ease 0s 1 normal forwards;
+    @media screen and (max-width: 990px) {
+  animation: none;
+  opacity: 1;
+            }
  
     .header-p {
         opacity: 0;
       animation: myTextAnim 1s ease 0s 1 normal forwards;
       animation-delay: 2s;
+      @media screen and (max-width: 800px) {
+animation-delay: 0s;
+                  }
     }
 
 .imagediv{
@@ -73,12 +80,19 @@
     background-color: #C68F68;
     animation: myImgBackAnim 1s ease 0s 1 normal forwards;
     animation-delay: 1s;
+    @media screen and (max-width: 1074px) {
+      animation: none;
+      opacity: 1;
+                }
 }
     img {
         opacity: 0;
       animation: myImgAnim 1s ease 0s 1 normal forwards;
       animation-delay: 2s;
-  
+      @media screen and (max-width: 990px) {
+        animation: none;
+        opacity: 1;
+                  }
     }
   }
 

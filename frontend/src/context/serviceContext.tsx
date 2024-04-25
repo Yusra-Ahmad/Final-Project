@@ -1,7 +1,6 @@
 // ServiceContext.tsx
 import React, { createContext, useContext, useState } from "react";
 
-// Create a context for managing services
 const ServiceContext = createContext<{
   services: Service[];
   loading: boolean;
@@ -18,7 +17,7 @@ const ServiceContext = createContext<{
   removeService: () => {},
 });
 
-// Provider component for the ServiceContext
+
 export const ServiceProvider: React.FC = ({ children }) => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -76,7 +75,7 @@ export const ServiceProvider: React.FC = ({ children }) => {
     }
   };
 
-  // Provide the state and functions to the children components
+
   return (
     <ServiceContext.Provider
       value={{
