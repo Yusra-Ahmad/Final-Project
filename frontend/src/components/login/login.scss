@@ -2,12 +2,20 @@
   background-color: #1c1919;
   color: white;
   height: 100vh;
+  font-family: serif;
+  font-style: italic;
+  letter-spacing: 0.2rem;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  input {
+  gap: 3rem;
+
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  transform-origin: bottom;
+
+  .login-input {
     background-color: #1c1919;
     color: white;
     border: none;
@@ -16,6 +24,16 @@
     width: 50%;
     &::placeholder {
       color: white;
+      font-size: 1.2rem;
     }
+  }
+  .login-button {
+    padding: 20px;
+    width: 50%;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    background-color: #b08568d3;
+    border-radius: 30px;
+    border: #b08568 solid 1px;
   }
 }

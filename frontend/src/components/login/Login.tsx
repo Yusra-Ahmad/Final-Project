@@ -4,9 +4,9 @@ const Login = () => {
   return (
     <form className="login-form">
       <p>Login</p>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button>Login</button>
+      <input className="login-input" type="email" placeholder="Email" />
+      <input className="login-input" type="password" placeholder="Password" />
+      <button className="login-button">Login</button>
     </form>
   );
 };

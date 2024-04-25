@@ -1,7 +1,15 @@
 .hero {
-  background-image: url("../../assets/hero2.jpg");
+  background-image: url("../../assets/hero206.jpg");
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .logo {
+    width: 55%;
+    max-width: 22rem;
+  }
 }

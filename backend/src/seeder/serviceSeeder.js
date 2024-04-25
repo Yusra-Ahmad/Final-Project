@@ -8,14 +8,14 @@ const servicesData = [
     description: "Professional haircut service",
     price: 30,
     duration: "1 hour",
-    image:"test"
+    
   },
   {
     title: "Manicure",
     description: "Nail care and manicure service",
     price: 20,
-    duration: "45 minutes",
-    image:"test"
+    duration: "1 hour",
+
   },
 
   {
@@ -23,21 +23,21 @@ const servicesData = [
     description: "Nail care and pedicure service",
     price: 25,
     duration: "1 hour",
-    image:"test"
+  
   },
   {
     title: "Massage",
     description: "Relaxing full body massage",
     price: 50,
-    duration: "1 hour 30 minutes",
-    image:"test"
+    duration: "1 hour",
+
   },
   {
     title: "Facial",
     description: "Skin rejuvenation facial treatment",
     price: 40,
     duration: "1 hour",
-    image:"test"
+    
   },
 ];
 // Function to seed services into the database
