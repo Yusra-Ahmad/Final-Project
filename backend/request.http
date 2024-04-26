@@ -31,10 +31,13 @@ POST http://localhost:3020/auth/register
 Content-Type: application/json
 
 
-{ "username":"hetal24",
+{  
+     "firstname":"hetal",
+    "lastname" :"ahir",
     "email":"hetal@gmail.com",
     "password":"Vritti@143",
-    "confirmPassword":"Vritti@143"}
+    "confirmPassword":"Vritti@143"
+    }
 
 
 ###
@@ -50,7 +53,7 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:6000/auth/users
+DELETE  http://localhost:3020/auth/users
 
 ###
 Get http://localhost:3020/services
