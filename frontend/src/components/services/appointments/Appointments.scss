@@ -1,0 +1,290 @@
+.appointment-container {
+  background-color: #1c1919;
+  color: rgba(255, 255, 255, 0.77);
+  height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  // flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  @media screen and (max-width: 1080px) {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .appointment-form {
+    border-right: #b08568 double 6px;
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 60%;
+    margin: 5rem;
+    border-radius: 25px;
+    height: 60%;
+
+    @media screen and (max-width: 1080px) {
+      border-right: none;
+      display: flex;
+      justify-content: start;
+      gap: 0;
+      padding: 0;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    .div-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10rem;
+      width: 50vw;
+      @media screen and (max-width: 1080px) {
+        display: flex;
+        height: 60vh;
+        width: 90%;
+        gap: 0;
+        flex-direction: column;
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .calendar-container {
+      width: 61%;
+      // overflow: hidden;
+      // font-size: 16px;
+      .react-calendar {
+        font-size: 1.2rem;
+        font-family: serif;
+        border: none;
+      }
+      .react-calendar__tile--selected {
+        background-color: #b08568;
+        color: #fff;
+        border-radius: 50%;
+      }
+
+      .react-calendar__tile--hover {
+        background-color: #b085685a;
+        color: #fff;
+      }
+
+      .react-calendar__tile {
+        background-color: transparent;
+        color: #ffffff;
+        border: none;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        @media screen and (max-width: 1080px) {
+          padding: 0;
+          font-size: 14px;
+        }
+      }
+
+      .react-calendar__tile--now {
+        border: 2px solid #b08568;
+        border-radius: 20px;
+      }
+
+      .react-calendar__navigation button {
+        background-color: transparent;
+        color: #efe6e6;
+        font-size: 1rem;
+        border: none;
+        margin-left: 1.3rem;
+        
+        @media screen and (max-width: 1080px) {
+          padding: 0;
+          font-size: 12px;
+        }
+      }
+
+      .react-calendar__navigation__arrow {
+        font-size: 1.5rem;
+      }
+
+      .react-calendar__navigation__label {
+        font-size: 1.5rem;
+      }
+      .react-calendar__tile:hover {
+        background-color: #f8ac7990;
+        border-radius: 20px;
+      }
+      .react-calendar__tile:focus {
+        background-color: #b96c93a3;
+        border-radius: 10px;
+      }
+    }
+    .service-select-container {
+      width: 60%;
+      select {
+        width: 100%;
+      }
+    }
+    .form-content {
+      width: 50%;
+      display: flex;
+
+      gap: 1rem;
+    }
+
+    select,
+    #service-date {
+      padding: 1rem;
+      color: white;
+      background-color: #1c1919;
+      box-shadow: #b08568 2px 2px 8px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: serif;
+    }
+    #service-date {
+      padding: 1rem;
+      color: white;
+      width: 100%;
+      background-color: #1c1919;
+      box-shadow: #b08568 2px 2px 8px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: serif;
+    }
+    
+    h3 {
+      padding: 1rem 0;
+      font-size: 1.5rem;
+    }
+  }
+  /* From uiverse.io by @Ali-Tahmazi99 */
+  .confirm-button {
+    display: inline-block;
+    background-color: #1c1919;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #c89a7aa0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+    z-index: 0;
+   }
+   
+   .confirm-button::before,
+   .confirm-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    transform: skew(15deg);
+    transition: all 0.5s;
+    overflow: hidden;
+    z-index: -1;
+   }
+   
+.confirm-button::before {
+    left: -10px;
+    background: #e0ac8999;
+   }
+   
+   .confirm-button::after {
+    right: -10px;
+    background: #e0ac8999;
+   }
+   
+   .confirm-button:hover::before,
+   .confirm-button:hover::after {
+    width: 58%;
+   }
+   
+   .confirm-button:hover span {
+    color: #0f0206;
+    transition: 0.3s;
+   }
+   
+   .confirm-button span {
+    color: #fdf9f6;
+    font-family: serif;
+    font-size: 18px;
+    transition: all 0.3s ease-in;
+   }
+
+}
+.submit-button {
+  width: 70%;
+  text-align: end;
+ button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #b08568;
+    border-bottom: solid 4px #b08568;
+    text-align: start;
+    width: 8rem;
+    margin: 2rem;
+    padding: 1px;
+  }
+  button:hover {
+    font-size: 1.6rem;
+    border: none;
+  }
+}
+
+h2 {
+  font-size: 3rem;
+  margin: 2rem;
+  @media screen and (max-width: 1080px) {
+    padding: 2rem;
+    margin-top: 8rem;
+    font-size: 2rem;
+    border-top: 4px double #b08568;
+    border-radius: 20px;
+  }
+}
+.data-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+
+  .submitted-data {
+    p {
+      font-size: 1.2em;
+      color: #b08568;
+    }
+    h3 {
+      align-items: end;
+      font-size: 2rem;
+      padding: 2rem;
+
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+
+    @media screen and (max-width: 1080px) {
+      padding: 0;
+      font-size: 15px;
+      h3 {
+        font-size: 2rem;
+        margin-top: 5rem;
+        padding-top: 1rem;
+      }
+    }
+  }
+}

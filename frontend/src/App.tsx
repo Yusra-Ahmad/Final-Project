@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-// import"./App.scss";
 import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
@@ -10,6 +9,7 @@ import Cart from "./components/cart/Cart";
 import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
 import Contact from "./components/contact/Contact";
+import Appointment from "./components/services/appointments/Appointments";
 
 function App() {
   return (
@@ -18,18 +18,14 @@ function App() {
         <ServiceProvider>
           <Navbar />
           <Routes>
-            {/* <div className="backgroundAnim"> */}
-            {/* <div className="main"> */}
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/book-appointment" element={<Appointment />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
-
-            {/* </div> */}
-            {/* </div> */}
           </Routes>
         </ServiceProvider>
       </CartProvider>
