@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./register.scss";
 
 const Register = () => {
-  const data = { name: "", email: "", password: "" };
+  const data = { name: "", lastName: "", email: "", password: "", confirm: "" };
   const [inputData, setInputData] = useState(data);
   const [register, setRegister] = useState(false);
   useEffect(() => {
@@ -14,7 +14,13 @@ const Register = () => {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (!inputData.name || !inputData.email || !inputData.password) {
+    if (
+      !inputData.name ||
+      !inputData.lastName ||
+      !inputData.email ||
+      !inputData.password ||
+      !inputData.confirm
+    ) {
       alert("All fields are Mandatory");
     } else {
       setRegister(true);
@@ -25,7 +31,10 @@ const Register = () => {
       <pre>
         {" "}
         {register ? (
-          <h2>Hello {inputData.name}, you have Registered successfully</h2>
+          <h2>
+            Hello {inputData.name} {inputData.lastName}, you have Registered
+            successfully
+          </h2>
         ) : (
           ""
         )}{" "}
@@ -42,8 +51,8 @@ const Register = () => {
         <input
           type="text"
           placeholder="Last Name*"
-          name="name"
-          value={inputData.name}
+          name="lastName"
+          value={inputData.lastName}
           onChange={handleData}
         />
         <input
@@ -63,11 +72,13 @@ const Register = () => {
         <input
           type="password"
           placeholder="Confirm Password*"
-          name="password"
-          value={inputData.password}
+          name="confirm"
+          value={inputData.confirm}
           onChange={handleData}
         />
-        <button type="submit">Submit</button>
+        <button className="register-button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
