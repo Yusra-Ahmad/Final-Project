@@ -8,7 +8,6 @@
   align-items: center;
 
   .register-form {
-    font-family: serif;
     font-style: italic;
     font-size: 2rem;
     width: 50%;
@@ -45,7 +44,9 @@
 
       &::placeholder {
         color: white;
+        font-style: italic;
         font-size: 1.2rem;
+        text-align: center;
       }
     }
 
@@ -59,9 +60,28 @@
       border: #b08568 solid 2px;
 
       &:hover {
-        background-color: #7b90b2;
         border: #ffffff5e solid 2px;
       }
+    }
+    .flex-direction {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+    .flex-direction div {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: auto;
+    }
+    .btn-icon {
+      font-size: 1.2rem;
+      color: white;
+      border-left: none;
+      background: transparent;
+      outline: none;
     }
   }
 }

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import "./register.scss";
+import { FaEyeSlash, IoEyeSharp } from "react-icons/fa";
 
 const Register = () => {
   const data = { name: "", lastName: "", email: "", password: "", confirm: "" };
   const [inputData, setInputData] = useState(data);
   const [register, setRegister] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   useEffect(() => {
     console.log("Register");
   }, [register]);
@@ -41,44 +44,60 @@ const Register = () => {
       </pre>
       <form className="register-form" onSubmit={handleSubmit}>
         <p>Registration </p>
-        <input
-          type="text"
-          placeholder="First Name*"
-          name="name"
-          value={inputData.name}
-          onChange={handleData}
-        />
-        <input
-          type="text"
-          placeholder="Last Name*"
-          name="lastName"
-          value={inputData.lastName}
-          onChange={handleData}
-        />
-        <input
-          type="email"
-          placeholder="Email*"
-          name="email"
-          value={inputData.email}
-          onChange={handleData}
-        />
-        <input
-          type="password"
-          placeholder="Password*"
-          name="password"
-          value={inputData.password}
-          onChange={handleData}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password*"
-          name="confirm"
-          value={inputData.confirm}
-          onChange={handleData}
-        />
-        <button className="register-button" type="submit">
-          Submit
-        </button>
+        <div className="flex-direction">
+          <div>
+            <input
+              type="text"
+              placeholder="First Name*"
+              name="name"
+              value={inputData.name}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Last Name*"
+              name="lastName"
+              value={inputData.lastName}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              placeholder="Email*"
+              name="email"
+              value={inputData.email}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password*"
+              name="password"
+              value={inputData.password}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Confirm Password*"
+              name="confirm"
+              value={inputData.confirm}
+              onChange={handleData}
+            />
+            <button className="btn-icon">
+              <FaEyeSlash />
+            </button>
+          </div>
+
+          <button className="register-button" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
