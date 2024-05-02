@@ -1,17 +1,14 @@
 .register-container {
   background-color: #1c1919;
   color: rgba(255, 255, 255, 0.77);
-  height: 105vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .register-form {
-    font-style: italic;
-    font-size: 2rem;
-    width: 50%;
-    padding: 1rem;
+    padding: 4rem 11rem 7rem 11rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,28 +28,27 @@
 
     p {
       letter-spacing: 0.2rem;
+      font-size: 3rem;
     }
 
     input {
+      width: 350px;
       font-size: large;
       background-color: #1c1919;
       border: none;
-      border-bottom: 2px solid #b08568;
-      padding: 20px;
-      width: 50%;
+      padding: 1px;
       color: white;
 
       &::placeholder {
         color: white;
         font-style: italic;
         font-size: 1.2rem;
-        text-align: center;
+        border-bottom: 2px solid #b08568;
       }
     }
-
     .register-button {
+      width: 100%;
       padding: 20px;
-      width: 50%;
       margin-top: 2rem;
       font-size: 1.2rem;
       background-color: #b08568d3;
@@ -63,25 +59,10 @@
         border: #ffffff5e solid 2px;
       }
     }
-    .flex-direction {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      width: 100%;
-      align-items: center;
-    }
-    .flex-direction div {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin: auto;
-    }
-    .btn-icon {
-      font-size: 1.2rem;
-      color: white;
-      border-left: none;
-      background: transparent;
-      outline: none;
+    .register-button2 p {
+      font-size: 1rem;
+      margin-top: 17px;
+      gap: 5px;
     }
   }
 }
