@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import "./register.scss";
 import { IoEye } from "react-icons/io5";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const data = { name: "", lastName: "", email: "", password: "", confirm: "" };
   const [inputData, setInputData] = useState(data);
   const [register, setRegister] = useState(false);
   // const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     console.log("Register");
   }, [register]);
@@ -97,15 +97,22 @@ const Register = () => {
           <div>
             <button
               className="register-button"
-              onClick={() => navigate("/")}
+              // onClick={() => navigate("/")}
               type="submit"
             >
               {" "}
               Submit{" "}
             </button>
-            <button className="register-button2">
-              <p>Already have an account ?</p>
-            </button>
+          </div>
+          <div>
+            <a
+              href="http://localhost:5173/"
+              className="register-button2"
+              // onClick={() => navigate("/")}
+            >
+              {" "}
+              Already have an account{" "}
+            </a>
           </div>
         </form>
       </div>

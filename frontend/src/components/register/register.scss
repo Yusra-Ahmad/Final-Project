@@ -49,8 +49,8 @@
     .register-button {
       width: 100%;
       padding: 20px;
-      margin-top: 2rem;
-      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
       background-color: #b08568d3;
       border-radius: 30px;
       border: #b08568 solid 2px;
@@ -59,10 +59,10 @@
         border: #ffffff5e solid 2px;
       }
     }
-    .register-button2 p {
-      font-size: 1rem;
-      margin-top: 17px;
-      gap: 5px;
+    .register-button2 {
+      font-size: 1.5rem;
+      padding: 5rem;
+      color: white;
     }
   }
 }
