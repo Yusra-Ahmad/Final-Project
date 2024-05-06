@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { TiDeleteOutline } from "react-icons/ti";
+import {TiDeleteOutline}from "react-icons/ti";
 import Calendar from "react-calendar";
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
@@ -11,7 +11,7 @@ const Appointment = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [summary, setSummary] = useState([]);
+  const [summary, setSummary] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,10 +28,6 @@ const Appointment = () => {
     fetchServices();
   }, []);
 
-  // const handleDateSelect = (date: Date | Date[]) => {
-  //   setSelectedDate(date instanceof Date ? date : null);
-  // };
-  
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
     setSelectedTime(selectedHour);
@@ -80,7 +76,7 @@ const Appointment = () => {
       };
       
       const response = await fetch("http://localhost:3020/appointments/book" , config);
-  
+
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -137,7 +133,10 @@ const Appointment = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+
     const totalPrice = summary.reduce((acc, item) => acc + item.price, 0);
+
+
     
     return (
       <>
@@ -193,8 +192,8 @@ const Appointment = () => {
       <div className="popup">
         <div className="popup-content">
           <p>{errorMessage}</p>
-           <TiDeleteOutline onClick={handleClosePopup} />
-         
+          <TiDeleteOutline onClick={handleClosePopup} />
+          {/* <button >Close</button> */}
         </div>
       </div>
     )}
