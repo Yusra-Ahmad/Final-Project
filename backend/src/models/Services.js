@@ -5,7 +5,6 @@ const required= true
 
 const serviceSchema = new Schema({
 title:{type:String,required},
-image:{type:String, required},
 description:{type:String,required},
 price:{type:Number,required},
 duration:{type:String}

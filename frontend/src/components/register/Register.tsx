@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./register.scss";
 import { IoEye } from "react-icons/io5";
 
