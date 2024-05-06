@@ -1,103 +1,122 @@
 import { useEffect, useRef, useState } from "react";
 import "./register.scss";
+import { IoEye } from "react-icons/io5";
+
+// import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const firstnameInput = useRef<HTMLInputElement>(null);
-  const lastnameInput = useRef<HTMLInputElement>(null);
-  const emailInput = useRef<HTMLInputElement>(null);
-  const passwordInput = useRef<HTMLInputElement>(null);
-  const confirmPasswordInput = useRef<HTMLInputElement>(null);
-
+  const data = { name: "", lastName: "", email: "", password: "", confirm: "" };
+  const [inputData, setInputData] = useState(data);
   const [register, setRegister] = useState(false);
-  // useEffect(() => {}, [register]);
-  // function handleData(e) {
-  //   setInputData({ ...inputData, [e.target.name]: e.target.value });
-  //   console.log("inputData", inputData);
-  // }
-  const handleSubmit = async (e) => {
+  // const [showPassword, setShowPassword] = useState(false);
+  // const navigate = useNavigate();
+  useEffect(() => {
+    console.log("Register");
+  }, [register]);
+  function handleData(e) {
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
+    console.log(inputData);
+  }
+  function handleSubmit(e) {
     e.preventDefault();
-    // if (
-    //   !firstnameInput ||
-    //   !lastnameInput ||
-    //   !emailInput ||
-    //   !passwordInput ||
-    //   !confirmPasswordInput
-    // ) {
-    //   alert("All fields are Mandatory");
-    // }
-    const email = emailInput.current.value.trim();
-    const firstname = firstnameInput.current.value.trim();
-    const lastname = lastnameInput.current.value.trim();
-    const password = passwordInput.current.value.trim();
-    const confirmPassword = confirmPasswordInput.current.value.trim();
-
-    try {
-      const config = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          firstname,
-          lastname,
-          password,
-          confirmPassword,
-        }),
-      };
-      const request = await fetch(
-        "http://localhost:3020/auth/register",
-        config
-      );
-      const result = await request.json();
-      console.log("result", result);
-    } catch (error) {
-      console.log(error.message);
+    if (
+      !inputData.name ||
+      !inputData.lastName ||
+      !inputData.email ||
+      !inputData.password ||
+      !inputData.confirm
+    ) {
+      alert("All fields are Mandatory");
+    } else {
+      setRegister(true);
     }
-  };
+  }
   return (
-    <div className="register-container">
-      {/* <pre>
-        {" "}
-        {register ? (
-          <h2>Hello {inputData.name}, you have Registered successfully</h2>
-        ) : (
-          ""
-        )}{" "}
-      </pre> */}
-      <form className="register-form" onSubmit={handleSubmit}>
-        <p>Registration </p>
-        <input
-          type="text"
-          placeholder="First Name*"
-          name="name"
-          ref={firstnameInput}
-        />
-        <input
-          type="text"
-          placeholder="Last Name*"
-          name="name"
-          ref={lastnameInput}
-        />
-        <input
-          type="email"
-          placeholder="Email*"
-          name="email"
-          ref={emailInput}
-        />
-        <input
-          type="text"
-          placeholder="Password*"
-          name="password"
-          ref={passwordInput}
-        />
-        <input
-          type="text"
-          placeholder="Confirm Password*"
-          name="password"
-          ref={confirmPasswordInput}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <>
+      <div className="register-container">
+        <pre>
+          {" "}
+          {register ? (
+            <h2>
+              Hello {inputData.name} {inputData.lastName}, you have Registered
+              successfully
+            </h2>
+          ) : (
+            ""
+          )}{" "}
+        </pre>
+        <form className="register-form" onSubmit={handleSubmit}>
+          <p>Registration </p>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name*"
+              name="name"
+              value={inputData.name}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Last Name*"
+              name="lastName"
+              value={inputData.lastName}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              placeholder="Email*"
+              name="email"
+              value={inputData.email}
+              onChange={handleData}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password*"
+              name="password"
+              value={inputData.password}
+              onChange={handleData}
+            />
+            <IoEye />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Confirm Password*"
+              name="confirm"
+              value={inputData.confirm}
+              onChange={handleData}
+            />
+            <IoEye />
+          </div>
+          <div>
+            <button
+              className="register-button"
+              // onClick={() => navigate("/")}
+              type="submit"
+            >
+              {" "}
+              Submit{" "}
+            </button>
+          </div>
+          <div>
+            <a
+              href="http://localhost:5173/"
+              className="register-button2"
+              // onClick={() => navigate("/")}
+            >
+              {" "}
+              Already have an account?{" "}
+            </a>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 
