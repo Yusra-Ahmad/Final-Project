@@ -111,7 +111,7 @@ const Register = () => {
               // onClick={() => navigate("/")}
             >
               {" "}
-              Already have an account{" "}
+              Already have an account?{" "}
             </a>
           </div>
         </form>
