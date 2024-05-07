@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import './login.scss';
-import { useUser, UserContext } from '../../context/UserContext';
-import CheckoutForm from '../checkout/CheckoutForm';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import "./login.scss";
+import { useUser, UserContext } from "../../context/UserContext";
+import CheckoutForm from "../checkout/CheckoutForm";
 
 interface UserContext {
   setToken: (value: string) => void;
@@ -28,7 +28,7 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       // Check if the login redirect state exists and navigate accordingly
-      const destination = location.state?.from || '/';
+      const destination = location.state?.from || "/";
       navigate(destination);
     }
   }, [token, navigate, location.state]);
@@ -56,13 +56,13 @@ const Login = () => {
         setToken(result.token);
         setUser(result.user);
         // Navigate to the intended destination or fallback to home
-        const CheckoutForm = location.state?.from || '/';
+        const CheckoutForm = location.state?.from || "/";
         navigate(CheckoutForm);
       } else {
-        console.log('Login error:', result.error);
+        console.log("Login error:", result.error);
       }
     } catch (error) {
-      console.log('Network error:', error.message);
+      console.log("Network error:", error.message);
     }
   };
 
