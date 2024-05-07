@@ -63,8 +63,8 @@ const Navbar = () => {
 
         <ul className="cart-ul">
           {token ? (
-            <Link onChange={handleUserIcon} className="cart-li " to="/logout">
-              {/* <span className="first-latter">{firstLatter}</span> */}
+            <Link onChange={handleUserIcon} className="cart-li" to="/logout">
+              <span className="first-latter">{firstLatter}</span>
             </Link>
           ) : (
             <Link onChange={handleUserIcon} className="cart-li" to="/login">
