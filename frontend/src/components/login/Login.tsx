@@ -1,35 +1,33 @@
 import "./login.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../context/UserContext";
 
 const Login = () => {
-  const [showPassword, setShowpassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
   const handleShowPassword = () => {
-    setShowpassword((prev) => !prev);
+    setShowPassword(prev => !prev);
   };
-  console.log(token);
 
   useEffect(() => {
     if (token) {
-      // Check if the login redirect state exists and navigate accordingly
-      const destination = location.state?.from || "/";
+      // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
+      const destination = location.state?.from?.pathname === "/cart" ? "/checkout" : location.state?.from || "/";
       navigate(destination);
     }
   }, [token, navigate, location.state]);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = emailInput.current!.value.trim() || "";
-    const password = passwordInput.current!.value.trim() || "";
-    console.log(email, password);
+    const email = emailInput.current?.value.trim() || "";
+    const password = passwordInput.current?.value.trim() || "";
     try {
       const config = {
         method: "POST",
@@ -40,7 +38,6 @@ const Login = () => {
       };
       const request = await fetch("http://localhost:3020/auth/login", config);
       const result = await request.json();
-      console.log(result);
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
@@ -48,10 +45,10 @@ const Login = () => {
         setUser(result.user);
 
         setIsLoggedIn(true);
-        navigate("/");
+        // After setting the login state, the useEffect will handle redirection
       }
     } catch (error) {
-      console.log(error.message);
+      console.error("Login error:", error.message);
     }
   };
 
@@ -99,4 +96,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;

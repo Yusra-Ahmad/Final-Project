@@ -1,27 +1,35 @@
 .checkout-form-container {
-  margin-top: 6em;
+  
+  margin-top: 2rem;
+  padding: 5%;
   width: 90vw;
   max-width: 600px;
-  max-height: 150%; 
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #1c1919;
   color: white;
   font-family: serif;
   font-style: italic;
   letter-spacing: 0.2rem;
-
   font-size: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  padding: 4rem;
+  justify-content: center;
+  align-items: center;
+  padding-top: 28rem;
+  padding-bottom: 5rem;
   box-shadow: 3px 3px 15px -5px #b08568;
   border-radius: 25px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
     font-size: 1.5rem;
     width: 90%;
@@ -29,15 +37,14 @@
     box-shadow: none;
     border-radius: 0;
   }
-
   label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     color: white;
     font-size: 0.99rem;
     font-weight: 600;
+    cursor: pointer;
   }
-
   input, select {
     width: 100%;
     padding: 10px 16px;
@@ -46,58 +53,44 @@
     border-radius: 4px;
     font-size: 1rem;
     box-shadow: 3px 3px 15px -5px #b08568;
-    border-radius: 25px;
     line-height: 1.25;
     background-color: #1c1919;
     color: white;
     cursor: pointer;
-
     &::placeholder {
       color: #888888;
     }
-
     &:focus {
       border-color: #666666;
       outline: none;
       box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.2);
     }
   }
-
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="grey" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    cursor: pointer;
-  }
-
   .payment-method {
     padding: 1rem;
     background: transparent;
-    border-radius: 8px;
     margin-bottom: 2rem;
     box-shadow: 3px 3px 15px -5px #b08568;
     border-radius: 25px;
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-
     div {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       width: 100%;
-    flex-wrap: wrap;
-
+      flex-wrap: wrap;
       input[type="radio"] {
-        margin-right: 15rem;
-        accent-color: #b08568;
+        margin-bottom: -4rem;
+        margin-left: 15rem;
+        accent-color: #c71010;
         transform: scale(1.6);
       }
-
       label {
+        margin-top: 1rem;
+        margin-right: 14rem;
+        line-height: 2em;
         font-weight: bold;
         font-size: 0.95rem;
         color: white;
@@ -105,11 +98,10 @@
       }
     }
   }
-
   .continue-button {
     width: 100%;
     padding: 12px;
-    background-color: #035203;
+    background-color: #066b06;
     color: white;
     border: none;
     border-radius: 4px;
@@ -118,12 +110,79 @@
     cursor: pointer;
     text-transform: uppercase;
     margin-top: 10px;
-
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
     &:hover {
-      background-color: #227a22;
+      background-color: #29a329;
       border-radius: 12px;
     }
+  }
+}
+.thank-you-message {
+  text-align: center;
+  padding: 10%;
+    box-shadow: 3px 3px 15px -5px #b08568;
+  border-radius: 25px;
+  border-radius: 5px;
+    background-color: #1c1919;
+  margin-bottom: 100%;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 3rem;
+  }
+
+  button {
+    padding: 10px;
+    margin-left: 2%;
+    background-color: rgb(88, 54, 21);
+    color: #fff;
+    border: 2px solid rgb(72, 58, 45);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #9e704a;
+    }
+  }
+}
+
+
+.continue-shopping-button {
+  margin-left: 15%;
+  width: 70%;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+  padding: 10px;
+  background-color: #402a12;
+  color: white;
+  border: 2px solid #563e2e;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
+  &:hover {
+    font-family: italic;
+
+    letter-spacing: 1.5px;
+    background-color: #cb9362;
+    color: black;
+    border-radius: 12px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
