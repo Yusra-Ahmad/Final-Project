@@ -3,17 +3,26 @@ import './Cart.scss';
 import { CartContext } from '../../context/Cart';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+
+interface Product {
+  _id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
 
 const Cart = () => {
   const Base_Url = 'http://localhost:3020';
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    setLoading(false); // Simulating data loading completion
-  }, []); // Empty dependency array means this effect runs only once after the initial render
+    setLoading(false);
+  }, []);
 
   const handleCheckout = () => {
     if (user) {
@@ -33,7 +42,7 @@ const Cart = () => {
             <h1>Shopping cart</h1>
           </div>
           <div className="cart-items">
-            {cartItems.map((product) => (
+            {cartItems.map((product: Product) => (
               <div className="cart-item" key={product._id}>
                 <div className="product-details">
                   <img src={`${Base_Url}/${product.image}`} alt={product.title} />
@@ -44,9 +53,13 @@ const Cart = () => {
                 </div>
                 <div className="price">€{product.price}</div>
                 <div className="quantity">
-                  <button className='cartProductAddRemove' onClick={() => removeFromCart(product)}>-</button>
+                  <button className='cartProductAddRemove' onClick={() => removeFromCart(product)}>
+                    <  FaMinus  />
+                  </button>
                   {product.quantity}
-                  <button className='cartProductAddRemove' onClick={() => addToCart(product)}>+</button>
+                  <button className='cartProductAddRemove' onClick={() => addToCart(product)}>
+                    <FaPlus />
+                  </button>
                 </div>
                 <div className="total">€{product.quantity * product.price}</div>
               </div>
