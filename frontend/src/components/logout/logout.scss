@@ -1,0 +1,102 @@
+.logout-container {
+  height: 100vh;
+  font-family: serif;
+  font-style: italic;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .logout-div {
+    padding: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    box-shadow: 3px 3px 15px -5px #b08568;
+    border-radius: 25px;
+    @media screen and (max-width: 768px) {
+      width: 500px;
+      padding: 4rem;
+    }
+
+    h1 {
+      letter-spacing: 0.2rem;
+      font-size: 2rem;
+      align-self: center;
+    }
+    p {
+      background-color: #32251d6b;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+    .logout-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      .confirm-button,
+      .cancel-button {
+        background-color: #1c1919;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid #c89a7aa0;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 0;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 0;
+          height: 100%;
+          transform: skew(15deg);
+          transition: all 0.5s;
+          overflow: hidden;
+          z-index: -1;
+        }
+
+        &:hover::before,
+        &:hover::after {
+          width: 58%;
+        }
+
+        &:hover span {
+          color: #0f0206;
+          transition: 0.3s;
+        }
+
+        span {
+          color: #fdf9f6;
+          font-family: serif;
+          font-size: 18px;
+          transition: all 0.3s ease-in;
+        }
+      }
+      .confirm-button {
+        &::before {
+          left: -12px;
+          background: #e0ac8999;
+        }
+
+        &::after {
+          right: -12px;
+          background: #e0ac8999;
+        }
+      }
+      .cancel-button {
+        &::before {
+          left: -10px;
+          background: rgb(121, 44, 44);
+        }
+
+        &::after {
+          right: -10px;
+          background: rgb(121, 44, 44);
+        }
+      }
+    }
+  }
+}

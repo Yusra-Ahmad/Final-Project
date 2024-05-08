@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface User {
   id: number;
@@ -10,6 +17,8 @@ interface UserContexType {
   setUser: (user: User | null) => void;
   token: string | null;
   setToken: (token: string | null) => void;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  isLoggedIn: boolean;
 }
 
 // const defaultUser = JSON.parse(localStorage.getItem("user"));
@@ -21,13 +30,23 @@ export const UserContext = createContext<UserContexType>({
   setUser: () => {},
   token: defaultToken,
   setToken: () => {},
+  setIsLoggedIn: () => {},
+  isLoggedIn: false,
 });
 
 export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(defaultUser);
   const [token, setToken] = useState(defaultToken);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
   return (
-    <UserContext.Provider value={{ user, setUser, token, setToken }}>
+    <UserContext.Provider
+      value={{ user, setUser, token, setToken, isLoggedIn, setIsLoggedIn }}
+    >
       {children}
     </UserContext.Provider>
   );

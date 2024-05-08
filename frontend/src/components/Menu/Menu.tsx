@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useUser } from "../../context/UserContext";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ interface MenuProps {
 }
 
 const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { isLoggedIn } = useUser();
 
   return (
     <div className={`menu ${dropMenu ? "hidden" : "active"}`}>
@@ -29,19 +29,14 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
           <li>Register</li>
         </Link>
 
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <Link to="/login" className="link" onClick={handleDropMenu}>
             <li>Login</li>
           </Link>
         ) : (
-          <li
-            onClick={() => {
-              // do big reset of everything here
-              // reset the user of the store (in the context)
-            }}
-          >
-            Logout
-          </li>
+          <Link to="/logout" className="link" onClick={handleDropMenu}>
+            <li>Logout</li>
+          </Link>
         )}
       </ul>
     </div>
