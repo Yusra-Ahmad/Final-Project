@@ -13,13 +13,16 @@ const Login = () => {
   const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
   const handleShowPassword = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
 
   useEffect(() => {
     if (token) {
       // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
-      const destination = location.state?.from?.pathname === "/cart" ? "/checkout" : location.state?.from || "/";
+      const destination =
+        location.state?.from?.pathname === "/cart"
+          ? "/checkout"
+          : location.state?.from || "/";
       navigate(destination);
     }
   }, [token, navigate, location.state]);
