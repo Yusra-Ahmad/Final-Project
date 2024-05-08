@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./register.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useUser, UserContext } from "../../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 
-interface UserContext {
-  setToken: (value: string) => void;
-  setUser: (value: UserType) => void;
-  token: string | null; // Assuming token is of type string
-}
+// interface UserContext {
+//   setToken: (value: string) => void;
+//   setUser: (value: UserType) => void;
+//   token: string | null; // Assuming token is of type string
+// }
 
-type UserType = {
-  id: number;
-  email: string;
-  password: string;
-};
+// type UserType = {
+//   id: number;
+//   email: string;
+//   password: string;
+// };
 
 const Register = () => {
   const firstnameRef = useRef<HTMLInputElement>(null);
