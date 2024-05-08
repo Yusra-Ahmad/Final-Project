@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx"; 
+import EmailGenerator from"./email/EmailGenerator.tsx";
 
 const Appointment = () => {
   const { services, fetchServices } = useServiceContext();
@@ -15,7 +16,8 @@ const Appointment = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [confirmationRequested, setConfirmationRequested] = useState(false); 
+// const [userData , setUserData]=useState("")
 
 
   const { user, setUser, token, setToken } = useUser();
@@ -57,7 +59,7 @@ const Appointment = () => {
       }
       
       const {price}= selectedServiceObj
-      console.log(typeof(price));
+  
       
       const submittedData = {
         service: selectedService,
@@ -136,7 +138,12 @@ const Appointment = () => {
 
     const totalPrice = summary.reduce((acc, item) => acc + item.price, 0);
 
-
+console.log("this is summary", summary);
+// console.log("this is summary service",summary.service);
+    const handleConfirmation = () => {
+      
+      setConfirmationRequested(true);
+    };
     
     return (
       <>
@@ -226,11 +233,25 @@ const Appointment = () => {
           <div className="total-price">
             <h3>Total Price: {totalPrice}€</h3>
           </div>
-          <button className="confirm-button">
+          <button className="confirm-button" onClick={handleConfirmation} >
             <span> Confirm</span>
           </button>
         </div>
       </div>
+      {confirmationRequested && (
+  <EmailGenerator
+    sendConfirmation={confirmationRequested}
+    userData={user}
+    bookingDetails ={summary[0]}
+    
+    // bookingDetails={{
+    //   selectedService: selectedService,
+    //   selectedDate: selectedDate,
+    //   selectedTime: selectedTime,
+    //   totalPrice: totalPrice,
+    // }}
+  />
+)}
     </>
   );
 };
