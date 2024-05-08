@@ -1,0 +1,63 @@
+.home-page {
+  .page-container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+    z-index: 0;
+    will-change: auto;
+  }
+
+  #blank {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: transform 300ms ease-in-out;
+    transform: translateY(-100%);
+  }
+
+  #blank.visible {
+    transition: transform 0ms ease-in-out;
+    transform: translateY(0);
+  }
+
+  .page.active {
+    z-index: 1;
+    visibility: visible;
+  }
+
+  .page.inactive {
+    z-index: 0;
+    visibility: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+}

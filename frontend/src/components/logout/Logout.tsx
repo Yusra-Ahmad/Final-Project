@@ -4,7 +4,7 @@ import "./logout.scss";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { setUser, setIsLoggedIn, setToken } = useUser();
+  const { user, setUser, setIsLoggedIn, setToken } = useUser();
 
   const handleLogout = () => {
     setUser(null);
@@ -16,16 +16,30 @@ const Logout = () => {
     navigate("/");
   };
 
-  // Optionally, you can add a confirmation message or modal here
+  const handleCancelLogout = () => {
+    navigate("/");
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const userName =
+    user && `${capitalize(user.firstname)} ${capitalize(user.lastname)}`;
 
   return (
     <div className="logout-container">
       <div className="logout-div">
-        <h1>Logout</h1>
-        <p>Are you sure you want to leave?</p>
-        <button onClick={handleLogout} className="logout-button ">
-          Logout
-        </button>
+        <h1>{userName}</h1>
+        <p>Are you sure you want to logout?</p>
+        <div className="logout-buttons">
+          <button onClick={handleLogout} className="confirm-button">
+            <span>Yes</span>
+          </button>
+          <button onClick={handleCancelLogout} className="cancel-button">
+            <span>Cancel</span>
+          </button>
+        </div>
       </div>
     </div>
   );
