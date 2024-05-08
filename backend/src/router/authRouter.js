@@ -46,7 +46,7 @@ authRouter
   .delete("/users", async (req, res, next) => {
     try {
       await User.deleteMany();
-      res.json({ message: "All user deleted!" });
+      res.json({ message: "All user deleted!" }); 
     } catch (error) {
       next({ status: 500, message: error.message });
     }
