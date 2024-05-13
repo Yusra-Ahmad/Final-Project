@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
+import Calendar from "react-calendar";
+import emailjs from "emailjs-com";
+
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
 import "./Appointments.scss";
@@ -11,6 +15,12 @@ import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
 // import { useUser } from "../../../context/UserContext.tsx";
 // import { useServiceContext } from "../../../context/serviceContext.tsx";
+// import EmailGenerator from"./email/EmailGenerator.tsx";
+import { useNavigate } from "react-router-dom";
+import "./Appointments.scss";
+// import { useUser } from "../../../context/UserContext.tsx";
+// import { useServiceContext } from "../../../context/serviceContext.tsx";
+
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary } =
     useServiceContext();
@@ -23,6 +33,7 @@ const Appointment = () => {
   const [confirmationRequested, setConfirmationRequested] = useState(false);
   // const [active, setActive] = useState<Boolean>(false);
   // const activeRef =useRef()
+
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
   const actualTime = displayTime + 2;
@@ -44,6 +55,7 @@ const Appointment = () => {
   // const handleFocus = () => {
   //   setActive(true)
   // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -54,6 +66,7 @@ const Appointment = () => {
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
+      
       // console.log("this is selectedServiceObj", selectedServiceObj);
       // console.log("this is selected service", selectedService);
       if (!selectedServiceObj) {
@@ -61,6 +74,7 @@ const Appointment = () => {
         return;
       }
       const { price } = selectedServiceObj;
+
       const submittedData = {
         service: selectedService,
         startTime: time,
@@ -110,6 +124,7 @@ const Appointment = () => {
         config
       );
       const data = await response.json();
+
       updateSummary(data);
     } catch (error) {
       console.log(error);
@@ -139,15 +154,18 @@ const Appointment = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+
   const totalPrice = summary
     ? summary.reduce((acc, item) => acc + item.price, 0)
     : 0;
+
   const navigate = useNavigate();
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
     updateSummary(summary);
     navigate("/bookingDetails");
     console.log("email is working");
+
     // Send confirmation email
     try {
       const template = {
@@ -155,17 +173,20 @@ const Appointment = () => {
         user_email: user?.email, //userData.email,
         total_amount: totalPrice,
       };
+
       await emailjs.send(
         "service_90mywz9",
         "template_qog1s6h",
         template,
         "uq8xQ_jnM6FacK9rL"
       );
+
       console.log("Confirmation email sent successfully");
     } catch (error) {
       console.error("Error sending confirmation email:", error);
     }
   };
+
   return (
     <>
       <div className="appointment-container">
@@ -247,6 +268,7 @@ const Appointment = () => {
               summary.map((item, index) => (
                 <div key={index} className="submitted-data">
                   <div className="display-data">
+                  
                     <p>
                     {index + 1})
                        <span>Service: </span>
@@ -296,7 +318,7 @@ const Appointment = () => {
   sendConfirmation={confirmationRequested}
     userData={user}
     totalPrice = {totalPrice}
-    // handleConfirmation={handleConfirmation}
+    // handleConfirmation={handleConfirmation} 
     // bookingDetails={{
     //   selectedService: selectedService,
     //   selectedDate: selectedDate,

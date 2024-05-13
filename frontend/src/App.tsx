@@ -12,6 +12,7 @@ import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
 import Logout from "./components/logout/Logout";
 import CheckoutForm from "./components/checkout/CheckoutForm";
+import BookingDetail from "./components/services/appointments/details&history/BookingDetail";
 // import OrderDetails from "./components/order/OrderDetails";
 import OrderList from "./components/order/OrderList";
 // import ThankYou from "./components/thankYou/ThankYou";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/services" element={<Services />} />
             <Route path="/book-appointment" element={<Appointment />} />
+            <Route path="/bookingDetails"  element={<BookingDetail/>}/>
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
