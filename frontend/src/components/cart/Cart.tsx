@@ -78,7 +78,7 @@ const Cart = () => {
             <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
             <button className="clear-cart-button" onClick={clearCart}>Clear Cart</button>
           </div>
-          {!user && <p style={{ color: "white" }}>You need to login first to continue checkout</p>}
+          {/* {!user && <p style={{ color: " #eccd7c", marginBottom:"16rem" ,fontSize:"22px" }}>You need to login first to continue checkout</p>} */}
         </>
       )}
     </div>
