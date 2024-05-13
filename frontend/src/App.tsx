@@ -13,6 +13,7 @@ import Appointment from "./components/services/appointments/Appointments";
 import Logout from "./components/logout/Logout";
 import CheckoutForm from "./components/checkout/CheckoutForm";
 import BookingDetail from "./components/services/appointments/details&history/BookingDetail";
+
 // import ThankYou from "./components/thankYou/ThankYou";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Homepage />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/services" element={<Services />} />
             <Route path="/book-appointment" element={<Appointment />} />

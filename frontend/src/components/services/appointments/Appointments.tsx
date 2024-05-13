@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
+
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
 import "./Appointments.scss";
@@ -8,6 +9,9 @@ import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
 import { useNavigate } from "react-router-dom";
+import "./Appointments.scss";
+import { useUser } from "../../../context/UserContext.tsx";
+import { useServiceContext } from "../../../context/serviceContext.tsx";
 
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary } =
@@ -21,6 +25,7 @@ const Appointment = () => {
   const [confirmationRequested, setConfirmationRequested] = useState(false);
   // const [active, setActive] = useState<Boolean>(false);
   // const activeRef =useRef()
+
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
   const actualTime = displayTime + 2;
@@ -31,6 +36,10 @@ const Appointment = () => {
     fetchServices();
     fetchData();
   }, []);
+
+  // const handleDateSelect = (date: Date | Date[]) => {
+  //   setSelectedDate(date instanceof Date ? date : null);
+  // };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
@@ -55,6 +64,9 @@ const Appointment = () => {
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
+      
+      // console.log("this is selectedServiceObj", selectedServiceObj);
+      // console.log("this is selected service", selectedService);
       if (!selectedServiceObj) {
         console.error("Selected service not found");
         return;

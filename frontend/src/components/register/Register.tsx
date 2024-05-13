@@ -1,161 +1,141 @@
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import "./register.scss";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useUser } from "../../context/UserContext";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
+// interface UserContext {
+//   setToken: (value: string) => void;
+//   setUser: (value: UserType) => void;
+//   token: string | null; // Assuming token is of type string
+// }
+
+// type UserType = {
+//   id: number;
+//   email: string;
+//   password: string;
+// };
+
 const Register = () => {
-  const firstnameInput = useRef<HTMLInputElement>(null);
-  const lastnameInput = useRef<HTMLInputElement>(null);
-  const emailInput = useRef<HTMLInputElement>(null);
-  const passwordInput = useRef<HTMLInputElement>(null);
-  const confirmPasswordInput = useRef<HTMLInputElement>(null);
+  const firstnameRef = useRef<HTMLInputElement>(null);
+  const lastnameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [register, setRegister] = useState(false);
-  const [showPassword, setShowpassword] = useState(false);
+  const location = useLocation();
+  const { setToken, setUser, token } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      const destination = location.state?.form || "/";
+      navigate(destination);
+    }
+  }, [token, navigate, location.state]);
+
   const handleShowPassword = () => {
-    setShowpassword((prev) => !prev);
+    setShowPassword((prev) => !prev);
   };
-  // useEffect(() => {}, [register]);
-  // function handleData(e) {
-  //   setInputData({ ...inputData, [e.target.name]: e.target.value });
-  //   console.log("inputData", inputData);
-  // }
-  const handleSubmit = async (e) => {
+
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (
-    //   !firstnameInput ||
-    //   !lastnameInput ||
-    //   !emailInput ||
-    //   !passwordInput ||
-    //   !confirmPasswordInput
-    // ) {
-    //   alert("All fields are Mandatory");
-    // }
-    const email = emailInput.current.value.trim();
-    const firstname = firstnameInput.current.value.trim();
-    const lastname = lastnameInput.current.value.trim();
-    const password = passwordInput.current.value.trim();
-    const confirmPassword = confirmPasswordInput.current.value.trim();
+    const email = emailRef.current?.value.trim() || "";
+    const password = passwordRef.current?.value.trim() || "";
+    const firstname = firstnameRef.current?.value.trim() || "";
+    const lastname = lastnameRef.current?.value.trim() || "";
+
     try {
-      const config = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstname,
-          lastname,
-          email,
-          password,
-          confirmPassword,
-        }),
+      const user = {
+        firstname,
+        lastname,
+        email,
+        password,
       };
-      const request = await fetch(
-        "http://localhost:3020/auth/register",
-        config
-      );
-      const result = await request.json();
-      console.log("result", result);
+      const response = await fetch("http://localhost:3020/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const result = await response.json();
+      console.log(result);
       if (!result.error) {
-        setMessage(
-          "Congratulations on successfully completing your registration! You're all set to get started."
-        );
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        setToken(result.token);
+        setUser(result.user);
+        const CheckoutForm = location.state?.from || "/";
+        navigate(CheckoutForm);
+        // } else {
+        //   console.log("Registration error:", result.error);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("Network error:", error);
     }
   };
   return (
-    <div className="register-container">
-      {/* <pre>
-        {" "}
-        {register ? (
-          <h2>Hello {inputData.name}, you have Registered successfully</h2>
-        ) : (
-          ""
-        )}{" "}
-      </pre> */}
-      <form className="register-form" onSubmit={handleSubmit}>
-        <p>Registration </p>
-        <div className="input-div">
-          <input
-            className="register-input"
-            type="text"
-            placeholder="First Name*"
-            name="name"
-            ref={firstnameInput}
-          />
-        </div>
-        <div className="input-div">
-          <input
-            className="register-input"
-            type="text"
-            placeholder="Last Name*"
-            name="name"
-            ref={lastnameInput}
-          />
-        </div>
-        <div className="input-div">
-          <input
-            className="register-input"
-            type="email"
-            placeholder="Email*"
-            name="email"
-            ref={emailInput}
-          />
-        </div>
-        <div className="input-div">
-          {showPassword ? (
+    <>
+      <div className="register-container">
+        <form onSubmit={submitHandler} className="register-form">
+          <p>Registration </p>
+          <div className="input-div">
             <input
-              ref={passwordInput}
-              className="register-input "
+              ref={firstnameRef}
+              className="register-input"
               type="text"
-              placeholder="Password*"
+              placeholder="First Name*"
             />
-          ) : (
+          </div>
+          <div className="input-div">
             <input
-              ref={passwordInput}
-              className="register-input "
-              type="password"
-              placeholder="Password*"
-            />
-          )}
-          <span className="eye-icon" onClick={handleShowPassword}>
-            {showPassword ? <FaEye /> : <FaEyeSlash />}
-          </span>
-        </div>
-        <div className="input-div">
-          {showPassword ? (
-            <input
-              ref={confirmPasswordInput}
-              className="register-input "
+              ref={lastnameRef}
+              className="register-input"
               type="text"
-              placeholder="Confirm Password*"
+              placeholder="Last Name*"
             />
-          ) : (
+          </div>
+          <div className="input-div">
             <input
-              ref={confirmPasswordInput}
-              className="register-input "
-              type="password"
-              placeholder="Confirm Password*"
+              ref={emailRef}
+              className="register-input"
+              type="email*"
+              placeholder="Email"
             />
-          )}
-          <span className="eye-icon" onClick={handleShowPassword}>
-            {showPassword ? <FaEye /> : <FaEyeSlash />}
-          </span>
-        </div>
-        <div className="register-div">
-          <button className="register-button" type="submit">
-            Submit
-          </button>
-          <Link to="/login" className="login">
-            Already have an account
-          </Link>
-        </div>
-      </form>
-    </div>
+          </div>
+
+          <div className="input-div">
+            {showPassword ? (
+              <input
+                ref={passwordRef}
+                className="register-input"
+                type="text"
+                placeholder="Password"
+              />
+            ) : (
+              <input
+                ref={passwordRef}
+                className="register-input"
+                type="password"
+                placeholder="Password"
+              />
+            )}
+            <span className="eye-icon" onClick={handleShowPassword}>
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
+          </div>
+
+          <div className="register-button-div">
+            <button type="submit" className="register-button">
+              Submit
+            </button>
+            <Link className="login" to="/login">
+              Already have an account?
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 export default Register;
