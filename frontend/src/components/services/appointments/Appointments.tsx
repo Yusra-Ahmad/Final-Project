@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import React, { useEffect, useRef, useState } from "react";
+// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
 
-import Calendar from "react-calendar";
-import emailjs from "emailjs-com";
+// import Calendar from "react-calendar";
+// import emailjs from "emailjs-com";
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
@@ -16,8 +16,8 @@ import "./Appointments.scss";
 // import { useUser } from "../../../context/UserContext.tsx";
 // import { useServiceContext } from "../../../context/serviceContext.tsx";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
-import { useNavigate } from "react-router-dom";
-import "./Appointments.scss";
+// import { useNavigate } from "react-router-dom";
+// import "./Appointments.scss";
 // import { useUser } from "../../../context/UserContext.tsx";
 // import { useServiceContext } from "../../../context/serviceContext.tsx";
 

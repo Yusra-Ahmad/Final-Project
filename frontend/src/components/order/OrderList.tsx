@@ -71,7 +71,6 @@ console.log(orders);
                             return <div key={product._id} className="product-details">
                                 <img src={`${Base_Url}/${product.image}`} alt={product.name} style={{ width: '100px', height: '100px' }} />
                                
-                                <p>Name:{product.name}</p> 
                                  <p>Quantity: {product.quantity}</p>
                                 <p>Price: €{product.price}</p>
                             </div>
