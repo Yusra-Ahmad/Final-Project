@@ -1,11 +1,12 @@
-import React, { useState ,} from 'react';
+import React, { useContext, useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import './CheckoutForm.scss';
 import { FaPaypal, FaCreditCard, FaMoneyCheckAlt } from 'react-icons/fa';
+import { UserContext } from '../../context/UserContext';
+import { CartContext } from '../../context/Cart';
 
 interface FormState {
-  email: string;
   fullName: string;
   telephone: string;
   address: string;
@@ -17,7 +18,6 @@ interface FormState {
 
 const CheckoutForm: React.FC = () => {
   const [formState, setFormState] = useState<FormState>({
-    email: '',
     fullName: '',
     telephone: '',
     address: '',
@@ -28,8 +28,52 @@ const CheckoutForm: React.FC = () => {
   });
   const [isCheckoutComplete, setIsCheckoutComplete] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { token } = useContext(UserContext);
+  const Base_Url = 'http://localhost:3020';
+  const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
 
- 
+  const submitOrder = () => {
+    if (token) {
+      const fetchOrders = async () => {
+        const { fullName, address, city, country, postcode } = formState;
+        const requestBody = {
+          products: cartItems.map(item => ({
+            product: item._id,
+            quantity: item.quantity
+          })),
+          totalAmount: getCartTotal(),
+          shippingAddress: {
+            fullName,
+            address,
+            city,
+            country,
+            postcode
+          },
+          paymentMethod: formState.paymentMethod
+        };
+        try {
+          const response = await fetch(`${Base_Url}/orders`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
+          });
+          const data = await response.json();
+          console.log('Order submitted:', data);
+          setIsCheckoutComplete(true);
+          clearCart(); // Clear the cart after successful checkout
+
+
+        } catch (error) {
+          console.error('Error fetching orders:', error);
+        }
+      };
+
+      fetchOrders();
+    }
+  }
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -38,15 +82,16 @@ const CheckoutForm: React.FC = () => {
   };
 
   const validateForm = (): boolean => {
-    const { email, fullName, telephone, address, city, country, postcode } = formState;
+    const { fullName, telephone, address, city, country, postcode } = formState;
     const isValidTelephone = telephone.match(/^\d{10}$/);
-    return email && fullName && isValidTelephone && address && city && country && postcode;
+    return fullName && isValidTelephone && address && city && country && postcode;
   };
 
   const handleCheckout = () => {
     if (validateForm()) {
       console.log("Checking out...", formState);
-      setIsCheckoutComplete(true); 
+      setIsCheckoutComplete(true);
+      submitOrder();
     } else {
       alert("Please ensure all fields are correctly filled.");
     }
@@ -67,15 +112,7 @@ const CheckoutForm: React.FC = () => {
       ) : (
         <form className="checkout-form">
           <div className="contact-info">
-            <label htmlFor="email">Contact</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={formState.email}
-              onChange={handleInputChange}
-            />
+
             <label htmlFor="fullName">Full Name</label>
             <input
               type="text"

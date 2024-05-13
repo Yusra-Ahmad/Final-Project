@@ -23,6 +23,8 @@ const Navbar = () => {
 
   let firstLatter = "";
   if (user) {
+    console.log(user);
+    
     firstLatter = user.firstname.charAt(0).toUpperCase();
     console.log(firstLatter);
   }

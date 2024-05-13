@@ -17,12 +17,13 @@ const Login = () => {
   };
 
   useEffect(() => {
+
     if (token) {
       // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
       const destination =
         location.state?.from?.pathname === "/cart"
           ? "/checkout"
-          : location.state?.from || "/";
+          : location?.state?.from || "/";
       navigate(destination);
     }
   }, [token, navigate, location.state]);
@@ -59,6 +60,8 @@ const Login = () => {
     <div className="login-container">
       <form onSubmit={submitHandler} className="login-form">
         <p>Login</p>
+        {!token && location?.state?.from === "/checkout" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>You need to login first to continue checkout</p>}
+
         <div className="input-div">
           <input
             ref={emailInput}

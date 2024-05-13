@@ -1,15 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
+// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
-
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
+
+// import Calendar from "react-calendar";
+// import emailjs from "emailjs-com";
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
 import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
+// import { useUser } from "../../../context/UserContext.tsx";
+// import { useServiceContext } from "../../../context/serviceContext.tsx";
+// import EmailGenerator from"./email/EmailGenerator.tsx";
+// import { useNavigate } from "react-router-dom";
+// import "./Appointments.scss";
 // import { useUser } from "../../../context/UserContext.tsx";
 // import { useServiceContext } from "../../../context/serviceContext.tsx";
 
@@ -29,23 +37,18 @@ const Appointment = () => {
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
   const actualTime = displayTime + 2;
-
   const time = new Date(selectedDate?.setHours(actualTime));
-
   useEffect(() => {
     fetchServices();
     fetchData();
   }, []);
-
   // const handleDateSelect = (date: Date | Date[]) => {
   //   setSelectedDate(date instanceof Date ? date : null);
   // };
-
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
     setSelectedTime(selectedHour);
   };
-
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(event.target.value);
   };
@@ -60,7 +63,6 @@ const Appointment = () => {
         console.error("Please select date, service, and time");
         return;
       }
-
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
@@ -71,7 +73,6 @@ const Appointment = () => {
         console.error("Selected service not found");
         return;
       }
-
       const { price } = selectedServiceObj;
 
       const submittedData = {
@@ -80,7 +81,6 @@ const Appointment = () => {
         price: price,
         user: user._id,
       };
-
       const config = {
         method: "POST",
         headers: {
@@ -89,12 +89,10 @@ const Appointment = () => {
         },
         body: JSON.stringify(submittedData),
       };
-
       const response = await fetch(
         "http://localhost:3020/appointments/book",
         config
       );
-
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -114,7 +112,6 @@ const Appointment = () => {
       console.error("Error while booking appointment:", error);
     }
   };
-
   const fetchData = async () => {
     const config = {
       headers: {
@@ -133,7 +130,6 @@ const Appointment = () => {
       console.log(error);
     }
   };
-
   const handleDelete = async (serviceName) => {
     try {
       const config = {
@@ -146,11 +142,9 @@ const Appointment = () => {
         `http://localhost:3020/appointments/deleteone/${serviceName}`,
         config
       );
-
       if (!response.ok) {
         throw new Error("Failed to delete appointment");
       }
-
       console.log("Appointment deleted successfully");
       fetchData();
     } catch (error) {
@@ -336,5 +330,23 @@ const Appointment = () => {
     </>
   );
 };
-
 export default Appointment;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
