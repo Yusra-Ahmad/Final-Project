@@ -8,6 +8,8 @@ const ServiceContext = createContext<{
   fetchServices: () => void;
   addService: () => void;
   removeService: (id: string) => void;
+  summary: [];
+  updateSummary: (data: any[]) => void;
 }>({
   services: [],
   loading: false,
@@ -15,6 +17,8 @@ const ServiceContext = createContext<{
   fetchServices: () => {},
   addService: () => {},
   removeService: () => {},
+  summary:[],
+  updateSummary: () => {}, 
 });
 
 
@@ -22,6 +26,13 @@ export const ServiceProvider: React.FC = ({ children }) => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [summary, setSummary] = useState<any[]>([]);
+
+  const updateSummary = (data) => {
+    // console.log("updated summary", data);
+    setSummary(data);
+  };
+// console.log("this is Summary", summary);
 
   // Function to fetch services
   const fetchServices = async () => {
@@ -85,6 +96,8 @@ export const ServiceProvider: React.FC = ({ children }) => {
         fetchServices,
         addService,
         removeService,
+        summary,
+        updateSummary,
       }}
     >
       {children}

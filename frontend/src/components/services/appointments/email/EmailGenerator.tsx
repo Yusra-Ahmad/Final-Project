@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 
@@ -37,7 +38,6 @@ console.log("this is time",adjustedStartTime.toLocaleTimeString([], { hour: '2-d
     }
   }, [sendConfirmation]);
 
-  return <div>{confirmationSent ? <p>Confirmation email sent!</p> : null}</div>;
 };
 
 export default EmailGenerator;

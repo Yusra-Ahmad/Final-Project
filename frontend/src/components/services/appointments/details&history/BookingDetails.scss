@@ -1,0 +1,120 @@
+.wrap-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .booking-details-container {
+        width: 50vw;
+        margin-top: 15rem;
+        margin: 0 auto;
+        padding: 20px;
+        border-top: 8px double #b08568;
+        border-bottom: 8px double #b08568;
+
+        border-radius: 8px;
+        // background-color: #f9f9f9;
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fcfafa;
+            text-align: center;
+        }
+        
+        .booking-detail {
+            box-shadow: 0 1px 8px #c78455;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: transparent;
+            border: 2px solid #432810;
+            border-radius: 4px;
+            
+            p {
+                margin: 5px 0;
+                font-size: 16px;
+                color: #faf7f7;
+                
+                span {
+                    font-weight: bold;
+                    margin-right: 5px;
+                }
+            }
+        }
+        
+        .total-amount {
+            margin-top: 20px;
+            text-align: right;
+            
+            p {
+                font-size: 18px;
+                font-weight: bold;
+                color: #f8f1f1;
+            }
+        }
+        
+        .home-button {
+            display: inline-block;
+            background-color: #1c1919;
+            width: 150px;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid #c89a7aa0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease-in;
+            z-index: 0;
+            @media screen and (max-width: 1000px){
+                margin-top: 2rem;
+                width: 100px;
+            }
+           }
+           
+           .home-button::before,
+           .home-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 100%;
+            transform: skew(15deg);
+            transition: all 0.5s;
+            overflow: hidden;
+            z-index: -1;
+           }
+           
+        .home-button::before {
+            left: -10px;
+            background: #b08568;
+           }
+           
+           .home-button::after {
+            right: -10px;
+            background: #b08568;
+           }
+           
+           .home-button:hover::before,
+           .home-button:hover::after {
+            width: 58%;
+            @media screen and (max-width: 1000px){
+                width: 62%;
+            }
+           }
+           
+           .home-button:hover span {
+            color: #0f0a02;
+            transition: 0.3s;
+           }
+           
+           .home-button span {
+            color: #fdf9f6;
+            font-family: serif;
+            font-size: 18px;
+            transition: all 0.3s ease-in;
+            @media screen and (max-width: 1000px){
+                font-size: 14px;
+                
+            }
+           }
+        
+    }
+}

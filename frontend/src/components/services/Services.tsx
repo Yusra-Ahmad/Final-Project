@@ -21,7 +21,7 @@ const Services = () => {
         fetchServices();
       }, []);
     
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleBookAppointment = () => {
  
