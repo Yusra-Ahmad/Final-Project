@@ -10,8 +10,8 @@ import { useServiceContext } from "../../../context/serviceContext.tsx";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
 import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
-import { useUser } from "../../../context/UserContext.tsx";
-import { useServiceContext } from "../../../context/serviceContext.tsx";
+// import { useUser } from "../../../context/UserContext.tsx";
+// import { useServiceContext } from "../../../context/serviceContext.tsx";
 
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary } =
