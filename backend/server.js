@@ -7,6 +7,7 @@ import cors from "cors";
 import appointmentRouter from "./src/router/appointmentRouter.js";
 import cartRouter from "./src/router/cartRouter.js";
 import { authRouter } from "./src/router/authRouter.js";
+import {orderRouter} from "./src/router/orderRouter.js"
 
 const app = express();
 config();
@@ -21,6 +22,8 @@ app.use("/products", productRouter);
 app.use("/appointments", appointmentRouter);
 app.use("/carts", cartRouter);
 app.use("/auth", authRouter);
+app.use('/orders', orderRouter);
+
 
 app.use((err, req, res, next) => {
   res

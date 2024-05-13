@@ -12,8 +12,10 @@ import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
 import Logout from "./components/logout/Logout";
 import CheckoutForm from "./components/checkout/CheckoutForm";
-
+// import OrderDetails from "./components/order/OrderDetails";
+import OrderList from "./components/order/OrderList";
 // import ThankYou from "./components/thankYou/ThankYou";
+
 
 function App() {
   return (
@@ -33,6 +35,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/checkout" element={<CheckoutForm />} />
+            <Route path="/orders" element={<OrderList />} />
+
+
+
             {/* <Route path="/thank-you" element={<ThankYou/>} /> */}
           </Routes>
         </ServiceProvider>
