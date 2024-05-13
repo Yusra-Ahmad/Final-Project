@@ -73,3 +73,13 @@ Content-Type: application/json
 ###
 Get http://localhost:3020/carts/661e4349d31012d4555d7bea
 
+# ###
+# POST http://localhost:3020/send-email
+# Content-Type: application/json
+
+#  {
+#   "firstName":"hetal" ,
+#   "lastName":"ahir",
+#    "email":"hetal@gmail.com",
+#     "message":"hello"
+# }

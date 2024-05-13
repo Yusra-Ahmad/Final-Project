@@ -12,6 +12,7 @@ import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
 import Logout from "./components/logout/Logout";
 import CheckoutForm from "./components/checkout/CheckoutForm";
+
 // import ThankYou from "./components/thankYou/ThankYou";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Homepage />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/services" element={<Services />} />
             <Route path="/book-appointment" element={<Appointment />} />

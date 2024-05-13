@@ -1,8 +1,19 @@
+import { useForm, ValidationError } from "@formspree/react";
 import "./contact.scss";
+import { useEffect, useRef } from "react";
+
 const Contact = () => {
+  const [state, handleSubmit] = useForm("myyrorpk");
+  const formRef = useRef(null);
+  useEffect(() => {
+    if (state.succeeded) {
+      formRef.current.reset();
+    }
+  }, [state.succeeded]);
+
   return (
-    <div className="contact-container">
-      <div className="visit-us">
+    <div className="contact-container  ">
+      <div className="visit-us ">
         <h1>VISIT US</h1>
       </div>
       <div className="contact-us">
@@ -12,25 +23,65 @@ const Contact = () => {
             Share your contact details, and we'll be in touch promptly to assist
             you further. Your relaxation journey starts here!
           </p>
-          <form action="" className="contact-form">
+          <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
             <div className="input-div">
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
+              <input
+                type="text"
+                name="firstname"
+                id="firstname"
+                placeholder="First Name"
+              />
+              <ValidationError
+                prefix="Firstname"
+                field="firstname"
+                errors={state.errors}
+              />
+              <input
+                type="text"
+                name="lastname"
+                id="lastname"
+                placeholder="Last Name"
+              />
+              <ValidationError
+                prefix="Lastname"
+                field="lastname"
+                errors={state.errors}
+              />
             </div>
             <div className="input-div">
-              <input type="text" placeholder="Phone" />
-              <input type="text" placeholder="Email" />
+              <input type="text" name="phone" id="phone" placeholder="Phone" />
+              <ValidationError
+                prefix="Phone"
+                field="phone"
+                errors={state.errors}
+              />
+              <input type="text" name="email" id="email" placeholder="Email" />
+              <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
+              />
             </div>
 
             <textarea
-              name=""
-              id=""
+              name="message"
+              id="message"
               cols="30"
               rows="6"
               placeholder="Enter your query or request here..."
-            ></textarea>
-            <button>Submit</button>
+            />
+            <ValidationError
+              prefix="Message"
+              field="message"
+              errors={state.errors}
+            />
+            <button type="submit">Submit</button>
           </form>
+          {state.succeeded && (
+            <div className="success-message">
+              <p>Thanks for reaching out! We'll get back to you soon.</p>
+            </div>
+          )}
         </div>
         <div className="location-div">
           <h2>LOCATION & OPENING HOURS</h2>
