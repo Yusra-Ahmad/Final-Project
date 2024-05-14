@@ -32,11 +32,11 @@ Content-Type: application/json
 
 
 {  
-     "firstname":"hetal",
-    "lastname" :"ahir",
-    "email":"hetal@gmail.com",
-    "password":"Vritti@143",
-    "confirmPassword":"Vritti@143"
+     "firstname":"sadhana",
+    "lastname" :"007",
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007",
+    "confirmPassword":"Ranu@007"
     }
 
 
@@ -47,8 +47,8 @@ Content-Type: application/json
 
 
 {
-    "email":"hetal@gmail.com",
-    "password":"Vritti@143"
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007"
 }
 
 ###
@@ -83,3 +83,30 @@ Get http://localhost:3020/carts/661e4349d31012d4555d7bea
 #    "email":"hetal@gmail.com",
 #     "message":"hello"
 # }
+###
+ POST http://localhost:3020/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTUxNjI1MTUsImV4cCI6MTcxNTQ0MzMxNX0.FIO1APcvvuYYWkL_dYERq4YTF-GQeMbfLi05IGB-qTw
+
+ {
+  "products": [
+    {
+        "product":"663b5cc84adbafc29d0a250d",
+        "quantity":1
+    }
+  ],
+  "totalAmount":100,
+  "shippingAddress": {
+    "fullName": "John Doe",
+    "address": "123 Apple St",
+    "city": "New York",
+    "state": "NY",
+    "postcode": "10001",
+    "country": "USA"
+  }
+}
+
+###
+ GET http://localhost:3020/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTUxNjI1MTUsImV4cCI6MTcxNTQ0MzMxNX0.FIO1APcvvuYYWkL_dYERq4YTF-GQeMbfLi05IGB-qTw

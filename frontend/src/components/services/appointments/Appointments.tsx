@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
+
+// import Calendar from "react-calendar";
+// import emailjs from "emailjs-com";
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
@@ -11,6 +15,12 @@ import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
 // import { useUser } from "../../../context/UserContext.tsx";
 // import { useServiceContext } from "../../../context/serviceContext.tsx";
+// import EmailGenerator from"./email/EmailGenerator.tsx";
+// import { useNavigate } from "react-router-dom";
+// import "./Appointments.scss";
+// import { useUser } from "../../../context/UserContext.tsx";
+// import { useServiceContext } from "../../../context/serviceContext.tsx";
+
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary } =
     useServiceContext();
@@ -54,8 +64,10 @@ const Appointment = () => {
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
+
       // console.log("this is selectedServiceObj", selectedServiceObj);
       // console.log("this is selected service", selectedService);
+
       if (!selectedServiceObj) {
         console.error("Selected service not found");
         return;
@@ -139,9 +151,11 @@ const Appointment = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+
   const totalPrice = summary
     ? summary.reduce((acc, item) => acc + item.price, 0)
     : 0;
+
   const navigate = useNavigate();
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
@@ -166,6 +180,7 @@ const Appointment = () => {
       console.error("Error sending confirmation email:", error);
     }
   };
+
   return (
     <>
       <div className="appointment-container">
@@ -295,7 +310,7 @@ const Appointment = () => {
   sendConfirmation={confirmationRequested}
     userData={user}
     totalPrice = {totalPrice}
-    // handleConfirmation={handleConfirmation}
+    // handleConfirmation={handleConfirmation} 
     // bookingDetails={{
     //   selectedService: selectedService,
     //   selectedDate: selectedDate,
