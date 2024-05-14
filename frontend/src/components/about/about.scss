@@ -1,0 +1,78 @@
+.about-container {
+  font-size: 1.5rem;
+
+  .inner-page-div {
+    height: 100vh;
+    line-height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: #584030;
+      transition: color 0.5s ease;
+    }
+    span {
+      position: relative;
+      padding-bottom: 5px;
+      &::before {
+        // Pseudo-element for the border animation
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0; // Initial position at left
+        width: 100%; // Initial width 0
+        height: 5px; // Border height
+
+        background-color: #584030; // Border color
+        transition: width 0.5s ease; // Transition effect
+      }
+      &:hover::before {
+        // Change width on hover
+
+        width: 0; // Full width on hover
+      }
+    }
+  }
+  .contact {
+    display: flex;
+    align-items: center;
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 3rem;
+    }
+
+    div {
+      display: flex;
+      gap: 1rem;
+
+      .contact-number {
+        text-decoration: underline;
+      }
+    }
+  }
+  .about-hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1rem;
+  }
+  .about-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .inner-div-content {
+      width: 50%;
+      line-height: 2rem;
+      p {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
