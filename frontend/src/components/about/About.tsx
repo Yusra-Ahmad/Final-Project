@@ -27,7 +27,7 @@ const About = () => {
           <p>Discover your bliss today.</p>
         </div>
       </div>
-      <div className="contact inner-page-div">
+      <div className="contact">
         <h1>come and visit us </h1>
         <p>123 Fake Street Berlin, 10115 Germany</p>
         <div>
