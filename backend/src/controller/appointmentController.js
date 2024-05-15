@@ -35,7 +35,9 @@ const appointmentController = {
           .json({ message: "Appointment for the same time already exists." });
       }
       await newAppointment.save();
-  
+      const appointments2 = await Appointment.find();
+  console.log("appointment2", appointments2.length);
+
       res.status(201).json({
         message: "Appointment booked successfully",
         appointment: newAppointment,
@@ -83,6 +85,21 @@ const appointmentController = {
       res.status(500).json({ message: error.message });
     }
   },
+
+  getAllBookingHistory:async(req,res,next)=> {
+    try {
+      const {user}=req.params
+      const appointments = await Appointment.find();
+console.log(appointments.length);
+      const allUserBookings = appointments.filter(
+        (appointment) => user !== appointment.user.valueOf()
+      );
+      console.log("All User booking length", allUserBookings.length);
+      res.send(allUserBookings)
+    } catch (error) {
+      next({ status: 500, message: error.message });
+    }
+  }
 
 };
 

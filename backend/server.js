@@ -8,6 +8,7 @@ import appointmentRouter from "./src/router/appointmentRouter.js";
 import cartRouter from "./src/router/cartRouter.js";
 import { authRouter } from "./src/router/authRouter.js";
 import {orderRouter} from "./src/router/orderRouter.js"
+import bookingRouter from "./src/router/bookingRouter.js";
 
 const app = express();
 config();
@@ -23,7 +24,7 @@ app.use("/appointments", appointmentRouter);
 app.use("/carts", cartRouter);
 app.use("/auth", authRouter);
 app.use('/orders', orderRouter);
-
+app.use("/history", bookingRouter);
 
 app.use((err, req, res, next) => {
   res
