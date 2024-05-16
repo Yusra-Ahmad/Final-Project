@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import aboutImg from "../../assets/about-page.jpg";
+import { Canvas } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
 
 import "./about.scss";
 
@@ -9,12 +10,13 @@ const About = () => {
     <div className="about-container">
       <div className="about-hero">
         <img src={logo} alt="" />
+        {/* <Canvas>
+          <mesh>
+            <Stars />
+          </mesh>
+        </Canvas> */}
       </div>
       <div className="about-content">
-        {/* <div>
-          <img className="about-img" src={aboutImg} alt="" />
-        </div> */}
-
         <div className="inner-div-content">
           <h2>Discover your bliss today</h2>
           <p>
