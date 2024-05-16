@@ -61,15 +61,15 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
-      
+
       // console.log("this is selectedServiceObj", selectedServiceObj);
       // console.log("this is selected service", selectedService);
+
       if (!selectedServiceObj) {
         console.error("Selected service not found");
         return;
       }
       const { price } = selectedServiceObj;
-
       const submittedData = {
         service: selectedService,
         startTime: time,
@@ -98,7 +98,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
       }
       const result = await response.json();
       console.log("Appointment booked successfully:", result);
-      setSelectedDate(null)
+      setSelectedDate(null);
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
@@ -120,6 +120,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         config
       );
       const data = await response.json();
+      
       setBookingDetail(data);
       updateSummary(data);
     } catch (error) {
@@ -356,22 +357,3 @@ console.log("this is config", config);
   );
 };
 export default Appointment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
