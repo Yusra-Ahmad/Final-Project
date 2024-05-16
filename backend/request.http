@@ -73,17 +73,7 @@ Content-Type: application/json
 ###
 Get http://localhost:3020/carts/661e4349d31012d4555d7bea
 
-# ###
-# POST http://localhost:3020/send-email
-# Content-Type: application/json
 
-#  {
-#   "firstName":"hetal" ,
-#   "lastName":"ahir",
-#    "email":"hetal@gmail.com",
-#     "message":"hello"
-# }
-###
  POST http://localhost:3020/orders
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTUxNjI1MTUsImV4cCI6MTcxNTQ0MzMxNX0.FIO1APcvvuYYWkL_dYERq4YTF-GQeMbfLi05IGB-qTw
