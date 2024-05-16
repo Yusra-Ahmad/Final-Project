@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, WheelEvent } from "react";
+import { Link } from "react-router-dom";
 import "./header.scss";
 import Navbar from "../navbar/Navbar";
 import logo from "../../assets/logo.svg";
@@ -94,10 +95,7 @@ const App = () => {
             el && pagesRef.current.push(el);
           }
         }}
-      >
-        <h2>Page 1</h2>
-        <p>This is some text overlaid on the first image.</p>
-      </div>
+      ></div>
       <div
         style={{
           transform: "translateY(100vh)",
@@ -110,8 +108,17 @@ const App = () => {
           }
         }}
       >
-        <h2>Page 2</h2>
-        <p>This is some text overlaid on the second image.</p>
+        <div className="about inner-page-div service-home">
+          <h3>Indulge in well-deserved pampering today!</h3>
+          <p>
+            At Bliss, we are passionate about providing you with the ultimate
+            salon and spa experience.
+          </p>
+          <p>Click here to book your salon and spa services now </p>
+          <Link to="services">
+            <span>Book Now</span>
+          </Link>
+        </div>
       </div>
       <div
         style={{
@@ -125,8 +132,17 @@ const App = () => {
           }
         }}
       >
-        <h2>Page 3</h2>
-        <p>This is some text overlaid on the third image.</p>
+        <div className="about inner-page-div product-home">
+          <h3> Discover our exclusive range of salon and spa products</h3>
+          <p>
+            Carefully curated to complement your beauty and wellness routine. At
+            Bliss, we believe in using only the finest ingredients to ensure the
+            best results for our clients.
+          </p>
+          <Link to="products">
+            <span>Explore our products</span>
+          </Link>
+        </div>
       </div>
       <div
         style={{
@@ -140,10 +156,21 @@ const App = () => {
           }
         }}
       >
-        <h2>Page 4</h2>
-        <p>This is some text overlaid on the fourth image.</p>
+        <div className="about inner-page-div">
+          <h3>
+            Step into Bliss Salon and Spa, your haven of tranquility in Berlin.
+          </h3>
+          <p>
+            We offer a range of personalized beauty and wellness services
+            designed to help you unwind and revitalize. From.....
+          </p>
+
+          <Link to="/about ">
+            <span>more</span>
+          </Link>
+        </div>
       </div>
-      <div
+      {/* <div
         style={{
           transform: "translateY(100vh)",
           transition: "transform ease-out 1s",
@@ -155,9 +182,21 @@ const App = () => {
           }
         }}
       >
-        <h2>Page 5</h2>
-        <p>This is some text overlaid on the fifth image.</p>
-      </div>
+        <div className="contact inner-page-div">
+          <h1>come and visit us </h1>
+          <p>123 Fake Street Berlin, 10115 Germany</p>
+          <div>
+            <Link className="contact-link" to="/contact">
+              <span> contact us</span>
+            </Link>
+            <span>|</span>
+            <div>
+              <span>tel:</span>
+              <p className="contact-number">+49 30 000000000</p>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };

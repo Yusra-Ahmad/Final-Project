@@ -33,7 +33,6 @@ const Appointment = () => {
   const [confirmationRequested, setConfirmationRequested] = useState(false);
   // const [active, setActive] = useState<Boolean>(false);
   // const activeRef =useRef()
-
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
   const actualTime = displayTime + 2;
@@ -55,7 +54,6 @@ const Appointment = () => {
   // const handleFocus = () => {
   //   setActive(true)
   // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -66,15 +64,15 @@ const Appointment = () => {
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
-      
+
       // console.log("this is selectedServiceObj", selectedServiceObj);
       // console.log("this is selected service", selectedService);
+
       if (!selectedServiceObj) {
         console.error("Selected service not found");
         return;
       }
       const { price } = selectedServiceObj;
-
       const submittedData = {
         service: selectedService,
         startTime: time,
@@ -102,7 +100,7 @@ const Appointment = () => {
       }
       const result = await response.json();
       console.log("Appointment booked successfully:", result);
-      setSelectedDate(null)
+      setSelectedDate(null);
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
@@ -124,7 +122,6 @@ const Appointment = () => {
         config
       );
       const data = await response.json();
-
       updateSummary(data);
     } catch (error) {
       console.log(error);
@@ -165,7 +162,6 @@ const Appointment = () => {
     updateSummary(summary);
     navigate("/bookingDetails");
     console.log("email is working");
-
     // Send confirmation email
     try {
       const template = {
@@ -173,14 +169,12 @@ const Appointment = () => {
         user_email: user?.email, //userData.email,
         total_amount: totalPrice,
       };
-
       await emailjs.send(
         "service_90mywz9",
         "template_qog1s6h",
         template,
         "uq8xQ_jnM6FacK9rL"
       );
-
       console.log("Confirmation email sent successfully");
     } catch (error) {
       console.error("Error sending confirmation email:", error);
@@ -268,10 +262,8 @@ const Appointment = () => {
               summary.map((item, index) => (
                 <div key={index} className="submitted-data">
                   <div className="display-data">
-                  
                     <p>
-                    {index + 1})
-                       <span>Service: </span>
+                      {index + 1})<span>Service: </span>
                       {item.service}
                     </p>
                     <p>
@@ -331,22 +323,3 @@ const Appointment = () => {
   );
 };
 export default Appointment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
