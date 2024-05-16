@@ -1,4 +1,6 @@
 import "./login.scss";
+import { BiError } from "react-icons/bi";
+
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -6,18 +8,20 @@ import { useUser } from "../../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { setToken, setUser, token, setIsLoggedIn } = useUser();
+  const { setToken, user, setUser, token, setIsLoggedIn } = useUser();
+
+  console.log("user:", user);
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
   useEffect(() => {
-
     if (token) {
       // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
       const destination =
@@ -50,6 +54,8 @@ const Login = () => {
 
         setIsLoggedIn(true);
         // After setting the login state, the useEffect will handle redirection
+      } else {
+        setLoginError(true);
       }
     } catch (error) {
       console.error("Login error:", error.message);
@@ -58,9 +64,23 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loginError && (
+        <div className="error-message">
+          <BiError className="error-icon" />
+
+          <div>
+            <span>There was a problem</span>
+            <p>Invalid email or password</p>
+          </div>
+        </div>
+      )}
       <form onSubmit={submitHandler} className="login-form">
         <p>Login</p>
-        {!token && location?.state?.from === "/checkout" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>You need to login first to continue checkout</p>}
+        {!token && location?.state?.from === "/checkout" && (
+          <p style={{ color: " #eccd7c", fontSize: "22px" }}>
+            You need to login first to continue checkout
+          </p>
+        )}
 
         <div className="input-div">
           <input
@@ -98,7 +118,7 @@ const Login = () => {
             Create an account
           </Link>
         </div>
-      </form>
+      </form>{" "}
     </div>
   );
 };

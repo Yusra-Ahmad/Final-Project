@@ -11,7 +11,7 @@ import "animate.css";
 import bliss from "../../assets/bliss2.png";
 
 import "./navbar.scss";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Menu from "../Menu/Menu";
 import { CartContext } from "../../context/Cart";
 import { useUser } from "../../context/UserContext";
@@ -22,7 +22,8 @@ const Navbar = () => {
   const { cartItems } = useContext(CartContext);
   const { user, token } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showIcon, setShowIcon] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // const [showIcons, setShowIcons] = useState(false);
 
   let firstLatter = "";
   if (user) {
@@ -45,20 +46,30 @@ const Navbar = () => {
     document.body.classList.toggle("menu-open");
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // const handleToggle = () => {
+  //   console.log("this runs");
+  //   setShowIcons((prev) => !prev);
+  // };
+
   return (
-    <div>
+    <div className="navbar-container">
       <div className="navbar">
         <ul>
           {dropMenu ? (
             <li onClick={handleDropMenu} className="menu-icon">
-              {showIcon ? (
-                <TfiAlignLeft />
-              ) : (
-                <>
-                  <span>Menu</span>
-                  <TfiAlignLeft />
-                </>
-              )}
+              {!isMobile && <span>Menu</span>}
+              <TfiAlignLeft />
             </li>
           ) : (
             <li className="menu-icon">
@@ -71,7 +82,11 @@ const Navbar = () => {
           <img src={bliss} alt="" />
         </Link>
 
-        <ul className={`cart-ul ${dropMenu ? "" : "hidden"}`}>
+        <ul
+          className={`cart-ul ${dropMenu ? "" : "hidden"} ${
+            !isMobile ? "" : "hidden"
+          } `}
+        >
           {token ? (
             <Link onChange={handleUserIcon} className="cart-li" to="/logout">
               <span className="first-latter">{firstLatter}</span>

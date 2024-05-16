@@ -7,18 +7,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    h1 {
-      text-align: center;
-      color: white;
-      letter-spacing: 0.8rem;
-      word-spacing: 0.5rem;
-      font-size: 3.5rem;
-      text-shadow: 3px 1px 1px #e7c8b3;
-    }
-
+    position: relative;
     img {
       width: 750px;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
     }
   }
   .about-content {
