@@ -41,6 +41,9 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/about" element={<About />} />
+            <Route path="/orders" element={<OrderList />} />
+
+
             {/* <Route path="/thank-you" element={<ThankYou/>} /> */}
           </Routes>
         </ServiceProvider>

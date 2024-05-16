@@ -1,4 +1,4 @@
-// import { useUser } from "../../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ interface MenuProps {
 }
 
 const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
-  // const { isLoggedIn } = useUser();
+  const { isLoggedIn } = useUser();
 
   return (
     <div className={`menu ${dropMenu ? "hidden" : "active"}`}>
@@ -29,10 +29,10 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
         <Link to="/contact" className="link" onClick={handleDropMenu}>
           <li>Contact</li>
         </Link>
-        {/* <Link to="/register" className="link" onClick={handleDropMenu}>
+        <Link to="/register" className="link" onClick={handleDropMenu}>
           <li>Register</li>
-        </Link> */}
-        {/* {!isLoggedIn ? (
+        </Link>
+        {!isLoggedIn ? (
           <Link to="/login" className="link" onClick={handleDropMenu}>
             <li>Login</li>
           </Link>
@@ -40,7 +40,7 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
           <Link to="/logout" className="link" onClick={handleDropMenu}>
             <li>Logout</li>
           </Link>
-        )} */}
+        )}
       </ul>
     </div>
   );
