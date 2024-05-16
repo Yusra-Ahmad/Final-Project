@@ -18,7 +18,7 @@ import "./Appointments.scss";
 
 
 const Appointment = () => {
-  const { services, fetchServices, summary, updateSummary } =
+  const { services, fetchServices, summary, updateSummary, setBookingDetail } =
     useServiceContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
@@ -88,6 +88,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         "http://localhost:3020/appointments/book",
         config
       );
+      console.log("this is response of proceed", response);
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -119,7 +120,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         config
       );
       const data = await response.json();
-
+      setBookingDetail(data);
       updateSummary(data);
     } catch (error) {
       console.log(error);
@@ -155,12 +156,13 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     : 0;
 
   const navigate = useNavigate();
+  
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
     updateSummary(summary);
-    navigate("/bookingDetails");
-    console.log("email is working");
-
+    await  handleConfirmBooking()
+ 
+    
     // Send confirmation email
     try {
       const template = {
@@ -169,20 +171,59 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         total_amount: totalPrice,
         // image_url: bliss2,
       };
-
+      
       await emailjs.send(
         "service_m46fwtd",
         "template_4mwvxay",
-      template,
+        template,
         "MCP7eN1sKKWReuKKW"
       );
-  
       console.log("Confirmation email sent successfully");
-  
+   
     } catch (error) {
       console.error("Error sending confirmation email:", error);
     }
   };
+// ---------------------------------------------------------------------------------------------------------------
+
+
+const handleConfirmBooking = async () => {
+  try {
+    const bookedServices = summary.map(item => ({
+      service: item.service,
+      startTime: item.startTime,
+      price: item.price,
+      user: user._id,
+    }));
+
+    const config = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookedServices }),
+    };
+console.log("this is config", config);
+    const response = await fetch("http://localhost:3020/bookingConfirm/book", config);
+    console.log("this is response of confirmed booking", response);
+    if (!response.ok) {
+
+      const responseData = await response.json();
+      setErrorMessage(responseData.message);
+      // setFilteredTimes(responseData.filteredTimes);
+      setShowPopup(true);
+      return;
+    }
+    const result = await response.json();
+    updateSummary([]);
+    navigate("/bookingDetails");
+    console.log("Confirmed booking successfully:", result);
+  } catch (error) {
+    console.error("Error while confirming booking:", error);
+  }
+};
+
 
   return (
     <>

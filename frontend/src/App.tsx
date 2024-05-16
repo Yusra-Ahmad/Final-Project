@@ -17,6 +17,7 @@ import BookingDetail from "./components/services/appointments/details&history/Bo
 
 // import OrderDetails from "./components/order/OrderDetails";
 import OrderList from "./components/order/OrderList";
+import ConfirmedBooking from "./components/services/appointments/details&history/ConfirmedBooking";
 // import ThankYou from "./components/thankYou/ThankYou";
 
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/book-appointment" element={<Appointment />} />
             <Route path="/bookingDetails"  element={<BookingDetail/>}/>
+            <Route path="/bookingConfirm" element={<ConfirmedBooking/>}/>
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />

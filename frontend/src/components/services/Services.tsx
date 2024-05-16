@@ -7,6 +7,7 @@ import { useServiceContext } from "../../context/serviceContext";
 import { useUser } from "../../context/UserContext";
 import service from "../../assets/Service1.jpeg";
 import 'animate.css';
+import { useInView } from 'react-intersection-observer';
 // const Base_Url = 'http://localhost:6000';
 const Services = () => {
   const { user} = useUser();
@@ -18,27 +19,15 @@ const Services = () => {
   } = useServiceContext();
   
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-  const contentRef = useRef(null);
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Only trigger the animation once
+    threshold: 0.3, // Trigger when 10% of the element is visible
+  });
+
   useEffect(() => {
         fetchServices();
       }, []);
-      useEffect(() => {
-        const handleScroll = () => {
-          if (!isVisible && contentRef.current) {
-            const top = contentRef.current.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (top < windowHeight) {
-              setIsVisible(true);
-            }
-          }
-        };
-    
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-          window.removeEventListener("scroll", handleScroll);
-        };
-      }, [isVisible]);
+      
   // const navigate = useNavigate(); 
 
   const handleBookAppointment = () => {
@@ -71,8 +60,8 @@ const Services = () => {
         </div>
       </div>
 
-      <div    ref={contentRef}
-        className={`content-body ${isVisible ? "animate" : ""}`}>
+      <div    className={`content-body ${inView ? 'fadeInOnce' : ''}`}
+        ref={ref}>
         <h2 className="animate__fadeInLeft">Our Menu</h2>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}

@@ -7,11 +7,11 @@
 @keyframes fadeInOnce {
   0% {
     opacity: 0;
-    transform: translateY(20px); /* Optional: Add some initial transformation */
+    transform: translateY(20px); 
   }
   100% {
     opacity: 1;
-    transform: translateY(0); /* Optional: Restore the initial transformation */
+    transform: translateY(0); 
   }
 }
 
@@ -87,8 +87,11 @@ letter-spacing: 1rem;
   height: 100vh;
   padding-left: 10rem;
   background-color: #1c1919;
-  animation: fadeInOnce 2s both;
-  animation-delay:3s ;
+  // animation: fadeInOnce 2s both;
+  // animation-delay:3s ;
+  &.fadeInOnce {
+    animation: fadeInOnce 2s forwards;
+  }
   @media screen and (max-width: 1280px) {
     width: 90vw;
 padding-left: 0;
