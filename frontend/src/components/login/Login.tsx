@@ -23,14 +23,23 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
-      const destination =
-        location.state?.from?.pathname === "/cart"
-          ? "/checkout"
-          : location?.state?.from || "/";
+      const fromPath = location?.state?.from?.pathname || "/";
+      let destination = "/";
+      switch (fromPath) {
+        case "/cart":
+          destination = "/checkout";
+          break;
+        case "/book-appointment":
+          destination = "/service";
+          break;
+        default:
+          destination = fromPath;
+          break;
+      }
       navigate(destination);
     }
   }, [token, navigate, location.state]);
+
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,6 +91,7 @@ const Login = () => {
           </p>
         )}
 
+        {!token && location?.state?.from === "/service" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>Login to Book an appointment. </p>}
         <div className="input-div">
           <input
             ref={emailInput}

@@ -213,7 +213,7 @@
     margin: 0.5rem;
     @media screen and (max-width: 1080px) {
       margin-bottom: 1rem;
-      height: 150px;
+      height: 100px;
     }
   }
 
@@ -289,6 +289,7 @@
 }
 
 .data-div {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -324,7 +325,22 @@
   }
 
   .submitted-data {
+  h4{
+    color: #b08568;
+    font-size: 1.2rem;
+  }
+ 
+.display-data{
+  width: 90%;
+  // .number{
 
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
+  @media screen and (max-width: 1080px) {
+    width: 50%;
+  }
+}
     margin: 1rem;
     p {
       font-size: 1.2em;
@@ -346,7 +362,7 @@
     gap: 1rem;
     .delete-button {
       color: rgb(121, 44, 44);
-      font-size: 2rem;
+      font-size: 1.6rem;
     }
 
     @media screen and (max-width: 1080px) {

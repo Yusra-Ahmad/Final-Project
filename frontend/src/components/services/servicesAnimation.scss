@@ -2,7 +2,7 @@
   0% {
     animation-timing-function: ease-in-out;
     opacity: 0;
-    transform: translateX(68px);
+    transform: translateX(45px);
   }
   100% {
     animation-timing-function: ease-in-out;
@@ -27,7 +27,7 @@
   0% {
     animation-timing-function: ease-out;
     opacity: 0;
-    transform: translateY(605px);
+    transform: translateY(105px);
   }
 
 50%{
@@ -70,7 +70,7 @@
         opacity: 0;
       animation: myTextAnim 1s ease 0s 1 normal forwards;
       animation-delay: 2s;
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 990px) {
 animation-delay: 0s;
                   }
     }

@@ -7,7 +7,7 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 import "animate.css";
-
+import { useNavigate } from "react-router-dom";
 import bliss from "../../assets/bliss2.png";
 
 import "./navbar.scss";
@@ -41,9 +41,18 @@ const Navbar = () => {
   const handleDropMenu = () => {
     console.log("this runs");
     setDropMenu((prevDropMenu) => !prevDropMenu);
+    
     // Toggle the menu-open class on the body element
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
     document.body.classList.toggle("menu-open");
+  };
+  const navigate = useNavigate()
+  const handleAppointment = () => {
+    if (user) {
+      navigate('/book-appointment');
+    } else {
+      navigate('/login', { state: { from: '/service' } });
+    }
   };
 
   useEffect(() => {
@@ -98,12 +107,19 @@ const Navbar = () => {
           )}
 
           <Link className="cart-li" to="/cart">
-            <PiShoppingCart className="cart-icon" />
-            <span className="btn-badge">{cartItems.length}</span>
+            <PiShoppingCart className="cart-icon" />{
+              cartItems.length>0 &&
+              (
+                <span className="btn-badge">{cartItems.length}</span>
+
+              )
+
+            }
+
           </Link>
-          <Link className="cart-li" to="/services">
-            <MdOutlineCalendarMonth className="cart-icon" />
-          </Link>
+      
+            <MdOutlineCalendarMonth className="cart-icon" onClick={handleAppointment} />
+      
         </ul>
       </div>
     </div>
