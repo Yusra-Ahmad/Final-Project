@@ -83,8 +83,15 @@ const Navbar = () => {
           )}
 
           <Link className="cart-li" to="/cart">
-            <PiShoppingCart className="cart-icon" />
-            <span className="btn-badge">{cartItems.length}</span>
+            <PiShoppingCart className="cart-icon" />{
+              cartItems.length>0 &&
+              (
+                <span className="btn-badge">{cartItems.length}</span>
+
+              )
+
+            }
+
           </Link>
           <Link className="cart-li" to="/services">
             <MdOutlineCalendarMonth className="cart-icon" />

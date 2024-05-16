@@ -49,6 +49,27 @@
   @media (max-width: 576px) {
     padding: 0.5rem;
   }
+
+  /* Style the scrollbar */
+  &::-webkit-scrollbar {
+    width: 5px; /* Set the width of the scrollbar */
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #1c1919; /* Color of the track */
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #b08568; /* Color of the scroll thumb */
+    border-radius: 10px; /* Rounded corners */
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #927f6d; /* Darker color when the handle is hovered */
+  }
 }
 
 .cart-header {
