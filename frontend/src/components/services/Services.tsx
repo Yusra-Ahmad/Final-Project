@@ -1,35 +1,47 @@
-import { useEffect } from "react";
+import { useEffect, useRef,useState } from "react";
 import "./servicesAnimation.scss";
 import { useNavigate } from "react-router-dom"; 
 import "./servicesAnimation.scss";
 import "./services.scss";
 import { useServiceContext } from "../../context/serviceContext";
+import { useUser } from "../../context/UserContext";
 import service from "../../assets/Service1.jpeg";
-
+import 'animate.css';
+import { useInView } from 'react-intersection-observer';
 // const Base_Url = 'http://localhost:6000';
 const Services = () => {
-    const {
-        services,
-        loading,
-        error,
-        fetchServices,
-        // addService,
-        // removeService,
-      } = useServiceContext();
-    
-      useEffect(() => {
+  const { user} = useUser();
+  const {
+    services,
+    loading,
+    error,
+    fetchServices,
+  } = useServiceContext();
+  
+  const navigate = useNavigate();
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Only trigger the animation once
+    threshold: 0.3, // Trigger when 10% of the element is visible
+  });
+
+  useEffect(() => {
         fetchServices();
       }, []);
-    
-  const navigate = useNavigate(); 
+      
+  // const navigate = useNavigate(); 
 
   const handleBookAppointment = () => {
- 
-    navigate("/book-appointment");
+    if (user) {
+      navigate("/book-appointment");
+    } else {
+      navigate('/login', { state: { from: '/service' } });
+    }
   };
   
   return (
     <>
+    <div className="completebody">
+
       <div className="backgroundAnim">
         <div className="servicebody">
           <div className="serviceheader">
@@ -48,18 +60,19 @@ const Services = () => {
         </div>
       </div>
 
-      <div className="content-body">
-        <h2>Our Menu</h2>
+      <div    className={`content-body ${inView ? 'fadeInOnce' : ''}`}
+        ref={ref}>
+        <h2 className="animate__fadeInLeft">Our Menu</h2>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {!loading &&
           !error &&
           services.map((service) => (
-            <div className="service-item" key={service._id}>
+            <div className="service-item animate__fadeInLeft"  key={service._id}>
               <h3 className="service-title">{service.title}</h3>
               <div className="service-content">
                 <p className="service-description">{service.description}</p>
-                <p className="dash-p">-----------------</p>
+                <p className="dash-p">-------------------------------</p>
                 <p className="service-duration">{service.duration}</p>
                 <p className="service-price">${service.price}</p>
               </div>
@@ -69,6 +82,7 @@ const Services = () => {
           <button onClick={handleBookAppointment}>Book Now</button>
           </div>
       </div>
+          </div>
     </>
   );
 };

@@ -1,4 +1,6 @@
 import "./login.scss";
+import { BiError } from "react-icons/bi";
+
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -6,27 +8,38 @@ import { useUser } from "../../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { setToken, setUser, token, setIsLoggedIn } = useUser();
+  const { setToken, user, setUser, token, setIsLoggedIn } = useUser();
+
+  console.log("user:", user);
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
   useEffect(() => {
-
     if (token) {
-      // Check if the user came from the cart, if so, navigate to checkout, else navigate to home or intended route
-      const destination =
-        location.state?.from?.pathname === "/cart"
-          ? "/checkout"
-          : location?.state?.from || "/";
+      const fromPath = location?.state?.from?.pathname || "/";
+      let destination = "/";
+      switch (fromPath) {
+        case "/cart":
+          destination = "/checkout";
+          break;
+        case "/book-appointment":
+          destination = "/service";
+          break;
+        default:
+          destination = fromPath;
+          break;
+      }
       navigate(destination);
     }
   }, [token, navigate, location.state]);
+
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +63,8 @@ const Login = () => {
 
         setIsLoggedIn(true);
         // After setting the login state, the useEffect will handle redirection
+      } else {
+        setLoginError(true);
       }
     } catch (error) {
       console.error("Login error:", error.message);
@@ -58,10 +73,25 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loginError && (
+        <div className="error-message">
+          <BiError className="error-icon" />
+
+          <div>
+            <span>There was a problem</span>
+            <p>Invalid email or password</p>
+          </div>
+        </div>
+      )}
       <form onSubmit={submitHandler} className="login-form">
         <p>Login</p>
-        {!token && location?.state?.from === "/checkout" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>You need to login first to continue checkout</p>}
+        {!token && location?.state?.from === "/checkout" && (
+          <p style={{ color: " #eccd7c", fontSize: "22px" }}>
+            You need to login first to continue checkout
+          </p>
+        )}
 
+        {!token && location?.state?.from === "/service" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>Login to Book an appointment. </p>}
         <div className="input-div">
           <input
             ref={emailInput}
@@ -98,7 +128,7 @@ const Login = () => {
             Create an account
           </Link>
         </div>
-      </form>
+      </form>{" "}
     </div>
   );
 };

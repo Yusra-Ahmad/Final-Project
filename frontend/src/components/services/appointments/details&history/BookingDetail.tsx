@@ -4,14 +4,14 @@ import "./BookingDetails.scss";
 import { useServiceContext } from "../../../../context/serviceContext";
 
 const BookingDetail = () => {
-  const { summary } = useServiceContext();
-  const totalAmount = summary.reduce((total, item) => total + item.price, 0);
-
+  const { bookingDetail } = useServiceContext();
+  const totalAmount = bookingDetail.reduce((total, item) => total + item.price, 0);
+console.log("this is booking details", bookingDetail);
   return (
     <div className="wrap-container">
     <div className="booking-details-container">
       <h2>Booking is Confirmed</h2>
-      {summary.map((item, index) => (
+      {bookingDetail.map((item, index) => (
         <div key={index} className="booking-detail">
           <p>{index + 1}. Service: {item.service}</p>
           <p>Date: {new Date(item.startTime).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -22,7 +22,7 @@ const BookingDetail = () => {
       <div className="total-amount">
         <p>Total Amount: {totalAmount}€</p>
       </div>
-      <Link to="/book-appointment"> {/* Assuming "/" is the homepage route */}
+      <Link to="/services"> 
         <button className="home-button">
           <span>Go Back</span>
         </button>
