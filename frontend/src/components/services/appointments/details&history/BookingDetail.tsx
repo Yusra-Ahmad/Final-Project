@@ -22,7 +22,7 @@ console.log("this is booking details", bookingDetail);
       <div className="total-amount">
         <p>Total Amount: {totalAmount}€</p>
       </div>
-      <Link to="/book-appointment"> 
+      <Link to="/services"> 
         <button className="home-button">
           <span>Go Back</span>
         </button>

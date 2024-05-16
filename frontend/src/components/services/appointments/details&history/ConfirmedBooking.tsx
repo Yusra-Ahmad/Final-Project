@@ -49,9 +49,9 @@ const ConfirmedBooking = () => {
       {bookings.length > 0 ? (
         <ul>
           {bookings.map((booking) => (
-            <div className="booking-details">
+            <div className="booking-details" key={booking._id}>
 
-            <li key={booking._id}>
+            <li >
               <p><span>Service: </span>{booking.service}</p>
               <p><span>Start Time:</span> {new Date(booking.startTime).toLocaleString()}</p>
               <p><span>Price: </span>{booking.price}€</p>
