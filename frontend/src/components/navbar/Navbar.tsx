@@ -46,8 +46,31 @@ const Navbar = () => {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
     document.body.classList.toggle("menu-open");
   };
+  const navigate = useNavigate()
+  const handleAppointment = () => {
+    if (user) {
+      navigate('/book-appointment');
+    } else {
+      navigate('/login', { state: { from: '/service' } });
+    }
+  };
 
-  
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // const handleToggle = () => {
+  //   console.log("this runs");
+  //   setShowIcons((prev) => !prev);
+  // };
+
   return (
     <div className="navbar-container">
       <div className="navbar">
@@ -84,6 +107,8 @@ const Navbar = () => {
           )}
 
           <Link className="cart-li" to="/cart">
+            <PiShoppingCart className="cart-icon" />
+            <span className="btn-badge">{cartItems.length}</span>
             <PiShoppingCart className="cart-icon" />{
               cartItems.length>0 &&
               (
