@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import "./app.css";
 import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
@@ -12,6 +13,8 @@ import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
 import Logout from "./components/logout/Logout";
 import CheckoutForm from "./components/checkout/CheckoutForm";
+import BookingDetail from "./components/services/appointments/details&history/BookingDetail";
+import About from "./components/about/About";
 
 // import ThankYou from "./components/thankYou/ThankYou";
 
@@ -34,6 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/checkout" element={<CheckoutForm />} />
+            <Route path="/about" element={<About />} />
             {/* <Route path="/thank-you" element={<ThankYou/>} /> */}
           </Routes>
         </ServiceProvider>

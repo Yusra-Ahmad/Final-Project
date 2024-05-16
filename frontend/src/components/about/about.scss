@@ -1,13 +1,69 @@
 .about-container {
-  font-size: 1.5rem;
+  font-size: 2rem;
 
-  .inner-page-div {
-    height: 100vh;
-    line-height: 3rem;
+  .about-hero {
+    margin-block: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+
+    h1 {
+      text-align: center;
+      color: white;
+      letter-spacing: 0.8rem;
+      word-spacing: 0.5rem;
+      font-size: 3.5rem;
+      text-shadow: 3px 1px 1px #e7c8b3;
+    }
+
+    img {
+      width: 750px;
+    }
   }
+  .about-content {
+    border: white 3rem solid;
+    background-image: url("../../assets/about-page.jpg");
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    color: white;
+    display: flex;
+    justify-content: left;
+
+    // .about-img {
+    //   width: 700px;
+    //   margin-left: 3rem;
+    //   margin-top: 3rem;
+    // }
+
+    .inner-div-content {
+      padding-block: 5rem;
+      width: 50%;
+
+      @media screen and (max-width: 1280px) {
+        width: 80%;
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 768px) {
+        width: 95%;
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 4rem;
+        padding-left: 3rem;
+      }
+
+      p {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        padding-left: 5rem;
+        line-height: 2.5rem;
+      }
+    }
+  }
+
   a {
     color: white;
     text-decoration: none;
@@ -37,12 +93,25 @@
       }
     }
   }
+
   .contact {
+    height: 100vh;
+    line-height: 3rem;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     h1 {
       margin-bottom: 1rem;
-      font-size: 3rem;
+      letter-spacing: 0.5rem;
+      word-spacing: 0.2rem;
+      font-size: 3.2rem;
+      font-style: italic;
+      font-weight: 200;
+    }
+    p,
+    span {
+      font-size: 1.5rem;
     }
 
     div {
@@ -51,27 +120,6 @@
 
       .contact-number {
         text-decoration: underline;
-      }
-    }
-  }
-  .about-hero {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 1rem;
-  }
-  .about-content {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .inner-div-content {
-      width: 50%;
-      line-height: 2rem;
-      p {
-        margin-top: 1rem;
       }
     }
   }

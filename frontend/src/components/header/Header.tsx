@@ -108,9 +108,17 @@ const App = () => {
           }
         }}
       >
-        <Link to="services">
-          <span>to services</span>
-        </Link>
+        <div className="about inner-page-div service-home">
+          <h3>Indulge in well-deserved pampering today!</h3>
+          <p>
+            At Bliss, we are passionate about providing you with the ultimate
+            salon and spa experience.
+          </p>
+          <p>Click here to book your salon and spa services now </p>
+          <Link to="services">
+            <span>Book Now</span>
+          </Link>
+        </div>
       </div>
       <div
         style={{
@@ -124,9 +132,17 @@ const App = () => {
           }
         }}
       >
-        <Link to="products">
-          <span>to products</span>
-        </Link>
+        <div className="about inner-page-div product-home">
+          <h3> Discover our exclusive range of salon and spa products</h3>
+          <p>
+            Carefully curated to complement your beauty and wellness routine. At
+            Bliss, we believe in using only the finest ingredients to ensure the
+            best results for our clients.
+          </p>
+          <Link to="products">
+            <span>Explore our products</span>
+          </Link>
+        </div>
       </div>
       <div
         style={{
@@ -184,5 +200,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
 export default App;
