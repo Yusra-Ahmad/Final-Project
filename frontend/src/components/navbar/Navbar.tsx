@@ -1,6 +1,7 @@
 import { TfiAlignLeft } from "react-icons/tfi";
 import { AiOutlineClose } from "react-icons/ai";
 import { PiShoppingCart } from "react-icons/pi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineCalendarMonth } from "react-icons/md";
 
@@ -20,11 +21,13 @@ const Navbar = () => {
   const [userIcon, setUserIcon] = useState(true);
   const { cartItems } = useContext(CartContext);
   const { user, token } = useUser();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
 
   let firstLatter = "";
   if (user) {
     console.log(user);
-    
+
     firstLatter = user.firstname.charAt(0).toUpperCase();
     console.log(firstLatter);
   }
@@ -35,35 +38,40 @@ const Navbar = () => {
   };
 
   const handleDropMenu = () => {
+    console.log("this runs");
     setDropMenu((prevDropMenu) => !prevDropMenu);
+    // Toggle the menu-open class on the body element
+    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
+    document.body.classList.toggle("menu-open");
   };
+
   return (
     <div>
       <div className="navbar">
         <ul>
           {dropMenu ? (
-            <li
-              onClick={handleDropMenu}
-              className="menu-icon animate__rotateIn"
-            >
-              <span>Menu</span>
-              <TfiAlignLeft className={dropMenu ? " animate__rotateIn" : ""} />
+            <li onClick={handleDropMenu} className="menu-icon">
+              {showIcon ? (
+                <TfiAlignLeft />
+              ) : (
+                <>
+                  <span>Menu</span>
+                  <TfiAlignLeft />
+                </>
+              )}
             </li>
           ) : (
             <li className="menu-icon">
-              <AiOutlineClose
-                onClick={handleDropMenu}
-                className={dropMenu ? " animate__rotateIn" : ""}
-              />
+              <AiOutlineClose onClick={handleDropMenu} />
             </li>
           )}
           <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />
         </ul>
-        <Link to="/">
+        <Link className={`${dropMenu ? "" : "hidden"}`} to="/">
           <img src={bliss} alt="" />
         </Link>
 
-        <ul className="cart-ul">
+        <ul className={`cart-ul ${dropMenu ? "" : "hidden"}`}>
           {token ? (
             <Link onChange={handleUserIcon} className="cart-li" to="/logout">
               <span className="first-latter">{firstLatter}</span>
