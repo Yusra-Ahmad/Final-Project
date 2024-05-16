@@ -1,3 +1,20 @@
+// .completebody{
+//   overflow-y: auto;
+//   scrollbar-width: thin;
+//     scrollbar-color: #b08568 #1c1919;
+
+// }
+@keyframes fadeInOnce {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); 
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+
 .servicebody {
   height: 100vh;
   background-color: #1c1919;
@@ -15,7 +32,7 @@
     @media screen and (max-width: 990px) {
     
     width: 85%;
-      margin-left: 0;
+      margin-left: -1rem;
             }
     .header-p {
       margin-left: 5rem;
@@ -26,7 +43,7 @@
       z-index: 1;
       letter-spacing: normal;
       font-size: 1.5rem;
-      @media screen and (max-width: 1010px) {
+      @media screen and (max-width: 990px) {
 width: 50%;
 font-size: 1.1rem;
 margin-left: 0;
@@ -66,12 +83,18 @@ letter-spacing: 1rem;
 }
 
 .content-body {
+  opacity: 0;
   height: 100vh;
   padding-left: 10rem;
   background-color: #1c1919;
-  @media screen and (max-width: 1180px) {
+  // animation: fadeInOnce 2s both;
+  // animation-delay:3s ;
+  &.fadeInOnce {
+    animation: fadeInOnce 2s forwards;
+  }
+  @media screen and (max-width: 1280px) {
+    width: 90vw;
 padding-left: 0;
-// padding: 0.5rem;
 .dash-p{
   display: none;
 }
@@ -87,9 +110,18 @@ h2{
     font-family: serif;
     padding: 2rem;
     padding-left: 5rem;
+    @media screen and (max-width: 1200px) {
+font-size: 2rem;
+    }
   }
   .service-item {
+    .service-description{
+      width: 60%;
+    }
     padding: 2rem;
+    @media screen and (max-width: 1200px) {
+font-size: 12px;
+    }
     .service-content {
       display: flex;
       gap: 1rem;
@@ -113,11 +145,18 @@ text-align: end;
       width:10rem;
       margin: 2rem;
       padding: 1px;
+      cursor: pointer;
     }
     button:hover{
-      font-size: 1.6rem;
+      // font-size: 1.6rem;
       border: none;
+    }
+    service-button-div button:active {
+      scroll-behavior: smooth; /* Add smooth scroll behavior when button is clicked */
     }
   }
 
 }
+// .content-body:focus-visible{
+
+// }

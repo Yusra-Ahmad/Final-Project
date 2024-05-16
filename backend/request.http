@@ -7,13 +7,13 @@ GET http://localhost:6000/products
 
 ###
 POST http://localhost:3020/appointments/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMzNjNiNWQzMjY0YmE5YjM5Mjg1ZTAiLCJpYXQiOjE3MTQ2NDQzMDcsImV4cCI6MTcxNDkyNTEwN30.drbD2rl-Tjai8huRtiRfFD2FepqxJTryHodbmlTsWKY"
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQ0Zjc4MDA5NmRjNDJiMjVlODZiMjAiLCJpYXQiOjE3MTU3OTU4NTUsImV4cCI6MTcxNjA3NjY1NX0.CT71RHYtuYpfN39TnHJqURXR35YP__B_YI71rZWdUo0"
 Content-Type: application/json
 
 {
     "service": "manicure",
     "startTime": "2024-05-15T14:00:00.000Z",
-    "user": "663363b5d3264ba9b39285e0"
+    "user": "6644f780096dc42b25e86b20"
 }
 ###
 DELETE http://localhost:3020/appointments/deleteall
@@ -26,7 +26,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMwZ
 GET http://localhost:3020/auth/users
 
 ###
+POST  http://localhost:3020/bookingConfirm/book
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQxYmM0OGYyZDY0MzIxZGMwYTJmN2QiLCJpYXQiOjE3MTU2ODk5NzgsImV4cCI6MTcxNTk3MDc3OH0.n0iIH84_nkge-LheOudX8Z1277rhYGzIxmgUd2bKerM
+Content-Type: application/json
 
+{
+  "bookedServices":[{
+  "service": "manicure",
+  "startTime": "2024-05-24T11:00:00.000Z",
+  "price": 90,
+  "user": "6641bc48f2d64321dc0a2f7d"
+}
+]
+}
+###
+GET http://localhost:3020/bookingConfirm/6641bc48f2d64321dc0a2f7d
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQxYmM0OGYyZDY0MzIxZGMwYTJmN2QiLCJpYXQiOjE3MTU2ODk5NzgsImV4cCI6MTcxNTk3MDc3OH0.n0iIH84_nkge-LheOudX8Z1277rhYGzIxmgUd2bKerM
+
+
+
+
+
+###
 POST http://localhost:3020/auth/register
 Content-Type: application/json
 

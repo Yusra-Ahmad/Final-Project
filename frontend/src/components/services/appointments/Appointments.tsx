@@ -4,25 +4,21 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
-
-// import Calendar from "react-calendar";
-// import emailjs from "emailjs-com";
+// import  bliss2 from "../../../assets/bliss2.png"
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
-// import EmailGenerator from"./email/EmailGenerator.tsx";
 import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
-// import { useUser } from "../../../context/UserContext.tsx";
-// import { useServiceContext } from "../../../context/serviceContext.tsx";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
-// import { useNavigate } from "react-router-dom";
-// import "./Appointments.scss";
-// import { useUser } from "../../../context/UserContext.tsx";
-// import { useServiceContext } from "../../../context/serviceContext.tsx";
+
+
+
+
+
 
 const Appointment = () => {
-  const { services, fetchServices, summary, updateSummary } =
+  const { services, fetchServices, summary, updateSummary, setBookingDetail } =
     useServiceContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
@@ -31,19 +27,21 @@ const Appointment = () => {
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmationRequested, setConfirmationRequested] = useState(false);
-  // const [active, setActive] = useState<Boolean>(false);
-  // const activeRef =useRef()
+
+
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
-  const actualTime = displayTime + 2;
-  const time = new Date(selectedDate?.setHours(actualTime));
+  const formattedHours = Math.floor(displayTime);
+  const formattedMinutes = Math.round((displayTime - formattedHours) * 60);
+  const totalSeconds = formattedHours * 3600 + formattedMinutes * 60
+  const formattedSeconds = totalSeconds % 60
+const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,formattedSeconds))
+
   useEffect(() => {
     fetchServices();
-    fetchData();
+    // fetchData();
   }, []);
-  // const handleDateSelect = (date: Date | Date[]) => {
-  //   setSelectedDate(date instanceof Date ? date : null);
-  // };
+  
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
     setSelectedTime(selectedHour);
@@ -51,9 +49,8 @@ const Appointment = () => {
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(event.target.value);
   };
-  // const handleFocus = () => {
-  //   setActive(true)
-  // };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -91,6 +88,7 @@ const Appointment = () => {
         "http://localhost:3020/appointments/book",
         config
       );
+      console.log("this is response of proceed", response);
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -122,6 +120,8 @@ const Appointment = () => {
         config
       );
       const data = await response.json();
+      
+      setBookingDetail(data);
       updateSummary(data);
     } catch (error) {
       console.log(error);
@@ -157,29 +157,74 @@ const Appointment = () => {
     : 0;
 
   const navigate = useNavigate();
+  
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
     updateSummary(summary);
-    navigate("/bookingDetails");
-    console.log("email is working");
+    await  handleConfirmBooking()
+ 
+    
     // Send confirmation email
     try {
       const template = {
         to_name: user?.firstname,
-        user_email: user?.email, //userData.email,
+        user_email: user?.email,
         total_amount: totalPrice,
+        // image_url: bliss2,
       };
+      
       await emailjs.send(
-        "service_90mywz9",
-        "template_qog1s6h",
+        "service_m46fwtd",
+        "template_4mwvxay",
         template,
-        "uq8xQ_jnM6FacK9rL"
+        "MCP7eN1sKKWReuKKW"
       );
       console.log("Confirmation email sent successfully");
+   
     } catch (error) {
       console.error("Error sending confirmation email:", error);
     }
   };
+// ---------------------------------------------------------------------------------------------------------------
+
+
+const handleConfirmBooking = async () => {
+  try {
+    const bookedServices = summary.map(item => ({
+      service: item.service,
+      startTime: item.startTime,
+      price: item.price,
+      user: user._id,
+    }));
+
+    const config = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookedServices }),
+    };
+console.log("this is config", config);
+    const response = await fetch("http://localhost:3020/bookingConfirm/book", config);
+    console.log("this is response of confirmed booking", response);
+    if (!response.ok) {
+
+      const responseData = await response.json();
+      setErrorMessage(responseData.message);
+      // setFilteredTimes(responseData.filteredTimes);
+      setShowPopup(true);
+      return;
+    }
+    const result = await response.json();
+    updateSummary([]);
+    navigate("/bookingDetails");
+    console.log("Confirmed booking successfully:", result);
+  } catch (error) {
+    console.error("Error while confirming booking:", error);
+  }
+};
+
 
   return (
     <>
@@ -197,9 +242,6 @@ const Appointment = () => {
                   onChange={setSelectedDate}
                   value={selectedDate}
                   minDate={new Date()}
-                  // ref={activeRef}
-                  // className={active ? "react-calendar__tile--active" : ""}
-                  // onActiveStartDateChange={handleFocus}
                 />
               </div>
               <div className="service-select-container">
@@ -261,11 +303,16 @@ const Appointment = () => {
             {summary &&
               summary.map((item, index) => (
                 <div key={index} className="submitted-data">
+                  <h4>{index + 1})  </h4>
                   <div className="display-data">
+                    
+                    {/* <div className="number"> */}
+
                     <p>
-                      {index + 1})<span>Service: </span>
+                       <span>Service: </span>
                       {item.service}
                     </p>
+                    {/* </div> */}
                     <p>
                       <span>Date: </span>
                       {new Date(item.startTime).toLocaleDateString("en-US", {
@@ -277,7 +324,7 @@ const Appointment = () => {
                     <p>
                       <span>Time: </span>
                       {new Date(
-                        new Date(item.startTime).getTime() - 2 * 60 * 60 * 1000
+                        new Date(item.startTime).getTime() 
                       ).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -305,20 +352,7 @@ const Appointment = () => {
           </button>
         </div>
       </div>
-      {/* {confirmationRequested && (
-  <EmailGenerator
-  sendConfirmation={confirmationRequested}
-    userData={user}
-    totalPrice = {totalPrice}
-    // handleConfirmation={handleConfirmation} 
-    // bookingDetails={{
-    //   selectedService: selectedService,
-    //   selectedDate: selectedDate,
-    //   selectedTime: selectedTime,
-    //   totalPrice: totalPrice,
-    // }}
-  /> */}
-      {/* )} */}
+
     </>
   );
 };
