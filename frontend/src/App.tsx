@@ -18,7 +18,6 @@ import BookingDetail from "./components/services/appointments/details&history/Bo
 import ConfirmedBooking from "./components/services/appointments/details&history/ConfirmedBooking";
 // import OrderDetails from "./components/order/OrderDetails";
 import OrderList from "./components/order/OrderList";
-// import ThankYou from "./components/thankYou/ThankYou";
 
 function App() {
   return (
@@ -41,6 +40,9 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/about" element={<About />} />
+            <Route path="/orders" element={<OrderList />} />
+
+
             {/* <Route path="/thank-you" element={<ThankYou/>} /> */}
           </Routes>
         </ServiceProvider>
