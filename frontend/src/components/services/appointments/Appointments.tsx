@@ -27,6 +27,7 @@ const Appointment = () => {
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmationRequested, setConfirmationRequested] = useState(false);
+  const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 
   const { user, setUser, token, setToken } = useUser();
@@ -42,6 +43,19 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     // fetchData();
   }, []);
   
+  useEffect(() => {
+    if (showPopup) {
+      popupTimerRef.current = setTimeout(() => {
+        setShowPopup(false);
+      }, 4000);
+    }
+    return () => {
+      if (popupTimerRef.current) {
+        clearTimeout(popupTimerRef.current);
+      }
+    };
+  }, [showPopup]);
+
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
     setSelectedTime(selectedHour);
@@ -55,15 +69,13 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     event.preventDefault();
     try {
       if (!selectedDate || !selectedService || !selectedTime) {
-        console.error("Please select date, service, and time");
+        setErrorMessage('All fields are required. Please select a date, service, and time.');
+        setShowPopup(true)
         return;
       }
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
-
-      // console.log("this is selectedServiceObj", selectedServiceObj);
-      // console.log("this is selected service", selectedService);
 
       if (!selectedServiceObj) {
         console.error("Selected service not found");
@@ -162,6 +174,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     setConfirmationRequested(true);
     updateSummary(summary);
     await  handleConfirmBooking()
+    // setShowPopup(true);
  
     
     // Send confirmation email
@@ -212,7 +225,7 @@ console.log("this is config", config);
 
       const responseData = await response.json();
       setErrorMessage(responseData.message);
-      // setFilteredTimes(responseData.filteredTimes);
+    
       setShowPopup(true);
       return;
     }
@@ -285,7 +298,6 @@ console.log("this is config", config);
                       <div className="popup-content">
                         <p>{errorMessage}</p>
                         <TiDeleteOutline onClick={handleClosePopup} />
-                        {/* <button >Close</button> */}
                       </div>
                     </div>
                   )}
