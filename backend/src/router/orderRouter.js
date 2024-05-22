@@ -27,8 +27,8 @@ router
       const allOrders = await Order.find({ user: req.user.id }).populate({
         path: "products.product",
         model: "Products",
-        select: "name price image"
-        // model: "Products", 
+        select: "title price image"
+        // model: "Products"
       });
       res.send(allOrders);
     } catch (error) {
