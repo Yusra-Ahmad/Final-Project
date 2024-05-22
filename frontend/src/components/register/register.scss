@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 4rem;
 
   .register-form {
     width: 650px;
@@ -14,7 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
     box-shadow: 3px 3px 15px -5px #b08568;
     border-radius: 25px;
     font-family: sans-serif;
@@ -31,7 +32,7 @@
 
     p {
       letter-spacing: 0.2rem;
-      // font-size: 3rem;
+      font-size: 3rem;
     }
 
     .register-input {
@@ -110,6 +111,15 @@
         color: #b0856885;
         font-size: 1.2rem;
         margin-left: 10px;
+        margin-top: 30px;
+      }
+      .success-message {
+        font-size: 1.5rem;
+        color: #b0856885;
+      }
+      .error-message {
+        font-size: 1rem;
+        color: #b0856885;
       }
     }
   }
