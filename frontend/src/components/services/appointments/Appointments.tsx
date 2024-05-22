@@ -173,29 +173,32 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
     updateSummary(summary);
-    await  handleConfirmBooking()
-    // setShowPopup(true);
+    const bookingConfirmed=await  handleConfirmBooking()
+
  
     
     // Send confirmation email
-    try {
-      const template = {
-        to_name: user?.firstname,
-        user_email: user?.email,
-        total_amount: totalPrice,
-        // image_url: bliss2,
-      };
-      
-      await emailjs.send(
-        "service_m46fwtd",
-        "template_4mwvxay",
-        template,
-        "MCP7eN1sKKWReuKKW"
-      );
-      console.log("Confirmation email sent successfully");
-   
-    } catch (error) {
-      console.error("Error sending confirmation email:", error);
+    if(bookingConfirmed){
+
+      try {
+        const template = {
+          to_name: user?.firstname,
+          user_email: user?.email,
+          total_amount: totalPrice,
+          // image_url: bliss2,
+        };
+        
+        await emailjs.send(
+          "service_m46fwtd",
+          "template_4mwvxay",
+          template,
+          "MCP7eN1sKKWReuKKW"
+        );
+        console.log("Confirmation email sent successfully");
+        
+      } catch (error) {
+        console.error("Error sending confirmation email:", error);
+      }
     }
   };
 // ---------------------------------------------------------------------------------------------------------------
