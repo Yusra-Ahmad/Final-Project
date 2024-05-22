@@ -1,9 +1,9 @@
 body.menu-open {
-  overflow: hidden; /* Hide scrollbars */
+  overflow: hidden; 
 }
 
 body.menu-open::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for WebKit browsers */
+  display: none;
 }
 
 .navbar-container {
@@ -20,7 +20,7 @@ body.menu-open::-webkit-scrollbar {
     justify-content: space-between;
     align-items: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: serif;
     list-style: none;
     padding-inline: 2rem;
@@ -36,16 +36,19 @@ body.menu-open::-webkit-scrollbar {
       max-width: 10rem;
     }
     .menu-icon {
+      
       display: flex;
       gap: 10px;
       margin-right: 7px;
       .cross-icon {
         margin-left: 3.8rem;
+      
       }
+     
     }
-    .menu-icon svg {
-      transition: transform 0.3s ease-in-out;
-    }
+    // .menu-icon svg {
+    //   transition: transform 0.3s ease-in-out;
+    // }
     .cart-ul.hidden {
       display: none;
     }
@@ -59,8 +62,9 @@ body.menu-open::-webkit-scrollbar {
       }
 
       .first-latter {
-        font-size: 1.6rem;
-        padding-inline: 0.3rem;
+        font-size: 1.3rem;
+         padding-inline: .7rem;
+         cursor: pointer;
         color: black;
         background-color: white;
         border-radius: 50%;
@@ -89,7 +93,13 @@ body.menu-open::-webkit-scrollbar {
         border-radius: 20px;
         font-weight: bold;
         color: #e0ab88;
+  cursor: pointer;
+
       }
     }
   }
+}
+.dropdown-toggle::after {
+  cursor: pointer;
+  display: none;
 }

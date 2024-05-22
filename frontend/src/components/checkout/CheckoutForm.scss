@@ -1,4 +1,5 @@
 .checkout-form-container {
+
   background-image: url('../../assets/thankyou-page.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,11 +11,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh; /* Full height for the container */
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+  // margin-top: 10rem;
+  // margin-bottom: 2rem;
 }
 
 .checkout-content {
+  position: absolute;
   background-color: #3e352f9f;
   padding: 4.9rem; 
   border-radius: 2rem;
@@ -164,7 +166,8 @@ select {
   font-style: italic;
   word-spacing: .3rem;
   font-weight: bold;
-  padding: 15px;
+  width: 13rem;
+  //  padding: -7px;
   margin-left: 5.5rem;
   background-color: #976e53;
   color: #fff;
