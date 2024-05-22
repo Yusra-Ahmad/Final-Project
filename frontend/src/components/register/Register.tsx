@@ -125,6 +125,20 @@ const Register = () => {
   return (
     <>
       <div className="register-container">
+        {errormessages && (
+          <div className="error-message">
+            <BiError className="error-icon" />
+            <div className="error-container">
+              <span className="error-span">There was a problem</span>
+              {/* <ol className="error-list">
+                  {errormessages.map((error, index) => (
+                    <li key={index}> {error.msg} </li>
+                  ))}
+                </ol> */}
+              <p className="error-para"> {errormessages} </p>
+            </div>
+          </div>
+        )}
         <form onSubmit={submitHandler} className="register-form">
           <p>Registration </p>
 
@@ -207,20 +221,6 @@ const Register = () => {
           {successMessage && (
             <div className="success-message">{successMessage} </div>
           )}
-          <div>
-            {errormessages && (
-              <div className="error-message">
-                <BiError className="error-icon" />
-                <span>There was a problem</span>
-                {/* <ol className="error-list">
-                  {errormessages.map((error, index) => (
-                    <li key={index}> {error.msg} </li>
-                  ))}
-                </ol> */}
-                <p> {errormessages} </p>
-              </div>
-            )}
-          </div>
 
           {/* {errormessages.length > 0 && (
             <div className="error-message">

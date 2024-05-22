@@ -6,15 +6,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
-  margin-top: 4rem;
+  margin-top: 5rem;
+
+  .error-message {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    width: 90%;
+    margin-bottom: 2rem;
+    text-align: left;
+    box-shadow: 1px 1px 4px #b08568;
+    border-radius: 15px;
+    padding-block: 1rem;
+
+    .error-icon {
+      color: #c53932;
+      font-size: 3.5rem;
+      margin-left: 2rem;
+    }
+    .error-container {
+      .error-span {
+        font-size: 1.5rem;
+        color: #c53932;
+      }
+      .error-para {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+    }
+  }
 
   .register-form {
     font-family: serif;
     font-style: italic;
     font-size: 2rem;
     width: 650px;
-    padding: 4rem;
+    padding: 1rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,12 +187,9 @@
         margin-left: 10px;
         margin-top: 30px;
       }
+
       .success-message {
         font-size: 1.5rem;
-        color: #b0856885;
-      }
-      .error-message {
-        font-size: 1rem;
         color: #b0856885;
       }
     }
