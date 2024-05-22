@@ -54,7 +54,7 @@ const Cart = () => {
                 <div className="price">€{product.price}</div>
                 <div className="quantity">
                   <button className='cartProductAddRemove' onClick={() => removeFromCart(product)}>
-                    <  FaMinus  />
+                    <FaMinus />
                   </button>
                   {product.quantity}
                   <button className='cartProductAddRemove' onClick={() => addToCart(product)}>
@@ -75,10 +75,11 @@ const Cart = () => {
               <span>Total (Inclusive of tax €0.00)</span>
               <span>€{getCartTotal()}</span>
             </div>
-            <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+           
+              <button className="checkout-button" disabled={cartItems.length === 0} onClick={handleCheckout}>Checkout</button>
+            
             <button className="clear-cart-button" onClick={clearCart}>Clear Cart</button>
           </div>
-          {/* {!user && <p style={{ color: " #eccd7c", marginBottom:"16rem" ,fontSize:"22px" }}>You need to login first to continue checkout</p>} */}
         </>
       )}
     </div>
