@@ -7,13 +7,13 @@ GET http://localhost:6000/products
 
 ###
 POST http://localhost:3020/appointments/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMzNjNiNWQzMjY0YmE5YjM5Mjg1ZTAiLCJpYXQiOjE3MTQ2NDQzMDcsImV4cCI6MTcxNDkyNTEwN30.drbD2rl-Tjai8huRtiRfFD2FepqxJTryHodbmlTsWKY"
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQ0Zjc4MDA5NmRjNDJiMjVlODZiMjAiLCJpYXQiOjE3MTU3OTU4NTUsImV4cCI6MTcxNjA3NjY1NX0.CT71RHYtuYpfN39TnHJqURXR35YP__B_YI71rZWdUo0"
 Content-Type: application/json
 
 {
     "service": "manicure",
     "startTime": "2024-05-15T14:00:00.000Z",
-    "user": "663363b5d3264ba9b39285e0"
+    "user": "6644f780096dc42b25e86b20"
 }
 ###
 DELETE http://localhost:3020/appointments/deleteall
@@ -26,17 +26,38 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMwZ
 GET http://localhost:3020/auth/users
 
 ###
+POST  http://localhost:3020/bookingConfirm/book
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQxYmM0OGYyZDY0MzIxZGMwYTJmN2QiLCJpYXQiOjE3MTU2ODk5NzgsImV4cCI6MTcxNTk3MDc3OH0.n0iIH84_nkge-LheOudX8Z1277rhYGzIxmgUd2bKerM
+Content-Type: application/json
 
+{
+  "bookedServices":[{
+  "service": "manicure",
+  "startTime": "2024-05-24T11:00:00.000Z",
+  "price": 90,
+  "user": "6641bc48f2d64321dc0a2f7d"
+}
+]
+}
+###
+GET http://localhost:3020/bookingConfirm/6641bc48f2d64321dc0a2f7d
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjQxYmM0OGYyZDY0MzIxZGMwYTJmN2QiLCJpYXQiOjE3MTU2ODk5NzgsImV4cCI6MTcxNTk3MDc3OH0.n0iIH84_nkge-LheOudX8Z1277rhYGzIxmgUd2bKerM
+
+
+
+
+
+###
 POST http://localhost:3020/auth/register
 Content-Type: application/json
 
 
 {  
-     "firstname":"hetal",
-    "lastname" :"ahir",
-    "email":"hetal@gmail.com",
-    "password":"Vritti@143",
-    "confirmPassword":"Vritti@143"
+     "firstname":"sadhana",
+    "lastname" :"007",
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007",
+    "confirmPassword":"Ranu@007"
     }
 
 
@@ -47,8 +68,8 @@ Content-Type: application/json
 
 
 {
-    "email":"hetal@gmail.com",
-    "password":"Vritti@143"
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007"
 }
 
 ###
@@ -73,13 +94,31 @@ Content-Type: application/json
 ###
 Get http://localhost:3020/carts/661e4349d31012d4555d7bea
 
-# ###
-# POST http://localhost:3020/send-email
-# Content-Type: application/json
 
-#  {
-#   "firstName":"hetal" ,
-#   "lastName":"ahir",
-#    "email":"hetal@gmail.com",
-#     "message":"hello"
-# }
+ POST http://localhost:3020/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTUxNjI1MTUsImV4cCI6MTcxNTQ0MzMxNX0.FIO1APcvvuYYWkL_dYERq4YTF-GQeMbfLi05IGB-qTw
+
+ {
+  "products": [
+    {
+        "product":"663b5cc84adbafc29d0a250d",
+        "quantity":1
+    }
+  ],
+  "totalAmount":100,
+  "shippingAddress": {
+    "fullName": "John Doe",
+    "address": "123 Apple St",
+    "city": "New York",
+    "state": "NY",
+    "postcode": "10001",
+    "country": "USA"
+  }
+}
+
+###
+ GET http://localhost:3020/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTYyMDQ5NjgsImV4cCI6MTcxNjQ4NTc2OH0.YPL-DKPGFHvk0tJMUtGKFRLCtWXHWwYNl77682a1IhA
+

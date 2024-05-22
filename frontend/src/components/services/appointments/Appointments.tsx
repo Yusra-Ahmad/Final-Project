@@ -1,71 +1,93 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
+import Calendar from "react-calendar";
+import emailjs from "emailjs-com";
+// import  bliss2 from "../../../assets/bliss2.png"
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
+import { useNavigate } from "react-router-dom";
+import "./Appointments.scss";
+// import EmailGenerator from"./email/EmailGenerator.tsx";
+
+
+
+
+
 
 const Appointment = () => {
-  const { services, fetchServices } = useServiceContext();
+  const { services, fetchServices, summary, updateSummary, setBookingDetail } =
+    useServiceContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [summary, setSummary] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [confirmationRequested, setConfirmationRequested] = useState(false);
+  const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
+
 
   const { user, setUser, token, setToken } = useUser();
   const displayTime = parseInt(selectedTime);
-  const actualTime = displayTime + 2;
-
-  const time = new Date(selectedDate?.setHours(actualTime));
+  const formattedHours = Math.floor(displayTime);
+  const formattedMinutes = Math.round((displayTime - formattedHours) * 60);
+  const totalSeconds = formattedHours * 3600 + formattedMinutes * 60
+  const formattedSeconds = totalSeconds % 60
+const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,formattedSeconds))
 
   useEffect(() => {
     fetchServices();
+    // fetchData();
   }, []);
-
-  // const handleDateSelect = (date: Date | Date[]) => {
-  //   setSelectedDate(date instanceof Date ? date : null);
-  // };
+  
+  useEffect(() => {
+    if (showPopup) {
+      popupTimerRef.current = setTimeout(() => {
+        setShowPopup(false);
+      }, 4000);
+    }
+    return () => {
+      if (popupTimerRef.current) {
+        clearTimeout(popupTimerRef.current);
+      }
+    };
+  }, [showPopup]);
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedHour = parseInt(event.target.value);
     setSelectedTime(selectedHour);
   };
-
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(event.target.value);
   };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (!selectedDate || !selectedService || !selectedTime) {
-        console.error("Please select date, service, and time");
+        setErrorMessage('All fields are required. Please select a date, service, and time.');
+        setShowPopup(true)
         return;
       }
-
       const selectedServiceObj = services.find(
         (service) => service.title === selectedService
       );
-      console.log("this is selectedServiceObj", selectedServiceObj);
-      console.log("this is selected service", selectedService);
+
       if (!selectedServiceObj) {
         console.error("Selected service not found");
         return;
       }
-
       const { price } = selectedServiceObj;
-      console.log(typeof price);
-
       const submittedData = {
         service: selectedService,
         startTime: time,
         price: price,
         user: user._id,
       };
-
       const config = {
         method: "POST",
         headers: {
@@ -74,12 +96,11 @@ const Appointment = () => {
         },
         body: JSON.stringify(submittedData),
       };
-
       const response = await fetch(
         "http://localhost:3020/appointments/book",
         config
       );
-
+      console.log("this is response of proceed", response);
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -89,14 +110,16 @@ const Appointment = () => {
       }
       const result = await response.json();
       console.log("Appointment booked successfully:", result);
+      setSelectedDate(null);
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
+      // activeRef.current.removeAttribute("active")
+      // setActive(false)
     } catch (error) {
       console.error("Error while booking appointment:", error);
     }
   };
-
   const fetchData = async () => {
     const config = {
       headers: {
@@ -109,13 +132,13 @@ const Appointment = () => {
         config
       );
       const data = await response.json();
-
-      setSummary(data);
+      
+      setBookingDetail(data);
+      updateSummary(data);
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleDelete = async (serviceName) => {
     try {
       const config = {
@@ -128,11 +151,9 @@ const Appointment = () => {
         `http://localhost:3020/appointments/deleteone/${serviceName}`,
         config
       );
-
       if (!response.ok) {
         throw new Error("Failed to delete appointment");
       }
-
       console.log("Appointment deleted successfully");
       fetchData();
     } catch (error) {
@@ -142,7 +163,84 @@ const Appointment = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-  const totalPrice = summary.reduce((acc, item) => acc + item.price, 0);
+
+  const totalPrice = summary
+    ? summary.reduce((acc, item) => acc + item.price, 0)
+    : 0;
+
+  const navigate = useNavigate();
+  
+  const handleConfirmation = async () => {
+    setConfirmationRequested(true);
+    updateSummary(summary);
+    const bookingConfirmed=await  handleConfirmBooking()
+
+ 
+    
+    // Send confirmation email
+    if(bookingConfirmed){
+
+      try {
+        const template = {
+          to_name: user?.firstname,
+          user_email: user?.email,
+          total_amount: totalPrice,
+          // image_url: bliss2,
+        };
+        
+        await emailjs.send(
+          "service_m46fwtd",
+          "template_4mwvxay",
+          template,
+          "MCP7eN1sKKWReuKKW"
+        );
+        console.log("Confirmation email sent successfully");
+        
+      } catch (error) {
+        console.error("Error sending confirmation email:", error);
+      }
+    }
+  };
+// ---------------------------------------------------------------------------------------------------------------
+
+
+const handleConfirmBooking = async () => {
+  try {
+    const bookedServices = summary.map(item => ({
+      service: item.service,
+      startTime: item.startTime,
+      price: item.price,
+      user: user._id,
+    }));
+
+    const config = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookedServices }),
+    };
+console.log("this is config", config);
+    const response = await fetch("http://localhost:3020/bookingConfirm/book", config);
+    console.log("this is response of confirmed booking", response);
+    if (!response.ok) {
+
+      const responseData = await response.json();
+      setErrorMessage(responseData.message);
+    
+      setShowPopup(true);
+      return;
+    }
+    const result = await response.json();
+    updateSummary([]);
+    navigate("/bookingDetails");
+    console.log("Confirmed booking successfully:", result);
+  } catch (error) {
+    console.error("Error while confirming booking:", error);
+  }
+};
+
 
   return (
     <>
@@ -210,58 +308,67 @@ const Appointment = () => {
               </div>
             </div>
             <div className="submit-button">
-              <button type="submit">Submit</button>
+              <button type="submit">Proceed</button>
             </div>
           </form>
         </div>
         <div className="data-div">
           <h2>Summary</h2>
+          <div className="data-container">
+            {summary &&
+              summary.map((item, index) => (
+                <div key={index} className="submitted-data">
+                  <h4>{index + 1})  </h4>
+                  <div className="display-data">
+                    
+                    {/* <div className="number"> */}
 
-          {summary.map((item, index) => (
-            <div key={index} className="submitted-data">
-              <div className="display-data">
-                <p>
-                  {index + 1} <span>Service: </span>
-                  {item.service}
-                </p>
-                <p>
-                  <span>Date: </span>
-                  {new Date(item.startTime).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-                <p>
-                  <span>Time: </span>
-                  {new Date(
-                    new Date(item.startTime).getTime() - 2 * 60 * 60 * 1000
-                  ).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
-                <p>
-                  <span>Price: </span>
-                  {item.price}€
-                </p>
-              </div>
-              <div className="delete-button">
-                <RiDeleteBin6Line onClick={() => handleDelete(item.service)} />
-              </div>
-            </div>
-          ))}
+                    <p>
+                       <span>Service: </span>
+                      {item.service}
+                    </p>
+                    {/* </div> */}
+                    <p>
+                      <span>Date: </span>
+                      {new Date(item.startTime).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p>
+                      <span>Time: </span>
+                      {new Date(
+                        new Date(item.startTime).getTime() 
+                      ).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
+                    <p>
+                      <span>Price: </span>
+                      {item.price}€
+                    </p>
+                  </div>
+                  <div className="delete-button">
+                    <RiDeleteBin6Line
+                      onClick={() => handleDelete(item.service)}
+                    />
+                  </div>
+                </div>
+              ))}
+          </div>
           {/* Display total price */}
           <div className="total-price">
             <h3>Total Price: {totalPrice}€</h3>
           </div>
-          <button className="confirm-button">
+          <button className="confirm-button" onClick={handleConfirmation}>
             <span> Confirm</span>
           </button>
         </div>
       </div>
+
     </>
   );
 };
-
 export default Appointment;

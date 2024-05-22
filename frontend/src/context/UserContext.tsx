@@ -21,7 +21,6 @@ interface UserContexType {
   isLoggedIn: boolean;
 }
 
-// const defaultUser = JSON.parse(localStorage.getItem("user"));
 const defaultToken = localStorage.getItem("token");
 const defaultUser = JSON.parse(localStorage.getItem("user"));
 

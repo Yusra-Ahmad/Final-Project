@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/seeder/serviceSeeder.js && node src/seeder/productSeeder.js && nodemon server.js",
+    "start": "  nodemon server.js",
+    "seed" : "node src/seeder/serviceSeeder.js  ",
     "dev": "nodemon server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

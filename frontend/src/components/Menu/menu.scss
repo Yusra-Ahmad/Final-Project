@@ -1,9 +1,13 @@
+::-webkit-scrollbar:not(.menu) {
+  display: none;
+}
 .menu {
   background-color: #1c1919;
   font-family: serif;
   font-style: italic;
   letter-spacing: 0.2rem;
-  font-size: 1.7rem;
+  font-size: 2rem;
+  width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -22,13 +26,9 @@
     list-style: none;
     gap: 3rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       flex-direction: column;
       text-align: center;
-      gap: 2rem;
-    }
-    @media (max-width: 1024px) {
-      gap: 2rem;
     }
     .link {
       text-decoration: none;

@@ -9,6 +9,7 @@ interface MenuProps {
 
 const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
   const { isLoggedIn } = useUser();
+
   return (
     <div className={`menu ${dropMenu ? "hidden" : "active"}`}>
       <ul>
@@ -21,7 +22,11 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
         <Link to="services" className="link" onClick={handleDropMenu}>
           <li>Services</li>
         </Link>
-        <Link to="contact" className="link" onClick={handleDropMenu}>
+        <Link to="/about" className="link" onClick={handleDropMenu}>
+          <li>About</li>
+        </Link>
+
+        <Link to="/contact" className="link" onClick={handleDropMenu}>
           <li>Contact</li>
         </Link>
         <Link to="/register" className="link" onClick={handleDropMenu}>

@@ -1,10 +1,21 @@
-div {
+body.menu-open {
+  overflow: hidden; /* Hide scrollbars */
+}
+
+body.menu-open::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.navbar-container {
+  display: grid;
+  grid-template-columns: 3;
+  grid-template-rows: 2;
   .navbar {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    background-color: #1c19195a;
+    background-color: #1c19195d;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,12 +23,13 @@ div {
     font-size: 1.5rem;
     font-family: serif;
     list-style: none;
-    z-index: 1;
     padding-inline: 2rem;
     z-index: 2;
-    @media screen and (max-width: 990px) {
-      z-index: 2;
+    @media screen and (max-width: 768px) {
+      flex-direction: row-reverse;
+      padding-left: 1rem;
     }
+
     img {
       margin-top: 10px;
       width: 80%;
@@ -27,10 +39,17 @@ div {
       display: flex;
       gap: 10px;
       margin-right: 7px;
+      .cross-icon {
+        margin-left: 3.8rem;
+      }
     }
     .menu-icon svg {
       transition: transform 0.3s ease-in-out;
     }
+    .cart-ul.hidden {
+      display: none;
+    }
+
     .cart-ul {
       display: flex;
       gap: 1.2rem;
@@ -56,10 +75,11 @@ div {
           color: #e0ab88;
         }
       }
+
       .cart-li .btn-badge {
         position: absolute;
         top: 0;
-        right: 2.1rem;
+        right: 4.3rem;
         background-color: var(--black);
         color: var(--white);
         font-size: 1.2rem;
