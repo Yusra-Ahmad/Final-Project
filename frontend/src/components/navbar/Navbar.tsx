@@ -12,7 +12,7 @@ import "./navbar.scss";
 import Menu from "../Menu/Menu";
 import { CartContext } from "../../context/Cart";
 import { useUser } from "../../context/UserContext";
-
+import { Dropdown } from "react-bootstrap";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(true);
