@@ -29,17 +29,16 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
         <Link to="/contact" className="link" onClick={handleDropMenu}>
           <li>Contact</li>
         </Link>
-        <Link to="/register" className="link" onClick={handleDropMenu}>
-          <li>Register</li>
-        </Link>
-        {!isLoggedIn ? (
-          <Link to="/login" className="link" onClick={handleDropMenu}>
-            <li>Login</li>
-          </Link>
-        ) : (
-          <Link to="/logout" className="link" onClick={handleDropMenu}>
-            <li>Logout</li>
-          </Link>
+
+        {!isLoggedIn && (
+          <>
+            <Link to="/register" className="link" onClick={handleDropMenu}>
+              <li>Register</li>
+            </Link>
+            <Link to="/login" className="link" onClick={handleDropMenu}>
+              <li>Login</li>
+            </Link>
+          </>
         )}
       </ul>
     </div>
