@@ -31,7 +31,7 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
           <li>Contact</li>
         </Link>
 
-        {!isLoggedIn && (
+        {/* {!isLoggedIn && (
           <>
             <Link to="/register" className="link" onClick={handleDropMenu}>
               <li>Register</li>
@@ -40,7 +40,7 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
               <li>Login</li>
             </Link>
           </>
-        )}
+        )} */}
       </ul>
     </div>
   );

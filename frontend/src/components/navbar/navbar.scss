@@ -34,6 +34,11 @@ body.menu-open::-webkit-scrollbar {
       // margin-top: 10px;
       width: 80%;
       max-width: 10rem;
+
+      
+    }
+    ul{
+      margin-bottom: 0;
     }
     ul{
       margin-bottom: 0;
@@ -45,14 +50,11 @@ body.menu-open::-webkit-scrollbar {
       gap: 10px;
       margin-right: 7px;
       .cross-icon {
+        transform: rotate(90deg);
         margin-left: 3.8rem;
-      
       }
-     
     }
-    // .menu-icon svg {
-    //   transition: transform 0.3s ease-in-out;
-    // }
+
     .cart-ul.hidden {
       display: none;
     }
@@ -70,13 +72,20 @@ justify-content: space-around;
 
       .first-latter {
         font-size: 1.3rem;
-         padding-inline: .7rem;
-         cursor: pointer;
-        color: black;
-        background-color: white;
+        padding-inline: .7rem;
+        cursor: pointer;
+        color: white;
+        background-color: #333;
         border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-weight: bold;
         &:hover {
           background-color: #e0ab88;
+          color: white;
         }
       }
       .cart-icon {
@@ -84,6 +93,7 @@ justify-content: space-around;
         color: white;
         &:hover {
           color: #e0ab88;
+          background-color:  black;
         }
       }
 
@@ -100,8 +110,7 @@ justify-content: space-around;
         border-radius: 20px;
         font-weight: bold;
         color: #e0ab88;
-  cursor: pointer;
-
+        cursor: pointer;
       }
     }
   }
