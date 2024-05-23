@@ -16,12 +16,13 @@ const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
         <Link to="/" className="link" onClick={handleDropMenu}>
           <li>Home </li>
         </Link>
-        <Link to="/products" className="link" onClick={handleDropMenu}>
-          <li>Products</li>
-        </Link>
         <Link to="services" className="link" onClick={handleDropMenu}>
           <li>Services</li>
         </Link>
+        <Link to="/products" className="link" onClick={handleDropMenu}>
+          <li>Products</li>
+        </Link>
+
         <Link to="/about" className="link" onClick={handleDropMenu}>
           <li>About</li>
         </Link>
