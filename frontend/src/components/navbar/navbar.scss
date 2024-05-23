@@ -1,9 +1,9 @@
 body.menu-open {
-  overflow: hidden; /* Hide scrollbars */
+  overflow: hidden; 
 }
 
 body.menu-open::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for WebKit browsers */
+  display: none;
 }
 
 .navbar-container {
@@ -20,7 +20,7 @@ body.menu-open::-webkit-scrollbar {
     justify-content: space-between;
     align-items: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: serif;
     list-style: none;
     padding-inline: 2rem;
@@ -31,36 +31,47 @@ body.menu-open::-webkit-scrollbar {
     }
 
     img {
-      margin-top: 10px;
+      // margin-top: 10px;
       width: 80%;
       max-width: 10rem;
     }
+    ul{
+      margin-bottom: 0;
+    }
     .menu-icon {
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 10px;
       margin-right: 7px;
       .cross-icon {
         margin-left: 3.8rem;
+      
       }
+     
     }
-    .menu-icon svg {
-      transition: transform 0.3s ease-in-out;
-    }
+    // .menu-icon svg {
+    //   transition: transform 0.3s ease-in-out;
+    // }
     .cart-ul.hidden {
       display: none;
     }
 
     .cart-ul {
       display: flex;
+      margin: 0;
+      // width: 10%;
+      align-items: center;
       gap: 1.2rem;
-
+justify-content: space-around;
       a:-webkit-any-link {
         text-decoration: none;
       }
 
       .first-latter {
-        font-size: 1.6rem;
-        padding-inline: 0.3rem;
+        font-size: 1.3rem;
+         padding-inline: .7rem;
+         cursor: pointer;
         color: black;
         background-color: white;
         border-radius: 50%;
@@ -79,7 +90,7 @@ body.menu-open::-webkit-scrollbar {
       .cart-li .btn-badge {
         position: absolute;
         top: 0;
-        right: 4.3rem;
+        right: 4.2rem;
         background-color: var(--black);
         color: var(--white);
         font-size: 1.2rem;
@@ -89,7 +100,22 @@ body.menu-open::-webkit-scrollbar {
         border-radius: 20px;
         font-weight: bold;
         color: #e0ab88;
+  cursor: pointer;
+
       }
     }
   }
+}
+.dropdown-menu.show{
+  border: #8a654c solid 2px;
+}
+.dropdown-item:hover{
+ background-color:#e0ab88;
+}
+.dropdown-item:active{
+  background-color: #e0ab88;
+ }
+.dropdown-toggle::after {
+  cursor: pointer;
+  display: none;
 }

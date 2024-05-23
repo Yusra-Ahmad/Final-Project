@@ -5,6 +5,7 @@ import './CheckoutForm.scss';
 import { UserContext } from '../../context/UserContext';
 import { CartContext } from '../../context/Cart';
 import emailjs from "emailjs-com";
+import { RotatingLines } from 'react-loader-spinner';
 
 interface FormState {
   fullName: string;
@@ -27,50 +28,47 @@ const CheckoutForm: React.FC = () => {
     paymentMethod: 'paypal',
   });
   const [isCheckoutComplete, setIsCheckoutComplete] = useState<boolean>(false);
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const navigate = useNavigate();
   const { user, token } = useContext(UserContext);
   const Base_Url = 'http://localhost:3020';
   const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
 
-  const submitOrder = () => {
+  const submitOrder = async () => {
     if (token) {
-      const fetchOrders = async () => {
-        const { fullName, address, city, country, postcode } = formState;
-        const requestBody = {
-          products: cartItems.map(item => ({
-            product: item._id,
-            quantity: item.quantity
-          })),
-          totalAmount: getCartTotal(),
-          shippingAddress: {
-            fullName,
-            address,
-            city,
-            country,
-            postcode
-          },
-          paymentMethod: formState.paymentMethod
-        };
-        try {
-          const response = await fetch(`${Base_Url}/orders`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-          });
-          const data = await response.json();
-          console.log('Order submitted:', data);
-          setIsCheckoutComplete(true);
-          clearCart(); // Clear the cart after successful checkout
-          sendConfirmationEmail();
-        } catch (error) {
-          console.error('Error fetching orders:', error);
-        }
+      const { fullName, address, city, country, postcode } = formState;
+      const requestBody = {
+        products: cartItems.map(item => ({
+          product: item._id,
+          quantity: item.quantity
+        })),
+        totalAmount: getCartTotal(),
+        shippingAddress: {
+          fullName,
+          address,
+          city,
+          country,
+          postcode
+        },
+        paymentMethod: formState.paymentMethod
       };
-
-      fetchOrders();
+      try {
+        const response = await fetch(`${Base_Url}/orders`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        });
+        const data = await response.json();
+        console.log('Order submitted:', data);
+        setIsCheckoutComplete(true);
+        clearCart(); // Clear the cart after successful checkout
+        sendConfirmationEmail();
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
     }
   };
 
@@ -90,11 +88,18 @@ const CheckoutForm: React.FC = () => {
   };
 
   const handleCheckout = () => {
+    setShowSpinner(true);
     if (validateForm()) {
       console.log("Checking out...", formState);
-      setIsCheckoutComplete(true);
-      submitOrder();
+
+      // Set timeout to hide spinner after 2 seconds
+      setTimeout(() => {
+        setIsCheckoutComplete(true);
+        setShowSpinner(false);
+        submitOrder();
+      }, 2000);
     } else {
+      setShowSpinner(false); // Hide spinner if form is not valid
       alert("Please ensure all fields are correctly filled.");
     }
   };
@@ -110,7 +115,6 @@ const CheckoutForm: React.FC = () => {
       to_name: fullName,
       total_amount: getCartTotal(),
       user_email: user?.email,
-      // user_id:user.id,  // Extract user ID from user context
     };
     try {
       console.log("formattedTemplate", formattedTemplate);
@@ -136,8 +140,9 @@ const CheckoutForm: React.FC = () => {
           <button className="continue-shopping-button" onClick={handleContinueShopping}><span>Continue Shopping</span></button>
         </div>
       ) : (
-        <>
+        <div className="checkout-content">
           <div className="form-section">
+            <h2>Shipping Information</h2>
             <div className="contact-info">
               <label htmlFor="fullName">Full Name</label>
               <input
@@ -206,8 +211,8 @@ const CheckoutForm: React.FC = () => {
             </div>
           </div>
           <div className="payment-section">
+            <h2>Payment Method</h2>
             <div className="payment-method">
-              <label>Payment Method</label>
               <div className="icon-wrapper">
                 <input
                   type="radio"
@@ -248,9 +253,20 @@ const CheckoutForm: React.FC = () => {
               onClick={handleCheckout}
             >
               <span>Pay now</span>
+              <RotatingLines
+                visible={showSpinner}
+                height="35"
+                width="35"
+                color="grey"
+                strokeWidth="3"
+                animationDuration="0.75"
+                ariaLabel="rotating-lines-loading"
+                wrapperStyle={{ marginLeft: "10px" }}
+                wrapperClass=""
+              />
             </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

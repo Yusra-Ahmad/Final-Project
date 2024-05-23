@@ -124,6 +124,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM
 
 ###
 
+
+POST http://localhost:3020/auth/forgot-password
+Content-Type: application/json
+
+ {
+  "email":"ahirhetal2409@gmail.com"
+}
+
+###
+
+POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
+Content-Type: application/json
+
+ {
+   "password":"Ranu@7",
+   "confirmPassword": "Ranu@7"
+}
+
+
+###
+
 POST http://localhost:3020/auth/forgot-password
 Content-Type: application/json
 

@@ -1,37 +1,36 @@
+import React, { useContext, useEffect, useState } from "react";
 import { TfiAlignLeft } from "react-icons/tfi";
 import { AiOutlineClose } from "react-icons/ai";
 import { PiShoppingCart } from "react-icons/pi";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineCalendarMonth } from "react-icons/md";
-
 import { Link } from "react-router-dom";
 import "animate.css";
 import { useNavigate } from "react-router-dom";
 import bliss from "../../assets/bliss2.png";
-
 import "./navbar.scss";
-import { useContext, useEffect, useState } from "react";
 import Menu from "../Menu/Menu";
 import { CartContext } from "../../context/Cart";
 import { useUser } from "../../context/UserContext";
+import { Dropdown } from "react-bootstrap";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(true);
-  const [userIcon, setUserIcon] = useState(true);
   const { cartItems } = useContext(CartContext);
   const { user, token } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
   // const [showIcons, setShowIcons] = useState(false);
 
   let firstLatter = "";
   if (user) {
+    
     console.log(user);
 
     firstLatter = user.firstname.charAt(0).toUpperCase();
-    console.log(firstLatter);
   }
+  
   const handleUserIcon = () => {
     if (token) {
       setUserIcon(false);
@@ -39,32 +38,32 @@ const Navbar = () => {
   };
 
   const handleDropMenu = () => {
-    console.log("this runs");
     setDropMenu((prevDropMenu) => !prevDropMenu);
+
     
     // Toggle the menu-open class on the body element
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
     document.body.classList.toggle("menu-open");
   };
+  
   const navigate = useNavigate()
   const handleAppointment = () => {
     if (user) {
-      navigate('/book-appointment');
+      navigate("/book-appointment");
     } else {
-      navigate('/login', { state: { from: '/service' } });
+      navigate("/login", { state: { from: "/service" } });
     }
   };
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
 
   // const handleToggle = () => {
   //   console.log("this runs");
@@ -82,7 +81,7 @@ const Navbar = () => {
             </li>
           ) : (
             <li className="menu-icon">
-              <AiOutlineClose onClick={handleDropMenu} />
+              <AiOutlineClose onClick={handleDropMenu} className="cross-icon" />
             </li>
           )}
           <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />
@@ -91,32 +90,36 @@ const Navbar = () => {
           <img src={bliss} alt="" />
         </Link>
 
+
         <ul
           className={`cart-ul ${dropMenu ? "" : "hidden"} ${
             !isMobile ? "" : "hidden"
           } `}
         >
           {token ? (
-            <Link onChange={handleUserIcon} className="cart-li" to="/logout">
-              <span className="first-latter">{firstLatter}</span>
-            </Link>
+            <Dropdown className="profile-dropdown">
+              <Dropdown.Toggle as="div" className="first-latter">
+                {firstLatter}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="/orders">Order History</Dropdown.Item>
+                <Dropdown.Item href="/bookingConfirm">Booking History</Dropdown.Item>
+                <Dropdown.Item href="/logout">Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           ) : (
-            <Link onChange={handleUserIcon} className="cart-li" to="/login">
+            <Link className="cart-li" to="/login">
               <FaUser className="cart-icon" />
             </Link>
           )}
-
           <Link className="cart-li" to="/cart">
-            <PiShoppingCart className="cart-icon" />{
-              cartItems.length>0 &&
-              (
-                <span className="btn-badge">{cartItems.length}</span>
-
-              )
-
-            }
-
+            <PiShoppingCart className="cart-icon" />
+            {cartItems.length > 0 && (
+              <span className="btn-badge">{cartItems.length}</span>
+            )}
           </Link>
+
       
             <MdOutlineCalendarMonth className="cart-icon" onClick={handleAppointment} />
       
@@ -125,5 +128,4 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;

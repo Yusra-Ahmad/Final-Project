@@ -18,6 +18,7 @@ import BookingDetail from "./components/services/appointments/details&history/Bo
 import ConfirmedBooking from "./components/services/appointments/details&history/ConfirmedBooking";
 // import OrderDetails from "./components/order/OrderDetails";
 import OrderList from "./components/order/OrderList";
+// import ThankYou from "./components/thankYou/ThankYou";
 
 function App() {
   return (
