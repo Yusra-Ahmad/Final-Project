@@ -1,24 +1,53 @@
 .register-container {
-  background-color: #1C1919;
+  background-color: #1c1919;
   color: rgba(255, 255, 255, 0.77);
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 5rem;
+
+  .error-message {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    width: 90%;
+    margin-bottom: 2rem;
+    text-align: left;
+    box-shadow: 1px 1px 4px #b08568;
+    border-radius: 15px;
+    padding-block: 1rem;
+
+    .error-icon {
+      color: #c53932;
+      font-size: 3.5rem;
+      margin-left: 2rem;
+    }
+    .error-container {
+      .error-span {
+        font-size: 1.5rem;
+        color: #c53932;
+      }
+      .error-para {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+    }
+  }
+
   .register-form {
     font-family: serif;
     font-style: italic;
     font-size: 2rem;
     width: 650px;
-    padding: 4rem;
+    padding: 1rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    box-shadow: 3px 3px 15px -5px #B08568;
+    gap: 2rem;
+    box-shadow: 3px 3px 15px -5px #b08568;
     //box-shadow: 0px 5px 15px -2px rgb(0, 0, 0);
     border-radius: 25px;
     font-family: sans-serif;
@@ -33,7 +62,7 @@
     transform-origin: bottom;
     p {
       letter-spacing: 0.2rem;
-      // font-size: 3rem;
+      font-size: 3rem;
     }
 
     .register-input {
@@ -85,17 +114,17 @@
         font-size: 1.2rem;
         background-color: #b08568d3;
         border-radius: 10px;
-        border: #B08568 solid 2px;
+        border: #b08568 solid 2px;
         &:hover {
-          background-color: #B08568;
+          background-color: #b08568;
           border: #ffffff5e solid 2px;
         }
       }
     }
-    
+
     .register-button-div {
       width: 100%;
-      
+
       display: flex;
       justify-content: center;
       align-items: center;
@@ -156,6 +185,12 @@
         color: #b0856885;
         font-size: 1.2rem;
         margin-left: 10px;
+        margin-top: 30px;
+      }
+
+      .success-message {
+        font-size: 1.5rem;
+        color: #b0856885;
       }
     }
   }
