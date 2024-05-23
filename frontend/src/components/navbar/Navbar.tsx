@@ -12,27 +12,41 @@ import "./navbar.scss";
 import Menu from "../Menu/Menu";
 import { CartContext } from "../../context/Cart";
 import { useUser } from "../../context/UserContext";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Dropdown } from "react-bootstrap";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(true);
   const { cartItems } = useContext(CartContext);
   const { user, token } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
+  // const [showIcons, setShowIcons] = useState(false);
 
   let firstLatter = "";
   if (user) {
+    
+    console.log(user);
+
     firstLatter = user.firstname.charAt(0).toUpperCase();
   }
+  
+  const handleUserIcon = () => {
+    if (token) {
+      setUserIcon(false);
+    }
+  };
 
   const handleDropMenu = () => {
     setDropMenu((prevDropMenu) => !prevDropMenu);
+
+    
+    // Toggle the menu-open class on the body element
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
     document.body.classList.toggle("menu-open");
   };
-
-  const navigate = useNavigate();
+  
+  const navigate = useNavigate()
   const handleAppointment = () => {
     if (user) {
       navigate("/book-appointment");
@@ -40,17 +54,21 @@ const Navbar: React.FC = () => {
       navigate("/login", { state: { from: "/service" } });
     }
   };
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
+  // const handleToggle = () => {
+  //   console.log("this runs");
+  //   setShowIcons((prev) => !prev);
+  // };
 
   return (
     <div className="navbar-container">
@@ -72,7 +90,12 @@ const Navbar: React.FC = () => {
           <img src={bliss} alt="" />
         </Link>
 
-        <ul className={`cart-ul ${dropMenu ? "" : "hidden"} ${!isMobile ? "" : "hidden"}`}>
+
+        <ul
+          className={`cart-ul ${dropMenu ? "" : "hidden"} ${
+            !isMobile ? "" : "hidden"
+          } `}
+        >
           {token ? (
             <Dropdown className="profile-dropdown">
               <Dropdown.Toggle as="div" className="first-latter">
@@ -80,17 +103,25 @@ const Navbar: React.FC = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="/orders">Order History</Dropdown.Item>
-                <Dropdown.Item href="/bookingConfirm">Booking History</Dropdown.Item>
-                <Dropdown.Item href="/logout">Logout</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/orders">Order History</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/bookingConfirm">Booking History</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/logout">Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
-            <Link className="cart-li" to="/login">
-              <FaUser className="cart-icon" />
-            </Link>
-          )}
+            <>
+              <Dropdown className="profile-dropdown">
+                <Dropdown.Toggle as="div" className="first-latter">
+                  <FaUser className="cart-icon" />
+                </Dropdown.Toggle>
 
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/register">Register</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </>
+          )}
           <Link className="cart-li" to="/cart">
             <PiShoppingCart className="cart-icon" />
             {cartItems.length > 0 && (
@@ -98,14 +129,12 @@ const Navbar: React.FC = () => {
             )}
           </Link>
 
-          <MdOutlineCalendarMonth
-            className="cart-icon"
-            onClick={handleAppointment}
-          />
+      
+            <MdOutlineCalendarMonth className="cart-icon" onClick={handleAppointment} />
+      
         </ul>
       </div>
     </div>
   );
 };
-
 export default Navbar;

@@ -12,6 +12,8 @@ const userSchema = new Schema(
     lastname: { type: String, required },
     email: { type: String, unique, required },
     password: { type: String, required },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
   },
   { versionKey: false }
 );
