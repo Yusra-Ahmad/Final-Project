@@ -306,7 +306,7 @@
 
     &::after {
       right: -12px;
-    color: black;
+      color: black;
       background: linear-gradient(45deg, #2f771b, #4c904f);
     }
 
@@ -316,6 +316,19 @@
       color: black;
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+      background: grey;
+      color: #999999;
+      cursor: not-allowed;
+      box-shadow: none;
+
+      &:hover {
+        background: grey;
+        color: #999999;
+        transform: none;
+      }
     }
   }
 
@@ -342,7 +355,19 @@
       color: black;
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    } &:disabled {
+      background: grey;
+      color: #999999;
+      cursor: not-allowed;
+      box-shadow: none;
+
+      &:hover {
+        background: grey;
+        color: #999999;
+        transform: none;
+      }
     }
+  
 
     @media (max-width: 576px) {
       width: 100%;

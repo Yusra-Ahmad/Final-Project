@@ -40,7 +40,6 @@ const Login = () => {
     }
   }, [token, navigate, location.state]);
 
-
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailInput.current?.value.trim() || "";
@@ -86,12 +85,12 @@ const Login = () => {
       <form onSubmit={submitHandler} className="login-form">
         <p>Login</p>
         {!token && location?.state?.from === "/checkout" && (
-          <p style={{ color: " #eccd7c", fontSize: "22px" }}>
+          <p style={{ color: "white", fontSize: "22px" }}>
             You need to login first to continue checkout
           </p>
         )}
 
-        {!token && location?.state?.from === "/service" && <p style={{ color: " #eccd7c", fontSize: "22px" }}>Login to Book an appointment. </p>}
+        {!token && location?.state?.from === "/service" && <p style={{ color: "white", fontSize: "22px", backgroundColor: "#32251d6b" }}>Login to Book an appointment. </p>}
         <div className="input-div">
           <input
             ref={emailInput}
@@ -120,15 +119,21 @@ const Login = () => {
             {showPassword ? <FaEye /> : <FaEyeSlash />}
           </span>
         </div>
+        <div>
+          <Link className="forgot-password" to="">
+            Forgot password ?
+          </Link>
+        </div>
         <div className="login-div">
           <button type="submit" className="login-button">
             Login
           </button>
+
           <Link className="register" to="/register">
             Create an account
           </Link>
         </div>
-      </form>{" "}
+      </form>
     </div>
   );
 };

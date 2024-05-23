@@ -53,16 +53,29 @@ Content-Type: application/json
 
 
 {  
-     "firstname":"sadhana",
+     "firstname":"Hetal",
+    "lastname" :"Ahir",
+    "email":"ahirhetal2409@gmail.com",
+    "password":"Vritti@7",
+    "confirmPassword":"Vritti@7"
+    }
+
+
+###
+POST http://localhost:3020/auth/register
+
+Content-Type: application/json
+
+{  
+     "firstname":"sandy",
     "lastname" :"007",
     "email":"sandy@gmail.com",
     "password":"Ranu@007",
     "confirmPassword":"Ranu@007"
     }
 
-
+  
 ###
-
 POST http://localhost:3020/auth/login
 Content-Type: application/json
 
@@ -120,5 +133,43 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM
 ###
  GET http://localhost:3020/orders
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTYyMDQ5NjgsImV4cCI6MTcxNjQ4NTc2OH0.YPL-DKPGFHvk0tJMUtGKFRLCtWXHWwYNl77682a1IhA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM2JmOGU3YjdhYzVjZDk1OTRkMzgiLCJpYXQiOjE3MTUxNjI1MTUsImV4cCI6MTcxNTQ0MzMxNX0.FIO1APcvvuYYWkL_dYERq4YTF-GQeMbfLi05IGB-qTw
 
+###
+
+
+POST http://localhost:3020/auth/forgot-password
+Content-Type: application/json
+
+ {
+  "email":"ahirhetal2409@gmail.com"
+}
+
+###
+
+POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
+Content-Type: application/json
+{
+   "password":"Ranu@7",
+   "confirmPassword": "Ranu@7"
+}
+
+
+###
+
+POST http://localhost:3020/auth/forgot-password
+Content-Type: application/json
+
+ {
+  "email":"ahirhetal2409@gmail.com"
+}
+
+###
+
+POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
+Content-Type: application/json
+
+ {
+   "password":"Ranu@7",
+   "confirmPassword": "Ranu@7"
+}

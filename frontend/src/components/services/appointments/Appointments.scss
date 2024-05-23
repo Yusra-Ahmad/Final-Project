@@ -150,15 +150,15 @@
           top: calc(100% + 10px); /* Adjust the distance from the dropdown */
           left: 0;
           background-color: transparent;
-          font-size: 1.2rem;
+          font-size: 2rem;
           border: 1px solid #b08568;
-          padding: 10px;
+          padding: 5px;
           color: #cfcbc8;
           border-radius: 4px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           p {
             color: crimson;
-            font-size: 1rem;
+            font-size: 0.9rem;
           }
         }
         .popup-content {
@@ -209,7 +209,7 @@
     display: inline-block;
     background-color: #1c1919;
     width: 150px;
-    height: 50px;
+    height: 80px;
     border-radius: 10px;
     border: 1px solid #c89a7aa0;
     position: relative;
@@ -265,13 +265,14 @@
 }
 .submit-button {
   width: 70%;
-  margin-top: 4.5rem;
+  margin-top: 3.5rem;
   text-align: end;
   position: relative; /* Ensure relative positioning for containing pseudo-elements */
 
   @media screen and (max-width: 1080px) {
     width: 15rem;
     align-items: center;
+    margin-top: 7.5rem;
   }
 
   button {
@@ -358,6 +359,7 @@
 
     .display-data {
       width: 90%;
+  
       // .number{
 
       //   display: flex;
@@ -371,7 +373,7 @@
     p {
       font-size: 1.2em;
       color: #fbe2d1;
-      margin-bottom: 0;
+      margin-bottom: -1rem;
       span {
         color: #bd7646;
         font-weight: bolder;
@@ -380,7 +382,7 @@
     }
     h3 {
       align-items: end;
-      font-size: 2rem;
+      font-size: 2ch;
       padding: 2rem;
     }
     display: flex;
