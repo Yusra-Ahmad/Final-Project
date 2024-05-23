@@ -358,6 +358,7 @@
 
     .display-data {
       width: 90%;
+  
       // .number{
 
       //   display: flex;
@@ -371,7 +372,7 @@
     p {
       font-size: 1.2em;
       color: #fbe2d1;
-      margin-bottom: 0;
+      margin-bottom: -1rem;
       span {
         color: #bd7646;
         font-weight: bolder;
@@ -380,7 +381,7 @@
     }
     h3 {
       align-items: end;
-      font-size: 2rem;
+      font-size: 2ch;
       padding: 2rem;
     }
     display: flex;
