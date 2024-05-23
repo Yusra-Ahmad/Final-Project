@@ -103,15 +103,24 @@ const Navbar = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="/orders">Order History</Dropdown.Item>
-                <Dropdown.Item href="/bookingConfirm">Booking History</Dropdown.Item>
-                <Dropdown.Item href="/logout">Logout</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/orders">Order History</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/bookingConfirm">Booking History</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/logout">Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
-            <Link className="cart-li" to="/login">
-              <FaUser className="cart-icon" />
-            </Link>
+            <>
+              <Dropdown className="profile-dropdown">
+                <Dropdown.Toggle as="div" className="first-latter">
+                  <FaUser className="cart-icon" />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/register">Register</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </>
           )}
           <Link className="cart-li" to="/cart">
             <PiShoppingCart className="cart-icon" />

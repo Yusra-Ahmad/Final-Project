@@ -24,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px; /* Add a max-width to improve layout on large screens */
+  max-width: 1200px; 
 }
 
 .form-section,
@@ -155,10 +155,10 @@ select {
   color: #fff;
   max-width: 600px;
   width: 100%;
-  margin-top: 10rem; /* Add top margin */
-  margin-bottom: 10rem; /* Add bottom margin */
-  margin-left: 2rem; /* Add left margin */
-  margin-right: 2rem; /* Add right margin */
+  margin-top: 10rem; 
+  margin-bottom: 10rem; 
+  margin-left: 2rem; 
+  margin-right: 2rem; 
 }
 
 .continue-shopping-button {
@@ -228,7 +228,7 @@ select {
 @media (max-width: 768px) {
   .checkout-form-container {
     padding: 10rem 2rem;
-    height: auto; /* Let the content determine the height */
+    height: auto; 
     margin-top: 5rem;
     margin-bottom: 5rem;
   }
