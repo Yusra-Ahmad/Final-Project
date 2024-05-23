@@ -2,8 +2,25 @@ import { Router } from "express";
 import { User } from "../models/User.js";
 import validateUser from "../middlewares/validateUser.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import crypto from "crypto";
+import nodemailer from "nodemailer";
+import { config } from "dotenv";
+import validatePassword from "../middlewares/validatePassword.js";
+
+config();
 
 export const authRouter = Router();
+
+const { hash } = bcrypt;
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 authRouter
   .get("/users", async (req, res, next) => {
@@ -43,10 +60,84 @@ authRouter
       next({ status: 500, message: error.message });
     }
   })
+  .post("/forgot-password", async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        next({ status: 404, message: "User not found!" });
+        return;
+      }
+
+      const token = crypto.randomBytes(20).toString("hex");
+      user.resetPasswordToken = token;
+      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+      await user.save();
+
+      const mailOptions = {
+        to: user.email,
+        from: process.env.EMAIL,
+        subject: "Password Reset",
+        text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+               Please click on the following link, or paste this into your browser to complete the process:\n\n
+               http://${req.headers.host}/reset-password?token=${token}\n\n
+               If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+      };
+
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          next({ status: 500, message: error.message });
+          return;
+        }
+        res.status(200).json({ message: "Email sent!" });
+      });
+    } catch (error) {
+      next({ status: 500, message: error.message });
+    }
+  })
+  .post("/reset-password/:token", validatePassword, async (req, res, next) => {
+    try {
+      const { token } = req.params;
+      const { password, confirmPassword } = req.body;
+
+      if (password !== confirmPassword) {
+        next({ status: 400, message: "Passwords do not match." });
+        return;
+      }
+
+      const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        next({
+          status: 400,
+          message: "Password reset token is invalid or has expired.",
+        });
+        return;
+      }
+
+      const hashed = await hash(user.password, 10);
+
+      user.password = hashed;
+      user.confirmPassword = confirmPassword;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+
+      await user.save();
+
+      res.status(200).json({ message: "Password has been reset!" });
+    } catch (error) {
+      next({ status: 500, message: error.message });
+    }
+  })
   .delete("/users", async (req, res, next) => {
     try {
       await User.deleteMany();
-      res.json({ message: "All user deleted!" }); 
+      res.json({ message: "All user deleted!" });
     } catch (error) {
       next({ status: 500, message: error.message });
     }
