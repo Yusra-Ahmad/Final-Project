@@ -85,6 +85,7 @@ const Register = () => {
         body: JSON.stringify(user),
       });
       const result = await response.json();
+      console.log("result", response.status);
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));

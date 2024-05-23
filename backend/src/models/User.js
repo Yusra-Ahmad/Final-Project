@@ -17,14 +17,17 @@ const userSchema = new Schema(
 );
 
 userSchema.statics.register = async (data) => {
-  // if (data.password !== data.confirmPassword) {
-  //   throw new Error("Passwords does not match");
+  // if (data.confirmPassword === "") {
+  //   throw new Error("Password is not confirmed");
   // }
+  if (data.password !== data.confirmPassword) {
+    throw new Error("Passwords does not match");
+  }
   const hashed = await hash(data.password, 10);
 
   data.password = hashed;
 
-  // delete data.confirmPassword;
+  delete data.confirmPassword;
 
   return User.create(data);
 };
