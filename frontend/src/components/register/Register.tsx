@@ -40,13 +40,13 @@ const Register = () => {
       setSuccessMessage("");
     }, 5000);
   };
-  const toggleErrorMessage = () => {
-    console.log("Worked");
-    setTimeout(() => {
-      setErrorMessages("");
-    }, 5000);
-    // setErrorMessages("All Fields are Mandatory");
-  };
+  // const toggleErrorMessage = () => {
+  //   console.log("Worked");
+  //   setTimeout(() => {
+  //     setErrorMessages("");
+  //   }, 5000);
+  //   // setErrorMessages("All Fields are Mandatory");
+  // };
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailRef.current?.value.trim() || "";
