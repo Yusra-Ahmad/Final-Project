@@ -62,14 +62,27 @@ Content-Type: application/json
 
 
 ###
+POST http://localhost:3020/auth/register
 
+Content-Type: application/json
+
+{  
+     "firstname":"sandy",
+    "lastname" :"007",
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007",
+    "confirmPassword":"Ranu@007"
+    }
+
+  
+###
 POST http://localhost:3020/auth/login
 Content-Type: application/json
 
 
 {
-    "email":"ahirhetal2409@gmail.com",
-    "password":"Ranu@7"
+    "email":"sandy@gmail.com",
+    "password":"Ranu@007"
 }
 
 ###
@@ -136,8 +149,7 @@ Content-Type: application/json
 
 POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
 Content-Type: application/json
-
- {
+{
    "password":"Ranu@7",
    "confirmPassword": "Ranu@7"
 }
