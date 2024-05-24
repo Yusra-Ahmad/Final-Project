@@ -9,6 +9,13 @@ import { config } from "dotenv";
 import validatePassword from "../middlewares/validatePassword.js";
 
 config();
+import bcrypt from "bcrypt";
+import crypto from "crypto";
+import nodemailer from "nodemailer";
+import { config } from "dotenv";
+import validatePassword from "../middlewares/validatePassword.js";
+
+config();
 
 export const authRouter = Router();
 

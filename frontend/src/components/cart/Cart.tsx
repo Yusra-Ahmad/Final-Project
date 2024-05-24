@@ -76,9 +76,9 @@ const Cart = () => {
               <span>€{getCartTotal()}</span>
             </div>
            
-              <button className="checkout-button" disabled={cartItems.length === 0} onClick={handleCheckout}>Checkout</button>
+              <button className="checkout-button" disabled={cartItems.length === 0}  onClick={handleCheckout}>Checkout</button>
             
-            <button className="clear-cart-button" onClick={clearCart}>Clear Cart</button>
+            <button className="clear-cart-button" disabled={cartItems.length === 0}  onClick={clearCart}>Clear Cart</button>
           </div>
         </>
       )}
