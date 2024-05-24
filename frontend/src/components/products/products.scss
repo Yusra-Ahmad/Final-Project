@@ -11,7 +11,7 @@ body {
 
 /* Product Page Styles */
 .product-page {
-  position: relative; 
+  position: relative;
   display: grid;
   justify-content: right;
   align-items: right;
@@ -121,7 +121,7 @@ body {
   }
 
   .product-image {
-    position: relative; 
+    position: relative;
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -147,23 +147,23 @@ body {
   .product-description,
   .product-price {
     margin-top: 1rem;
-    text-align: center; 
+    text-align: center;
   }
 
   @media screen and (max-width: 768px) {
     .product-image {
-      height: 150px; 
+      height: 150px;
     }
 
     .product-title,
     .product-description,
     .product-price {
-      font-size: 0.9rem; 
+      font-size: 0.9rem;
     }
 
     .product-image span {
       font-size: 1.2rem;
-      padding: 0.3rem 0.6rem; 
+      padding: 0.3rem 0.6rem;
     }
   }
 }
@@ -176,14 +176,13 @@ body {
 /* Popup Styles */
 .popup {
   position: fixed;
-  top: 5em;
+  top: 4em;
+  font-size: larger;
   right: 1rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #333;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  color: white;
+  border-bottom: solid #71523b;
+  box-shadow: 0px -5 0px rgb(119, 116, 116);
+  z-index: 5;
 
   @media screen and (max-width: 1024px) {
     top: 1em;
@@ -220,7 +219,6 @@ body {
   }
 }
 
-
 @keyframes myImgBackAnim {
   0% {
     animation-timing-function: ease-in-out;
@@ -234,16 +232,16 @@ body {
   }
 }
 @keyframes myImgAnim {
-    0% {
-      animation-timing-function: linear;
-      transform: translateX(0px);
-    }
-    100% {
-      animation-timing-function: linear;
-      opacity: 1;
-      transform: translateX(0px);
-    }
+  0% {
+    animation-timing-function: linear;
+    transform: translateX(0px);
   }
+  100% {
+    animation-timing-function: linear;
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
 
 //   text Animation
 @keyframes myTextAnim {
@@ -253,10 +251,10 @@ body {
     transform: translateY(605px);
   }
 
-50%{
+  50% {
     animation-timing-function: ease-out;
     opacity: 0.5;
-}
+  }
   100% {
     animation-timing-function: ease-out;
     opacity: 1;
@@ -264,109 +262,106 @@ body {
   }
 }
 // background Animation
-  @keyframes myBackgroundAnim {
-    0% {
-      animation-timing-function: ease-in-out;
-      opacity: 0;
-      transform: translateY(900px);
-    }
-    100% {
-      animation-timing-function: ease-in-out;
-      opacity: 1;
-      transform: translateY(0px);
-    }
+@keyframes myBackgroundAnim {
+  0% {
+    animation-timing-function: ease-in-out;
+    opacity: 0;
+    transform: translateY(900px);
   }
+  100% {
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
 
 //   Animation Implementation
-.backgroundAnim{
-    background-color: #343332;
+.backgroundAnim {
+  background-color: #343332;
 }
 .product-body {
-    opacity: 0;
-    animation: myBackgroundAnim 1s ease 0s 1 normal forwards;
- 
-    .header-p {
-        opacity: 0;
-      animation: myTextAnim 1s ease 0s 1 normal forwards;
-      animation-delay: 2s;
-    }
+  opacity: 0;
+  animation: myBackgroundAnim 1s ease 0s 1 normal forwards;
 
-.imagediv{
+  .header-p {
     opacity: 0;
-    background-color: #C68F68;
+    animation: myTextAnim 1s ease 0s 1 normal forwards;
+    animation-delay: 2s;
+  }
+
+  .imagediv {
+    opacity: 0;
+    background-color: #c68f68;
     animation: myImgBackAnim 1s ease 0s 1 normal forwards;
     animation-delay: 1s;
+  }
+  img {
+    opacity: 0;
+    animation: myImgAnim 1s ease 0s 1 normal forwards;
+    animation-delay: 2s;
+  }
 }
-    img {
-        opacity: 0;
-      animation: myImgAnim 1s ease 0s 1 normal forwards;
-      animation-delay: 2s;
-  
-    }
-  }
 
-  .product-body {
+.product-body {
+  height: 100vh;
+  background-color: #1c1919;
+  color: white;
+  font-family: serif;
+  display: flex;
+  flex-direction: column;
+  .product-header {
     height: 100vh;
-    background-color: #1c1919;
-    color: white;
-    font-family: serif;
+    width: 90vw;
     display: flex;
-    flex-direction: column;
-    .product-header {
-      height: 100vh;
-      width: 90vw;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      text-align: justify;
-      @media screen and (max-width: 990px) {
-    
-        width: 85%;
-          margin-left: 0;
-                }
-      .header-p {
-        position: absolute;
-        left: 6%;
-        transform: translateY(-50%);
-        width: 40%;
-        z-index: 1;
-        letter-spacing: normal;
-        font-size: 1.5rem;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: justify;
+    @media screen and (max-width: 990px) {
+      width: 85%;
+      margin-left: 0;
+    }
+    .header-p {
+      position: absolute;
+      left: 6%;
+      transform: translateY(-50%);
+      width: 40%;
+      z-index: 1;
+      letter-spacing: normal;
+      font-size: 1.5rem;
+      @media screen and (max-width: 1010px) {
+        width: 50%;
+        font-size: 1.1rem;
+        margin-left: 0;
+      }
+
+      h1 {
+        letter-spacing: 1.5rem;
+        font-size: 3em;
+        text-align: center;
+        padding: 2rem;
         @media screen and (max-width: 1010px) {
-          width: 50%;
-          font-size: 1.1rem;
-          margin-left: 0;
-        }
-          
-        h1 {
-          letter-spacing: 1.5rem;
-          font-size: 3em;
-          text-align: center;
-          padding: 2rem;
-        @media screen and (max-width: 1010px) {
-font-size: 2rem;
-letter-spacing: 1rem;
-        }
+          font-size: 2rem;
+          letter-spacing: 1rem;
         }
       }
-      .imagediv {
-        height: 60vh;
-        width: 60vw;
-        margin-right: -5rem;
-        @media screen and (max-width: 1080px) {
-          width: 100vw;
-          height: 50vh;
-        }
+    }
+    .imagediv {
+      height: 60vh;
+      width: 60vw;
+      margin-right: -5rem;
+      @media screen and (max-width: 1080px) {
+        width: 100vw;
+        height: 50vh;
       }
-      img {
-        z-index: 0;
-        height: 60vh;
-        width: 60vw;
-        @media screen and (max-width: 1080px) {
-          width: 100%;
-          height: 50vh;
-              }
+    }
+    img {
+      z-index: 0;
+      height: 60vh;
+      width: 60vw;
+      @media screen and (max-width: 1080px) {
+        width: 100%;
+        height: 50vh;
       }
     }
   }
-  
+}
