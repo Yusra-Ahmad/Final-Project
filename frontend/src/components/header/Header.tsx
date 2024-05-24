@@ -140,7 +140,7 @@ const App = () => {
             best results for our clients.
           </p>
           <Link to="products">
-            <span>Explore our products</span>
+            <span>Explore our Products</span>
           </Link>
         </div>
       </div>
@@ -166,11 +166,11 @@ const App = () => {
           </p>
 
           <Link to="/about ">
-            <span>more</span>
+            <span>More About us</span>
           </Link>
         </div>
       </div>
-      {/* <div
+      <div
         style={{
           transform: "translateY(100vh)",
           transition: "transform ease-out 1s",
@@ -182,21 +182,17 @@ const App = () => {
           }
         }}
       >
-        <div className="contact inner-page-div">
-          <h1>come and visit us </h1>
+        <div className="about inner-page-div">
+          <h3>Visit us </h3>
           <p>123 Fake Street Berlin, 10115 Germany</p>
           <div>
+            <h3>Or</h3>
             <Link className="contact-link" to="/contact">
-              <span> contact us</span>
+              <span> Contact us</span>
             </Link>
-            <span>|</span>
-            <div>
-              <span>tel:</span>
-              <p className="contact-number">+49 30 000000000</p>
-            </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -29,13 +29,13 @@
     }
 
     .login-input {
-      width: 100%;
       background-color: #1c1919;
       color: rgba(255, 255, 255, 0.645);
       border: none;
       outline: none;
       padding: 10px;
       font-size: 1rem;
+      margin-bottom: 0;
 
       &::placeholder {
         color: white;
@@ -85,19 +85,55 @@
       }
 
       .login-button {
-        width: 140px;
-        padding: 8px;
-        margin-top: 1rem;
-        font-size: 1.2rem;
-        background-color: #b08568d3;
+        background-color: #1c1919;
+        width: 150px;
+        height: 50px;
+        padding: 0;
         border-radius: 10px;
-        border: #b08568 solid 2px;
+        border: 1px solid #c89a7aa0;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 0;
         @media screen and (max-width: 768px) {
           width: 100%;
         }
-        &:hover {
-          background-color: #b08568;
-          border: #ffffff5e solid 2px;
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 0;
+          height: 100%;
+          transform: skew(15deg);
+          transition: all 0.5s;
+          overflow: hidden;
+          z-index: -1;
+        }
+
+        &:hover::before,
+        &:hover::after {
+          width: 58%;
+        }
+
+        &:hover span {
+          color: #0f0206;
+          transition: 0.3s;
+        }
+        span {
+          color: #fdf9f6;
+          font-family: serif;
+          font-size: 1.6rem;
+          transition: all 0.3s ease-in;
+        }
+        &::before {
+          left: -12px;
+          background: #e0ac8999;
+        }
+
+        &::after {
+          right: -12px;
+          background: #e0ac8999;
         }
       }
     }

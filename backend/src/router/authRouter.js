@@ -64,6 +64,7 @@ authRouter
     try {
       const { email } = req.body;
       const user = await User.findOne({ email });
+      console.log("bfuser :", user);
 
       if (!user) {
         next({ status: 404, message: "User not found!" });
@@ -75,6 +76,7 @@ authRouter
       user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
       await user.save();
+      console.log("afuser :", user);
 
       const mailOptions = {
         to: user.email,
@@ -82,7 +84,7 @@ authRouter
         subject: "Password Reset",
         text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
                Please click on the following link, or paste this into your browser to complete the process:\n\n
-               http://${req.headers.host}/reset-password?token=${token}\n\n
+               http://localhost:5173/resetPassword?token=${token}\n\n
                If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       };
 
@@ -111,7 +113,7 @@ authRouter
         resetPasswordToken: token,
         resetPasswordExpires: { $gt: Date.now() },
       });
-
+      console.log("user :", user);
       if (!user) {
         next({
           status: 400,
@@ -123,7 +125,6 @@ authRouter
       const hashed = await hash(user.password, 10);
 
       user.password = hashed;
-      user.confirmPassword = confirmPassword;
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
 

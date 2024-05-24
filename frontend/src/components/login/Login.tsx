@@ -124,13 +124,13 @@ const Login = () => {
           </span>
         </div>
         <div>
-          <Link className="forgot-password" to="">
+          <Link className="forgot-password" to="/forgotPassword">
             Forgot password ?
           </Link>
         </div>
         <div className="login-div">
           <button type="submit" className="login-button">
-            Login
+            <span>Login</span>
           </button>
 
           <Link className="register" to="/register">
