@@ -1,17 +1,7 @@
 import { body, validationResult } from "express-validator";
-import { User } from "../models/User.js";
 
 const validateUser = [
-  body("email")
-    .isEmail()
-    .withMessage("Must be a valid email")
-    .normalizeEmail()
-    .custom(async (email) => {
-      const user = await User.findOne({ email });
-      if (user) {
-        throw new Error("E-mail already in use");
-      }
-    }),
+  body("email").isEmail().withMessage("Must be a valid email").normalizeEmail(),
   body("password")
     .isLength({ min: 8 })
     .withMessage("password must be  at leasst 8 character long")

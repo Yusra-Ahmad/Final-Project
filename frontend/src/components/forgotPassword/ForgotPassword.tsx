@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./forgotPassword.scss";
 import { useNavigate } from "react-router-dom";
 import { BiError } from "react-icons/bi";

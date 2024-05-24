@@ -10,7 +10,7 @@
     font-family: serif;
     font-style: italic;
     font-size: 2rem;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     padding: 4rem;
     display: flex;
@@ -58,9 +58,12 @@
     }
 
     .forgot-password {
-      margin-right: 12.1rem;
+      margin-right: 18rem;
       color: #b0856885;
       font-size: 1.4rem;
+      @media screen and (max-width: 768px) {
+        margin-right: 0;
+      }
 
       &:hover {
         color: #c53932;
@@ -127,12 +130,12 @@
           transition: all 0.3s ease-in;
         }
         &::before {
-          left: -12px;
+          left: -0.3em;
           background: #e0ac8999;
         }
 
         &::after {
-          right: -12px;
+          right: -0.3em;
           background: #e0ac8999;
         }
       }

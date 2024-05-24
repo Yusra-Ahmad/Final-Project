@@ -53,11 +53,11 @@ Content-Type: application/json
 
 
 {  
-     "firstname":"sadhana",
-    "lastname" :"007",
-    "email":"sandy@gmail.com",
-    "password":"Ranu@007",
-    "confirmPassword":"Ranu@007"
+     "firstname":"hetal",
+    "lastname" :"ahir",
+    "email":"ahirhetal2409@gmail.com",
+    "password":"Vrittivaniya@7",
+    "confirmPassword":"Vrittivaniya@7"
     }
 
   
@@ -68,7 +68,7 @@ Content-Type: application/json
 
 {
     "email":"ahirhetal2409@gmail.com",
-    "password":"Ranu@7"
+    "password":"Vritti123!"
 }
 
 ###
@@ -124,7 +124,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjNiM
 
 ###
 
-
 POST http://localhost:3020/auth/forgot-password
 Content-Type: application/json
 
@@ -134,39 +133,14 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3020/auth/reset-password/8992fb106dba6ceec121b5104cec2d1ab4ea8743
+POST http://localhost:3020/auth/reset-password/040ae94bf9026907dbf1773bd53ed2a9b7eadc51
 Content-Type: application/json
 
- {
-   "password":"Ranu@007",
-   "confirmPassword": "Ranu@007"
-}
-
-###
-
-POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
-Content-Type: application/json
 {
-   "password":"Ranu@7",
-   "confirmPassword": "Ranu@7"
+   "newPassword":"Vritti123!",
+   "confirmPassword":"Vritti123!"
 }
 
 
-###
 
-POST http://localhost:3020/auth/forgot-password
-Content-Type: application/json
 
- {
-  "email":"ahirhetal2409@gmail.com"
-}
-
-###
-
-POST http://localhost:3020/auth/reset-password/f3b5debaeadb905f277c87a2a569a84f932827a4
-Content-Type: application/json
-
- {
-   "password":"Ranu@7",
-   "confirmPassword": "Ranu@7"
-}

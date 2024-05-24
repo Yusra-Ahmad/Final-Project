@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, WheelEvent } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
 import Navbar from "../navbar/Navbar";
-import logo from "../../assets/logo.svg";
 
 const App = () => {
   const pagesRef = useRef<HTMLDivElement[]>([]);
@@ -21,7 +20,6 @@ const App = () => {
     });
     pagesRef.current[currentPageRef.current].classList.add("active");
     pagesRef.current[currentPageRef.current].classList.remove("inactive");
-    console.log("pagesRef:", pagesRef);
   };
 
   const checkLast = (direction: number) => {
@@ -40,7 +38,6 @@ const App = () => {
   };
 
   const scrollToSection = (direction: number) => {
-    console.log("Scrolling to section activated");
     setTimeout(() => {
       setWheelEnabled(() => true);
     }, 1000); // after 2 second (can be changed), enable the scroll again
@@ -53,16 +50,11 @@ const App = () => {
     pagesRef.current[currentPageRef.current].style.transform = `translateY(${
       direction * -100
     }vh)`;
-    // pagesRef.current[
-    //   currentPageRef.current
-    // ].style.transition = `transform ease-out 2s`;
     const previousPage = currentPageRef.current;
 
     currentPageRef.current =
       (currentPageRef.current + pagesRef.current.length + direction) %
       pagesRef.current.length;
-    console.log("previousPage", previousPage);
-    console.log("currPageRef.current", currentPageRef.current);
 
     pagesRef.current[previousPage].classList.remove("active");
     pagesRef.current[previousPage].classList.add("inactive");
@@ -91,7 +83,6 @@ const App = () => {
         }}
         ref={(el: HTMLDivElement): void => {
           if (pagesRef.current.length < 1) {
-            console.log("this");
             el && pagesRef.current.push(el);
           }
         }}

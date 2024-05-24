@@ -13,9 +13,7 @@ const Login = () => {
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { setToken, user, setUser, token, setIsLoggedIn } = useUser();
-
-  console.log("user:", user);
+  const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -54,6 +52,7 @@ const Login = () => {
       };
       const request = await fetch("http://localhost:3020/auth/login", config);
       const result = await request.json();
+
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
