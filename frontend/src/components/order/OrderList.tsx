@@ -71,7 +71,9 @@ const Orders: React.FC = () => {
                             return <div key={product._id} className="product-details">
                                 <img src={`${Base_Url}/${product.image}`} alt={product.name} style={{ width: '100px', height: '100px' }} />
                                 <p>Name: {product.title}</p>
+                                <br />
                                 <p>Quantity: {quantity}</p>
+                                <br />
                                 <p>Price: €{product.price}</p>
                             </div>
                         }
