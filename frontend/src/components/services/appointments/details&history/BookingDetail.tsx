@@ -14,8 +14,23 @@ console.log("this is booking details", bookingDetail);
       {bookingDetail.map((item, index) => (
         <div key={index} className="booking-detail">
           <p>{index + 1}. Service: {item.service}</p>
-          <p>Date: {new Date(item.startTime).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-          <p>Time: {new Date(new Date(item.startTime).getTime() - 2 * 60 * 60 * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+          <p>
+                      <span>Date: </span>
+                      {new Date(item.startTime).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p>
+                      <span>Time: </span>
+                      {new Date(
+                        new Date(item.startTime).getTime() 
+                      ).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
           <p>Price: {item.price}€</p>
         </div>
       ))}

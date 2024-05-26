@@ -150,7 +150,7 @@
           top: calc(100% + 10px); /* Adjust the distance from the dropdown */
           left: 0;
           background-color: transparent;
-          font-size: 2rem;
+          font-size: 1.2rem;
           border: 1px solid #b08568;
           padding: 5px;
           color: #cfcbc8;
@@ -158,12 +158,12 @@
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           p {
             color: crimson;
-            font-size: 0.9rem;
+            font-size: 1rem;
           }
         }
         .popup-content {
           display: flex;
-          align-items: center;
+          align-items: start;
           justify-content: space-between;
           width: 100%;
         }
