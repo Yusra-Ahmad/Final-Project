@@ -19,9 +19,6 @@ const userSchema = new Schema(
 );
 
 userSchema.statics.register = async (data) => {
-  // if (data.confirmPassword === "") {
-  //   throw new Error("Password is not confirmed");
-  // }
   if (data.password !== data.confirmPassword) {
     throw new Error("Passwords does not match");
   }
@@ -55,6 +52,9 @@ userSchema.statics.login = async (data) => {
 userSchema.methods.toJSON = function () {
   const user = this.toObject();
   delete user.password;
+  delete user.resetPasswordExpires;
+  delete user.resetPasswordToken;
+
   return user;
 };
 
