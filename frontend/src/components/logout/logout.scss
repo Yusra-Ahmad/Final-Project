@@ -12,6 +12,8 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    max-width: 600px;
+    width: 90%;
     box-shadow: 3px 3px 15px -5px #b08568;
     border-radius: 25px;
     @media screen and (max-width: 768px) {
@@ -27,7 +29,7 @@
     p {
       background-color: #32251d6b;
       font-size: 1.5rem;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
     }
     .logout-buttons {
       display: flex;
@@ -71,7 +73,7 @@
         span {
           color: #fdf9f6;
           font-family: serif;
-          font-size: 18px;
+          font-size: 1.6rem;
           transition: all 0.3s ease-in;
         }
       }

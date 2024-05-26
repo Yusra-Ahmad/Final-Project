@@ -13,9 +13,7 @@ const Login = () => {
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { setToken, user, setUser, token, setIsLoggedIn } = useUser();
-
-  console.log("user:", user);
+  const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -54,6 +52,7 @@ const Login = () => {
       };
       const request = await fetch("http://localhost:3020/auth/login", config);
       const result = await request.json();
+
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
@@ -90,7 +89,18 @@ const Login = () => {
           </p>
         )}
 
-        {!token && location?.state?.from === "/service" && <p style={{ color: "white", fontSize: "22px", backgroundColor: "#32251d6b" }}>Login to Book an appointment. </p>}
+        {!token && location?.state?.from === "/service" && (
+          <p
+            style={{
+              color: "white",
+
+              fontSize: "22px",
+              backgroundColor: "#32251d6b",
+            }}
+          >
+            Login to Book an appointment.{" "}
+          </p>
+        )}
         <div className="input-div">
           <input
             ref={emailInput}
@@ -120,13 +130,13 @@ const Login = () => {
           </span>
         </div>
         <div>
-          <Link className="forgot-password" to="">
+          <Link className="forgot-password" to="/forgotPassword">
             Forgot password ?
           </Link>
         </div>
         <div className="login-div">
           <button type="submit" className="login-button">
-            Login
+            <span>Login</span>
           </button>
 
           <Link className="register" to="/register">

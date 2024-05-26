@@ -1,0 +1,36 @@
+.confirmationPage-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    max-width: 500px;
+    width: 90%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 3px 3px 15px -5px #b08568;
+    border-radius: 25px;
+    .mail-icon {
+      font-size: 4rem;
+      color: #b0856885;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+    }
+    .back-to-home {
+      color: #b0856885;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+    }
+  }
+}

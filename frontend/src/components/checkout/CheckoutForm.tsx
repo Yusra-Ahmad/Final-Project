@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaPaypal, FaCreditCard, FaMoneyCheckAlt } from 'react-icons/fa';
-import './CheckoutForm.scss';
-import { UserContext } from '../../context/UserContext';
-import { CartContext } from '../../context/Cart';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaPaypal, FaCreditCard, FaMoneyCheckAlt } from "react-icons/fa";
+import "./CheckoutForm.scss";
+import { UserContext } from "../../context/UserContext";
+import { CartContext } from "../../context/Cart";
 import emailjs from "emailjs-com";
-import { RotatingLines } from 'react-loader-spinner';
+import { RotatingLines } from "react-loader-spinner";
 
 interface FormState {
   fullName: string;
@@ -14,33 +14,33 @@ interface FormState {
   city: string;
   country: string;
   postcode: string;
-  paymentMethod: 'paypal' | 'creditCard' | 'debitCard';
+  paymentMethod: "paypal" | "creditCard" | "debitCard";
 }
 
 const CheckoutForm: React.FC = () => {
   const [formState, setFormState] = useState<FormState>({
-    fullName: '',
-    telephone: '',
-    address: '',
-    city: '',
-    country: '',
-    postcode: '',
-    paymentMethod: 'paypal',
+    fullName: "",
+    telephone: "",
+    address: "",
+    city: "",
+    country: "",
+    postcode: "",
+    paymentMethod: "paypal",
   });
   const [isCheckoutComplete, setIsCheckoutComplete] = useState<boolean>(false);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const navigate = useNavigate();
   const { user, token } = useContext(UserContext);
-  const Base_Url = 'http://localhost:3020';
+  const Base_Url = "http://localhost:3020";
   const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
 
   const submitOrder = async () => {
     if (token) {
       const { fullName, address, city, country, postcode } = formState;
       const requestBody = {
-        products: cartItems.map(item => ({
+        products: cartItems.map((item) => ({
           product: item._id,
-          quantity: item.quantity
+          quantity: item.quantity,
         })),
         totalAmount: getCartTotal(),
         shippingAddress: {
@@ -48,43 +48,47 @@ const CheckoutForm: React.FC = () => {
           address,
           city,
           country,
-          postcode
+          postcode,
         },
-        paymentMethod: formState.paymentMethod
+        paymentMethod: formState.paymentMethod,
       };
       try {
         const response = await fetch(`${Base_Url}/orders`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        console.log('Order submitted:', data);
+        console.log("Order submitted:", data);
         setIsCheckoutComplete(true);
         clearCart(); // Clear the cart after successful checkout
         sendConfirmationEmail();
       } catch (error) {
-        console.error('Error fetching orders:', error);
+        console.error("Error fetching orders:", error);
       }
     }
   };
 
   useEffect(() => {
-    emailjs.init('MCP7eN1sKKWReuKKW')
+    emailjs.init("MCP7eN1sKKWReuKKW");
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormState(prevState => ({ ...prevState, [name]: value }));
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const validateForm = (): boolean => {
     const { fullName, telephone, address, city, country, postcode } = formState;
     const isValidTelephone = /^\d+$/.test(telephone); // Check if the telephone contains only numbers
-    return fullName && isValidTelephone && address && city && country && postcode;
+    return (
+      fullName && isValidTelephone && address && city && country && postcode
+    );
   };
 
   const handleCheckout = () => {
@@ -105,7 +109,7 @@ const CheckoutForm: React.FC = () => {
   };
 
   const handleContinueShopping = () => {
-    navigate('/products');
+    navigate("/products");
   };
 
   const sendConfirmationEmail = async () => {
@@ -122,7 +126,7 @@ const CheckoutForm: React.FC = () => {
       await emailjs.send(
         "service_m46fwtd",
         "template_vovbtec",
-        formattedTemplate,
+        formattedTemplate
       );
 
       console.log("Confirmation email sent successfully");
@@ -132,12 +136,21 @@ const CheckoutForm: React.FC = () => {
   };
 
   return (
-    <div className={`checkout-form-container ${isCheckoutComplete ? 'thank-you-background' : ''}`}>
+    <div
+      className={`checkout-form-container ${
+        isCheckoutComplete ? "thank-you-background" : ""
+      }`}
+    >
       {isCheckoutComplete ? (
         <div className="thank-you-message">
           <h1>Thank You for Your Order!</h1>
           <p>Your order has been placed and is being processed.</p>
-          <button className="continue-shopping-button" onClick={handleContinueShopping}><span>Continue Shopping</span></button>
+          <button
+            className="continue-shopping-button"
+            onClick={handleContinueShopping}
+          >
+            <span>Continue Shopping</span>
+          </button>
         </div>
       ) : (
         <div className="checkout-content">
@@ -219,10 +232,12 @@ const CheckoutForm: React.FC = () => {
                   id="paypal"
                   name="paymentMethod"
                   value="paypal"
-                  checked={formState.paymentMethod === 'paypal'}
+                  checked={formState.paymentMethod === "paypal"}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="paypal"><FaPaypal /> PayPal</label>
+                <label htmlFor="paypal">
+                  <FaPaypal /> PayPal
+                </label>
               </div>
               <div className="icon-wrapper">
                 <input
@@ -230,10 +245,12 @@ const CheckoutForm: React.FC = () => {
                   id="creditCard"
                   name="paymentMethod"
                   value="creditCard"
-                  checked={formState.paymentMethod === 'creditCard'}
+                  checked={formState.paymentMethod === "creditCard"}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="creditCard"><FaCreditCard /> Credit Card</label>
+                <label htmlFor="creditCard">
+                  <FaCreditCard /> Credit Card
+                </label>
               </div>
               <div className="icon-wrapper">
                 <input
@@ -241,10 +258,12 @@ const CheckoutForm: React.FC = () => {
                   id="debitCard"
                   name="paymentMethod"
                   value="debitCard"
-                  checked={formState.paymentMethod === 'debitCard'}
+                  checked={formState.paymentMethod === "debitCard"}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="debitCard"><FaMoneyCheckAlt /> Debit Card</label>
+                <label htmlFor="debitCard">
+                  <FaMoneyCheckAlt /> Debit Card
+                </label>
               </div>
             </div>
             <button
