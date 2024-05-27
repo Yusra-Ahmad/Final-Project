@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "  nodemon server.js",
+    "start": "node server.js",
     "seed": "node src/seeder/serviceSeeder.js && node src/seeder/productSeeder.js  ",
     "dev": "nodemon server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

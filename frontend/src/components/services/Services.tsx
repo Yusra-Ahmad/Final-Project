@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import "./servicesAnimation.scss";
 import { useNavigate } from "react-router-dom";
 import "./servicesAnimation.scss";
@@ -8,15 +8,15 @@ import { useUser } from "../../context/UserContext";
 import service from "../../assets/Service1.jpeg";
 import "animate.css";
 import { useInView } from "react-intersection-observer";
-// const Base_Url = 'http://localhost:6000';
+
 const Services = () => {
   const { user } = useUser();
   const { services, loading, error, fetchServices } = useServiceContext();
 
   const navigate = useNavigate();
   const { ref, inView } = useInView({
-    triggerOnce: true, // Only trigger the animation once
-    threshold: 0.3, // Trigger when 10% of the element is visible
+    triggerOnce: true, 
+    threshold: 0.3, 
   });
 
   useEffect(() => {

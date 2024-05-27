@@ -5,7 +5,7 @@ import "./ConfirmedBooking.scss"
 // import './Appointments.scss';
 
 const ConfirmedBooking = () => {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { token, user } = useUser();
   const navigate = useNavigate();
@@ -20,12 +20,12 @@ const ConfirmedBooking = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:3020/bookingConfirm/${user._id}`, 
+          `${import.meta.env.VITE_backend_url}bookingConfirm/${user?._id}`,
           config
         );
         const data = await response.json();
-        setBookings(data); // Set the bookings state with fetched data
-        setLoading(false); // Set loading to false after data is fetched
+        setBookings(data); 
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching bookings:', error);
         setLoading(false);
@@ -33,7 +33,7 @@ const ConfirmedBooking = () => {
     };
 
     fetchBookings();
-  }, [token, user._id]);
+  }, [token, user?._id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,17 +43,17 @@ const ConfirmedBooking = () => {
     <div className="booking-confirmations">
       <div className='booking-border'>
 
-      <h1>My Booking History</h1>
-      <div className="booking-container">
+        <h1>My Booking History</h1>
+        <div className="booking-container">
 
-      {bookings.length > 0 ? (
-        <ul>
-          {bookings.map((booking) => (
-            <div className="booking-details" key={booking._id}>
+          {bookings.length > 0 ? (
+            <ul>
+              {bookings.map((booking) => (
+                <div className="booking-details" key={booking._id}>
 
-            <li >
-              <p><span>Service: </span>{booking.service}</p>
-              <p>
+                  <li >
+                    <p><span>Service: </span>{booking.service}</p>
+                    <p>
                       <span>Date: </span>
                       {new Date(booking.startTime).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -64,22 +64,22 @@ const ConfirmedBooking = () => {
                     <p>
                       <span>Time: </span>
                       {new Date(
-                        new Date(booking.startTime).getTime() 
+                        new Date(booking.startTime).getTime()
                       ).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
                     </p>
-              <p><span>Price: </span>{booking.price}€</p>
-      
-            </li>
-            </div>
-          ))}
-        </ul>
-      ) : (
-        <p>No bookings found.</p>
-      )}
-      </div>
+                    <p><span>Price: </span>{booking.price}€</p>
+
+                  </li>
+                </div>
+              ))}
+            </ul>
+          ) : (
+            <p>No bookings found.</p>
+          )}
+        </div>
       </div>
     </div>
   );

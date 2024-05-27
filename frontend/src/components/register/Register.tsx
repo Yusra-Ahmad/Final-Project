@@ -43,7 +43,7 @@ const Register = () => {
         password,
         confirmPassword,
       };
-      const response = await fetch("http://localhost:3020/auth/register", {
+      const response = await fetch(`${import.meta.env.VITE_backend_url}auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

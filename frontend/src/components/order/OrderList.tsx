@@ -22,7 +22,7 @@ const Orders: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const { token } = useContext(UserContext);
     console.log('Token:', token);
-    const Base_Url = 'http://localhost:3020';
+    const Base_Url = `${import.meta.env.VITE_backend_url}`;
     console.log(orders);
 
 
@@ -30,7 +30,7 @@ const Orders: React.FC = () => {
         if (token) {
             const fetchOrders = async () => {
                 try {
-                    const response = await fetch(`${Base_Url}/orders`, {
+                    const response = await fetch(`${Base_Url}orders`, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Orders: React.FC = () => {
 
 
                             return <div key={product._id} className="product-details">
-                                <img src={`${Base_Url}/${product.image}`} alt={product.name} style={{ width: '100px', height: '100px',  }} />
+                                <img src={`${Base_Url}/${product.image}`} alt={product.name} style={{ width: '100px', height: '100px', }} />
                                 <p>Name: {product.title}</p>
                                 <br />
                                 <p>Quantity: {quantity}</p>

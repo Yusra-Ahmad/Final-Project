@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
-// import  bliss2 from "../../../assets/bliss2.png"
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
@@ -20,14 +18,14 @@ import "./Appointments.scss";
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary, setBookingDetail } =
     useServiceContext();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectedService, setSelectedService] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [showPopup, setShowPopup] = useState(false);
-  const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [confirmationRequested, setConfirmationRequested] = useState(false);
-  const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    const [selectedService, setSelectedService] = useState<string>("");
+    const [selectedTime, setSelectedTime] = useState<number>(0);
+    const [showPopup, setShowPopup] = useState(false);
+    const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [confirmationRequested, setConfirmationRequested] = useState(false);
+    const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 
   const { user, setUser, token, setToken } = useUser();
@@ -36,13 +34,13 @@ const Appointment = () => {
   const formattedMinutes = Math.round((displayTime - formattedHours) * 60);
   const totalSeconds = formattedHours * 3600 + formattedMinutes * 60
   const formattedSeconds = totalSeconds % 60
-const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,formattedSeconds))
+  const time = new Date(selectedDate?.setHours(formattedHours, formattedMinutes, formattedSeconds))
 
   useEffect(() => {
     fetchServices();
-    // fetchData();
-  }, []);
   
+  }, []);
+
   useEffect(() => {
     if (showPopup) {
       popupTimerRef.current = setTimeout(() => {
@@ -65,7 +63,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
   };
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       if (!selectedDate || !selectedService || !selectedTime) {
@@ -86,7 +84,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         service: selectedService,
         startTime: time,
         price: price,
-        user: user._id,
+        user: user?._id,
       };
       const config = {
         method: "POST",
@@ -97,7 +95,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         body: JSON.stringify(submittedData),
       };
       const response = await fetch(
-        "http://localhost:3020/appointments/book",
+        `${import.meta.env.VITE_backend_url}appointments/book`,
         config
       );
       console.log("this is response of proceed", response);
@@ -114,8 +112,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
-      // activeRef.current.removeAttribute("active")
-      // setActive(false)
+
     } catch (error) {
       console.error("Error while booking appointment:", error);
     }
@@ -128,18 +125,18 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     };
     try {
       const response = await fetch(
-        `http://localhost:3020/appointments/${user._id}`,
+        `${import.meta.env.VITE_backend_url}appointments/${user._id}`,
         config
       );
       const data = await response.json();
-      
+
       setBookingDetail(data);
       updateSummary(data);
     } catch (error) {
       console.log(error);
     }
   };
-  const handleDelete = async (serviceName) => {
+  const handleDelete = async (serviceName: string) => {
     try {
       const config = {
         method: "DELETE",
@@ -148,7 +145,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
         },
       };
       const response = await fetch(
-        `http://localhost:3020/appointments/deleteone/${serviceName}`,
+        `${import.meta.env.VITE_backend_url}appointments/deleteone/${serviceName}`,
         config
       );
       if (!response.ok) {
@@ -169,16 +166,16 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
     : 0;
 
   const navigate = useNavigate();
-  
+
   const handleConfirmation = async () => {
     setConfirmationRequested(true);
     updateSummary(summary);
-    const bookingConfirmed=await  handleConfirmBooking()
+    const bookingConfirmed = await handleConfirmBooking()
 
- 
-    
+
+
     // Send confirmation email
-    if(bookingConfirmed){
+    if (bookingConfirmed) {
 
       try {
         const template = {
@@ -187,7 +184,7 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
           total_amount: totalPrice,
           // image_url: bliss2,
         };
-        
+
         await emailjs.send(
           "service_m46fwtd",
           "template_4mwvxay",
@@ -195,51 +192,52 @@ const time = new Date(selectedDate?.setHours(formattedHours,formattedMinutes,for
           "MCP7eN1sKKWReuKKW"
         );
         console.log("Confirmation email sent successfully");
-        
+
       } catch (error) {
         console.error("Error sending confirmation email:", error);
       }
     }
   };
-// ---------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------
 
 
-const handleConfirmBooking = async () => {
-  try {
-    const bookedServices = summary.map(item => ({
-      service: item.service,
-      startTime: item.startTime,
-      price: item.price,
-      user: user._id,
-    }));
+  const handleConfirmBooking = async () => {
+    try {
+      const bookedServices = summary.map(item => ({
+        service: item.service,
+        startTime: item.startTime,
+        price: item.price,
+        user: user._id,
+      }));
 
-    const config = {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookedServices }),
-    };
-console.log("this is config", config);
-    const response = await fetch("http://localhost:3020/bookingConfirm/book", config);
-    console.log("this is response of confirmed booking", response);
-    if (!response.ok) {
+      const config = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bookedServices }),
+      };
+      console.log("this is config", config);
 
-      const responseData = await response.json();
-      setErrorMessage(responseData.message);
-    
-      setShowPopup(true);
-      return;
+      const response = await fetch(`${import.meta.env.VITE_backend_url}bookingConfirm/book`, config);
+      console.log("this is response of confirmed booking", response);
+      if (!response.ok) {
+
+        const responseData = await response.json();
+        setErrorMessage(responseData.message);
+
+        setShowPopup(true);
+        return;
+      }
+      const result = await response.json();
+      updateSummary([]);
+      navigate("/bookingDetails");
+      console.log("Confirmed booking successfully:", result);
+    } catch (error) {
+      console.error("Error while confirming booking:", error);
     }
-    const result = await response.json();
-    updateSummary([]);
-    navigate("/bookingDetails");
-    console.log("Confirmed booking successfully:", result);
-  } catch (error) {
-    console.error("Error while confirming booking:", error);
-  }
-};
+  };
 
 
   return (
@@ -320,11 +318,11 @@ console.log("this is config", config);
                 <div key={index} className="submitted-data">
                   <h4>{index + 1})  </h4>
                   <div className="display-data">
-                    
+
                     {/* <div className="number"> */}
 
                     <p>
-                       <span>Service: </span>
+                      <span>Service: </span>
                       {item.service}
                     </p>
                     {/* </div> */}
@@ -339,7 +337,7 @@ console.log("this is config", config);
                     <p>
                       <span>Time: </span>
                       {new Date(
-                        new Date(item.startTime).getTime() 
+                        new Date(item.startTime).getTime()
                       ).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
