@@ -60,6 +60,21 @@ Content-Type: application/json
     "confirmPassword":"Vrittivaniya@7"
     }
 
+
+
+###
+POST http://localhost:3020/auth/register
+Content-Type: application/json
+
+
+{  
+     "firstname":"sandy",
+    "lastname" :"007",
+    "email":"sandy1@gmail.com",
+    "password":"Sandy@007",
+    "confirmPassword":"Sandy@007"
+    }
+
   
 ###
 POST http://localhost:3020/auth/login
@@ -69,6 +84,16 @@ Content-Type: application/json
 {
     "email":"ahirhetal2409@gmail.com",
     "password":"Vritti123!"
+}
+
+###
+POST http://localhost:3020/auth/login
+Content-Type: application/json
+
+
+{
+    "email":"sandy1@gmail.com",
+    "password":"Sandy@007"
 }
 
 ###
