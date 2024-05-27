@@ -21,6 +21,10 @@ const EmailGenerator: React.FC<EmailGeneratorProps> = ({ sendConfirmation, userD
   const [template, setTemplate] = useState({});
 
   const sendConfirmationEmail = async () => {
+    try {
+      const adjustedStartTime = new Date(bookingDetails.startTime);
+      adjustedStartTime.setHours(adjustedStartTime.getHours() - 2);
+
     const formattedTemplate = {      
         to_name: userData.firstname,
         user_email: userData.email,
