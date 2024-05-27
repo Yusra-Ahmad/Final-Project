@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./resetPassword.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -11,6 +12,7 @@ const ResetPassword = () => {
   const [resetSuccess, setResetSuccess] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -22,9 +24,11 @@ const ResetPassword = () => {
     const confirmPassword = confirmPasswordInput.current?.value.trim() || "";
 
     if (newPassword !== confirmPassword) {
-      setResetError("Passwords do not match.");
+      setResetError("Passwords do not match");
       return;
     }
+    setShowSpinner(true);
+    setResetError("");
 
     try {
       const config = {
@@ -45,19 +49,24 @@ const ResetPassword = () => {
         setResetSuccess(true);
         setTimeout(() => {
           navigate("/login");
-        }, 5000);
+        }, 3000);
       }
     } catch (error) {
+      setShowSpinner(false);
       console.error("Reset password error:", error.message);
       setResetError("An unexpected error occurred");
+    } finally {
+      setShowSpinner(false);
     }
   };
   return (
     <div className="resetPassword-div">
       {resetSuccess ? (
-        <p>
-          Password reset successfully! Please log in with your new password.
-        </p>
+        <div className="Success-message">
+          <p>
+            Password reset successfully! Please log in with your new password.
+          </p>
+        </div>
       ) : (
         <form
           onSubmit={handlePasswordReset}
@@ -109,6 +118,16 @@ const ResetPassword = () => {
           </div>
 
           <button type="submit">Reset Password</button>
+          <RotatingLines
+            visible={showSpinner}
+            height="35"
+            width="35"
+            color="grey"
+            strokeWidth="3"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{ marginLeft: "10px" }}
+          />
         </form>
       )}
     </div>
