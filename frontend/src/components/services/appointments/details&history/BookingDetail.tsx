@@ -11,10 +11,10 @@ console.log("this is booking details", bookingDetail);
     <div className="wrap-container">
     <div className="booking-details-container">
       <h2>Booking is Confirmed</h2>
-      {bookingDetail.map((item, index) => (
+      {bookingDetail.map((item:  any, index) => (
         <div key={index} className="booking-detail">
           <p>{index + 1}. Service: {item.service}</p>
-          <p>
+  <p>
                       <span>Date: </span>
                       {new Date(item.startTime).toLocaleDateString("en-US", {
                         year: "numeric",

@@ -18,8 +18,7 @@ import "./Appointments.scss";
 
 
 const Appointment = () => {
-  const { services, fetchServices, summary, updateSummary, setBookingDetail } =
-    useServiceContext();
+  const { services, fetchServices, summary, updateSummary, setBookingDetail } = useServiceContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<number>(0);
@@ -27,11 +26,10 @@ const Appointment = () => {
   const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [confirmationRequested, setConfirmationRequested] = useState(false);
-  const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
-
+  const popupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { user, setUser, token, setToken } = useUser();
-  const displayTime = parseInt(selectedTime);
+  const displayTime = selectedTime;
   const formattedHours = Math.floor(displayTime);
   const formattedMinutes = Math.round((displayTime - formattedHours) * 60);
   const totalSeconds = formattedHours * 3600 + formattedMinutes * 60
@@ -65,7 +63,7 @@ const Appointment = () => {
   };
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       if (!selectedDate || !selectedService || !selectedTime) {
@@ -84,9 +82,9 @@ const Appointment = () => {
       const { price } = selectedServiceObj;
       const submittedData = {
         service: selectedService,
-        startTime: time,
+        startTime: Array.isArray(selectedDate) ? selectedDate[0] : selectedDate,
         price: price,
-        user: user._id,
+        user: user?._id,
       };
       const config = {
         method: "POST",
@@ -139,7 +137,7 @@ const Appointment = () => {
       console.log(error);
     }
   };
-  const handleDelete = async (serviceName) => {
+  const handleDelete = async (serviceName: string) => {
     try {
       const config = {
         method: "DELETE",
@@ -185,7 +183,7 @@ const Appointment = () => {
           to_name: user?.firstname,
           user_email: user?.email,
           total_amount: totalPrice,
-          // image_url: bliss2,
+         
         };
 
         await emailjs.send(
@@ -195,18 +193,19 @@ const Appointment = () => {
           "MCP7eN1sKKWReuKKW"
         );
         console.log("Confirmation email sent successfully");
-
+return true
       } catch (error) {
         console.error("Error sending confirmation email:", error);
+        return false
       }
     }
   };
   // ---------------------------------------------------------------------------------------------------------------
 
 
-  const handleConfirmBooking = async () => {
+  const handleConfirmBooking = async (): Promise<boolean>  => {
     try {
-      const bookedServices = summary.map(item => ({
+      const bookedServices= summary.map((item: any) => ({
         service: item.service,
         startTime: item.startTime,
         price: item.price,
@@ -241,6 +240,9 @@ const Appointment = () => {
       console.error("Error while confirming booking:", error);
     }
   };
+  const handleDateChange = (value) => {
+    setSelectedDate(value);
+  };
 
 
   return (
@@ -256,7 +258,7 @@ const Appointment = () => {
               >
                 <h3>Select your date for Service:</h3>
                 <Calendar
-                  onChange={setSelectedDate}
+                  onChange={handleDateChange}
                   value={selectedDate}
                   minDate={new Date()}
                 />
@@ -270,7 +272,7 @@ const Appointment = () => {
                   onChange={handleServiceChange}
                 >
                   <option value="">Select a service</option>
-                  {services.map((service, index) => (
+                  {services.map((service: any, index) => (
                     <option key={index} value={service.title}>
                       {service.title}
                     </option>
@@ -317,7 +319,7 @@ const Appointment = () => {
           <h2>Summary</h2>
           <div className="data-container">
             {summary &&
-              summary.map((item, index) => (
+              summary.map((item: any, index) => (
                 <div key={index} className="submitted-data">
                   <h4>{index + 1})  </h4>
                   <div className="display-data">
