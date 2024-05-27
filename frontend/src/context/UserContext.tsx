@@ -24,7 +24,9 @@ interface UserContexType {
 }
 
 const defaultToken = localStorage.getItem("token");
-const defaultUser = JSON.parse(localStorage.getItem("user") || "");
+const defaultUser = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user")!)
+  : null;
 
 export const UserContext = createContext<UserContexType>({
   user: defaultUser,
