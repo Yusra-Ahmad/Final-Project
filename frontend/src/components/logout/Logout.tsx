@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import "./logout.scss";
 
-const Logout = () => {
+const Logout: React.FC = () => {
   const navigate = useNavigate();
   const { user, setUser, setIsLoggedIn, setToken } = useUser();
 
@@ -20,7 +20,7 @@ const Logout = () => {
     navigate("/");
   };
 
-  const capitalize = (str) => {
+  const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 

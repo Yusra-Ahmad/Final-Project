@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import { Canvas } from "@react-three/fiber";
-import { Stars } from "@react-three/drei";
+// import { Canvas } from "@react-three/fiber";
+// import { Stars } from "@react-three/drei";
 
 import "./about.scss";
 

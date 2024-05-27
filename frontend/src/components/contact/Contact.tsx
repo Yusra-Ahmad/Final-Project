@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("myyrorpk");
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    if (state.succeeded) {
+    if (state.succeeded && formRef.current) {
       formRef.current.reset();
     }
   }, [state.succeeded]);
@@ -66,8 +66,6 @@ const Contact = () => {
             <textarea
               name="message"
               id="message"
-              cols="30"
-              rows="6"
               placeholder="Enter your query or request here..."
             />
             <ValidationError
