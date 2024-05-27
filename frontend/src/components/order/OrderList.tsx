@@ -4,11 +4,15 @@ import { UserContext } from '../../context/UserContext';
 // import Products from '../products/products';
 
 interface Product {
-    productId: string;
-    name: string;
+    _id: string;
+    title: string;
     price: number;
-    quantity: number;
     image: string;
+}
+
+interface ProductData {
+    product: Product;
+    quantity: number;
 }
 
 interface Order {
@@ -16,7 +20,7 @@ interface Order {
     totalAmount: number;
     orderDate: Date;
     status: string;
-    products: Product[];
+    products: ProductData[];
 }
 const Orders: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -69,7 +73,7 @@ const Orders: React.FC = () => {
 
 
                             return <div key={product._id} className="product-details">
-                                <img src={`${Base_Url}/${product.image}`} alt={product.name} style={{ width: '100px', height: '100px', }} />
+                                <img src={`${Base_Url}${product.image}`} alt={product.title} style={{ width: '100px', height: '100px', }} />
                                 <p>Name: {product.title}</p>
                                 <br />
                                 <p>Quantity: {quantity}</p>
