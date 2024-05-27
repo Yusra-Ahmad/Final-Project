@@ -1,4 +1,3 @@
-// ServiceContext.tsx
 import React, { createContext, useContext, useState } from "react";
 
 const ServiceContext = createContext<{
@@ -24,7 +23,7 @@ const ServiceContext = createContext<{
 });
 
 
-export const ServiceProvider: React.FC = ({ children }) => {
+export const ServiceProvider: React.FC = ({ children }: { children: JSX.Element })  => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
