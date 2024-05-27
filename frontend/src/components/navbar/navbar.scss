@@ -41,8 +41,8 @@ body.menu-open::-webkit-scrollbar {
       }
 
       @media screen and (max-width: 576px) {
-        padding-left: 2rem;
-        max-width: 6rem;
+        padding-left: 1rem;
+        max-width: 5rem;
       }
     }
 
@@ -65,7 +65,7 @@ body.menu-open::-webkit-scrollbar {
 
       .cross-icon {
         transform: rotate(90deg);
-        margin-left: -3rem;
+        // margin-left: -3rem;
       }
 
       @media screen and (max-width: 768px) {
@@ -95,7 +95,7 @@ body.menu-open::-webkit-scrollbar {
 
       .first-letter {
         font-size: 1.3rem;
-        padding-inline: 0.7rem;
+        padding-inline: 0.3rem;
         cursor: pointer;
         color: white;
         background-color: #333;
