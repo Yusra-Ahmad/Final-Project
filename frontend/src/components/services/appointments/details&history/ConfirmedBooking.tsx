@@ -53,7 +53,23 @@ const ConfirmedBooking = () => {
 
             <li >
               <p><span>Service: </span>{booking.service}</p>
-              <p><span>Start Time:</span> {new Date(booking.startTime).toLocaleString()}</p>
+              <p>
+                      <span>Date: </span>
+                      {new Date(booking.startTime).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p>
+                      <span>Time: </span>
+                      {new Date(
+                        new Date(booking.startTime).getTime() 
+                      ).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
               <p><span>Price: </span>{booking.price}€</p>
       
             </li>

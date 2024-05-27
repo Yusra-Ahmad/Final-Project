@@ -297,13 +297,11 @@
 
     &::before {
       left: -12px;
-      background: linear-gradient(45deg, #447f44, #629764);
     }
 
     &::after {
       right: -12px;
       color: black;
-      background: linear-gradient(45deg, #2f771b, #4c904f);
     }
 
     &:hover {
@@ -335,14 +333,12 @@
 
     &::before {
       left: -10px;
-      background: linear-gradient(45deg, #f44336, #d77272);
     }
 
     &::after {
       right: -10px;
       color: black;
       text-transform: uppercase;
-      background: linear-gradient(45deg, #c62828, #b71c1c);
     }
 
     &:hover {
@@ -351,7 +347,9 @@
       color: black;
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
-    } &:disabled {
+    }
+
+    &:disabled {
       background: grey;
       color: #999999;
       cursor: not-allowed;
@@ -369,5 +367,98 @@
     width: 100%;
     padding: 1rem;
     order: 2; /* Move order summary below cart items */
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  max-height: 300px;
+  border: 2px solid #f9c29d;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #2c2a2a;
+  color: #fff;
+
+  p {
+    margin-bottom: 7rem;
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+    padding: 1.5rem;
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    max-width: 90%;
+    padding: 1rem;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+.cart-container {
+  .continue-shopping-button {
+    top: 12rem;
+    position: relative;
+    max-width: 8rem;
+    text-align: center;
+    max-height: 4rem;
+    margin-left: 9.4rem;
+    padding: 0.4rem 1rem; /* Smaller width and height */
+    border: none;
+    background-color: #b08568;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(45deg, #b08568, #fdbf6f);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1fr;
+    margin-right: 4rem;
+    font-size: 1rem; /* Adjusted font size */
+    z-index: 10;
+
+    /* Centering the button */
+    position: absolute;
+    bottom: 1rem;
+    left: 1%;
+    transform: translateX(-2%);
+  }
+
+  .continue-shopping-button:hover {
+    background: linear-gradient(45deg, #362207, #6e330e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 576px) {
+    .continue-shopping-button {
+      margin-right: 0.1rem;
+      padding: 0.4rem 0.8rem; /* Adjusted for smaller screens */
+      font-size: 0.875rem; /* Adjusted font size for smaller screens */
+    }
   }
 }
