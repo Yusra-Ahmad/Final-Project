@@ -5,7 +5,7 @@ import "./ConfirmedBooking.scss"
 // import './Appointments.scss';
 
 const ConfirmedBooking = () => {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { token, user } = useUser();
   const navigate = useNavigate();
@@ -20,12 +20,12 @@ const ConfirmedBooking = () => {
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_backend_url}bookingConfirm/${user._id}`,
+          `${import.meta.env.VITE_backend_url}bookingConfirm/${user?._id}`,
           config
         );
         const data = await response.json();
-        setBookings(data); // Set the bookings state with fetched data
-        setLoading(false); // Set loading to false after data is fetched
+        setBookings(data); 
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching bookings:', error);
         setLoading(false);
@@ -33,7 +33,7 @@ const ConfirmedBooking = () => {
     };
 
     fetchBookings();
-  }, [token, user._id]);
+  }, [token, user?._id]);
 
   if (loading) {
     return <div>Loading...</div>;

@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
-// import  bliss2 from "../../../assets/bliss2.png"
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
@@ -20,14 +18,14 @@ import "./Appointments.scss";
 const Appointment = () => {
   const { services, fetchServices, summary, updateSummary, setBookingDetail } =
     useServiceContext();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [selectedService, setSelectedService] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [showPopup, setShowPopup] = useState(false);
-  const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [confirmationRequested, setConfirmationRequested] = useState(false);
-  const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    const [selectedService, setSelectedService] = useState<string>("");
+    const [selectedTime, setSelectedTime] = useState<number>(0);
+    const [showPopup, setShowPopup] = useState(false);
+    const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [confirmationRequested, setConfirmationRequested] = useState(false);
+    const popupTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 
   const { user, setUser, token, setToken } = useUser();
@@ -40,7 +38,7 @@ const Appointment = () => {
 
   useEffect(() => {
     fetchServices();
-    // fetchData();
+  
   }, []);
 
   useEffect(() => {
@@ -65,7 +63,7 @@ const Appointment = () => {
   };
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       if (!selectedDate || !selectedService || !selectedTime) {
@@ -86,7 +84,7 @@ const Appointment = () => {
         service: selectedService,
         startTime: time,
         price: price,
-        user: user._id,
+        user: user?._id,
       };
       const config = {
         method: "POST",
@@ -114,8 +112,7 @@ const Appointment = () => {
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
-      // activeRef.current.removeAttribute("active")
-      // setActive(false)
+
     } catch (error) {
       console.error("Error while booking appointment:", error);
     }
@@ -139,7 +136,7 @@ const Appointment = () => {
       console.log(error);
     }
   };
-  const handleDelete = async (serviceName) => {
+  const handleDelete = async (serviceName: string) => {
     try {
       const config = {
         method: "DELETE",

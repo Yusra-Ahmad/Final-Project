@@ -5,13 +5,13 @@ import { useServiceContext } from "../../../../context/serviceContext";
 
 const BookingDetail = () => {
   const { bookingDetail } = useServiceContext();
-  const totalAmount = bookingDetail.reduce((total, item) => total + item.price, 0);
-console.log("this is booking details", bookingDetail);
+  const totalAmount = bookingDetail.reduce((total: number, item: any) => total + item.price, 0);
+
   return (
     <div className="wrap-container">
     <div className="booking-details-container">
       <h2>Booking is Confirmed</h2>
-      {bookingDetail.map((item, index) => (
+      {bookingDetail.map((item: any, index: number)  => (
         <div key={index} className="booking-detail">
           <p>{index + 1}. Service: {item.service}</p>
           <p>
