@@ -1,94 +1,90 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-const ServiceContext = createContext<{
+interface Service {
+  _id: string;
+  title: string;
+  description: string;
+  duration: string;
+  price: number;
+}
+
+interface ServiceContextType {
   services: Service[];
   loading: boolean;
   error: string | null;
   fetchServices: () => void;
   addService: () => void;
   removeService: (id: string) => void;
-  summary: [];
-  bookingDetail: [];
-  updateSummary: (data: any[]) => void;
-}>({
-  services: [],
-  loading: false,
-  error: null,
-  fetchServices: () => { },
-  addService: () => { },
-  removeService: () => { },
-  summary: [],
-  setBookingDetail: () => { },
-  updateSummary: () => { },
-});
+  summary: Service[];
+  bookingDetail: Service[];
+  setBookingDetail: (data: Service[]) => void;
+  updateSummary: (data: Service[]) => void;
+}
 
+const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
 
-export const ServiceProvider: React.FC = ({ children }: { children: JSX.Element })  => {
+interface ServiceProviderProps {
+  children: ReactNode;
+}
+
+export const ServiceProvider: React.FC<ServiceProviderProps> = ({ children }) => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [summary, setSummary] = useState<any[]>([]);
-  const [bookingDetail, setBookingDetail] = useState<any[]>([]);
+  const [summary, setSummary] = useState<Service[]>([]);
+  const [bookingDetail, setBookingDetail] = useState<Service[]>([]);
 
-  const updateSummary = (data) => {
-
-    // console.log("updated summary", data);
+  const updateSummary = (data: Service[]) => {
     setSummary(data);
   };
-  // console.log("this is Summary", summary);
 
-  // Function to fetch services
   const fetchServices = async () => {
     setLoading(true);
     try {
       const response = await fetch(`${import.meta.env.VITE_backend_url}services`);
       if (!response.ok) {
-        throw new Error("Failed to fetch services");
+        throw new Error('Failed to fetch services');
       }
       const data: Service[] = await response.json();
       setServices(data);
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  // Function to add a new service
   const addService = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_backend_url}services`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({}),
       });
       if (!response.ok) {
-        throw new Error("Failed to add service");
+        throw new Error('Failed to add service');
       }
       fetchServices();
     } catch (error) {
-      console.error("Error adding service:", error);
+      console.error('Error adding service:', error);
     }
   };
 
-
-  // Function to remove a service
   const removeService = async (id: string) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_backend_url}services/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error("Failed to remove service");
+        throw new Error('Failed to remove service');
       }
       fetchServices();
     } catch (error) {
-      console.error("Error removing service:", error);
+      console.error('Error removing service:', error);
     }
   };
-
 
   return (
     <ServiceContext.Provider
@@ -110,5 +106,10 @@ export const ServiceProvider: React.FC = ({ children }: { children: JSX.Element 
   );
 };
 
-
-export const useServiceContext = () => useContext(ServiceContext);
+export const useServiceContext = () => {
+  const context = useContext(ServiceContext);
+  if (!context) {
+    throw new Error('useServiceContext must be used within a ServiceProvider');
+  }
+  return context;
+};
