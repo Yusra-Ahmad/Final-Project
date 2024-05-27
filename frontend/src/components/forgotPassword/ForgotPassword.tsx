@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { BiError } from "react-icons/bi";
 import { RotatingLines } from "react-loader-spinner";
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const emailInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<boolean>(false);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
         setError(true);
       }
     } catch (error) {
-      console.error("Login error:", error.message);
+      console.error("Login error:", error);
       setError(true);
     } finally {
       setShowSpinner(false);
@@ -69,16 +69,15 @@ const ForgotPassword = () => {
           required
         />
         <button>Continue</button>
-        <RotatingLines
-          visible={showSpinner}
-          height="35"
-          width="35"
-          color="grey"
-          strokeWidth="3"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-          wrapperStyle={{ marginLeft: "10px" }}
-        />
+        <div style={{ marginLeft: "10px" }}>
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="3"
+            animationDuration="0.75"
+            width="35"
+            visible={showSpinner}
+          />
+        </div>
       </form>
     </div>
   );
