@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import "./servicesAnimation.scss";
 import { useNavigate } from "react-router-dom";
 import "./servicesAnimation.scss";
