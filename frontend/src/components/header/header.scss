@@ -7,7 +7,7 @@
   .page {
     display: flex;
     align-items: center;
-    color: black;
+    color: white;
     font-family: serif;
     font-style: italic;
     position: absolute;
@@ -63,7 +63,7 @@
           width: 100%; // Initial width 0
           height: 5px; // Border height
 
-          background-color: #584030; // Border color
+          background-color: black; // Border color
           transition: width 0.5s ease; // Transition effect
         }
         &:hover::before {
@@ -79,7 +79,7 @@
       width: 90%;
       height: fit-content;
       margin-left: 5rem;
-      background-color: #58403057;
+      background-color: #58403083;
 
       h1 {
         color: white;
