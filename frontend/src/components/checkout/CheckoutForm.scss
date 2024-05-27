@@ -1,6 +1,5 @@
 .checkout-form-container {
-
-  background-image: url('../../assets/thankyou-page.jpg');
+  background-image: url("../../assets/thankyou-page.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
@@ -16,15 +15,15 @@
 }
 
 .checkout-content {
-  position: absolute;
+  // position: absolute;
   background-color: #3e352f9f;
-  padding: 4.9rem; 
+  padding: 4.9rem;
   border-radius: 2rem;
   box-shadow: 4px 3px 16px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px; 
+  max-width: 1200px; /* Add a max-width to improve layout on large screens */
 }
 
 .form-section,
@@ -142,29 +141,29 @@ select {
 }
 
 .thank-you-message {
-  background-image: url('../../assets/newbackground thanku.jpg');
+  background-image: url("../../assets/newbackground thanku.jpg");
   background-size: cover;
   background-position: center;
   line-height: 5rem;
   text-align: center;
   margin-top: 50px;
   font-size: 1.1rem;
-  padding: 4.9rem; 
+  padding: 4.9rem;
   border-radius: 1em;
   box-shadow: 7px 7px 3px rgb(124, 94, 58);
   color: #fff;
   max-width: 600px;
   width: 100%;
-  margin-top: 10rem; 
-  margin-bottom: 10rem; 
-  margin-left: 2rem; 
-  margin-right: 2rem; 
+  margin-top: 10rem; /* Add top margin */
+  margin-bottom: 10rem; /* Add bottom margin */
+  margin-left: 2rem; /* Add left margin */
+  margin-right: 2rem; /* Add right margin */
 }
 
 .continue-shopping-button {
   top: 2rem;
   font-style: italic;
-  word-spacing: .3rem;
+  word-spacing: 0.3rem;
   font-weight: bold;
   width: 13rem;
   //  padding: -7px;
@@ -228,7 +227,7 @@ select {
 @media (max-width: 768px) {
   .checkout-form-container {
     padding: 10rem 2rem;
-    height: auto; 
+    height: auto; /* Let the content determine the height */
     margin-top: 5rem;
     margin-bottom: 5rem;
   }
