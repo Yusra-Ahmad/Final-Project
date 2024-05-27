@@ -42,7 +42,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
         body: JSON.stringify({ newPassword, confirmPassword }),
       };
       const request = await fetch(
-        `http://localhost:3020/auth/reset-password/${token}`,
+        `${import.meta.env.VITE_backend_url}auth/reset-password/${token}`,
         config
       );
       const result = await request.json();

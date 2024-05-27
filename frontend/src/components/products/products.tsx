@@ -4,7 +4,7 @@ import { CartContext } from '../../context/Cart';
 import ProductBackgroundImage from "../../assets/product-background.jpg";
 
 
-const BaseUrl = 'http://localhost:3020';
+const BaseUrl = `${import.meta.env.VITE_backend_url}`;
 
 const Products: React.FC = () => {
     const [products, setProducts] = useState<any[]>([]);
@@ -14,7 +14,7 @@ const Products: React.FC = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`${BaseUrl}/products`);
+                const response = await fetch(`${BaseUrl}products`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }
@@ -61,7 +61,7 @@ const Products: React.FC = () => {
                 <div className='product-list'>
                     {products.map((product: any) => (
                         <div className='product-item' key={product._id}>
-                            <img className='product-image' src={`${BaseUrl}/${product.image}`} alt={product.title} />
+                            <img className='product-image' src={`${BaseUrl}${product.image}`} alt={product.title} />
                             <h2 className='product-title'>{product.title}</h2>
                             <p className='product-description'>{product.description}</p>
                             <p className='product-price'>€{product.price}</p>

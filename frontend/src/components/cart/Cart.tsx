@@ -14,7 +14,7 @@ interface Product {
 }
 
 const Cart = () => {
-  const Base_Url = 'http://localhost:3020';
+  const Base_Url = `${import.meta.env.VITE_backend_url}`;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
@@ -51,7 +51,7 @@ const Cart = () => {
               cartItems.map((product: Product) => (
                 <div className="cart-item" key={product._id}>
                   <div className="product-details">
-                    <img src={`${Base_Url}/${product.image}`} alt={product.title} />
+                    <img src={`${Base_Url}${product.image}`} alt={product.title} />
                     <div>
                       <h2>{product.title}</h2>
                       <button className="remove-button" onClick={() => removeFromCart(product)}>Remove</button>

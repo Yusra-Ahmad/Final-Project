@@ -26,7 +26,7 @@ const ForgotPassword: React.FC = () => {
         body: JSON.stringify({ email }),
       };
       const request = await fetch(
-        "http://localhost:3020/auth/forgot-password",
+        `${import.meta.env.VITE_backend_url}auth/forgot-password`,
         config
       );
       const result = await request.json();

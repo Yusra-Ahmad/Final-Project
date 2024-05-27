@@ -31,7 +31,7 @@ const CheckoutForm: React.FC = () => {
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const navigate = useNavigate();
   const { user, token } = useContext(UserContext);
-  const Base_Url = "http://localhost:3020";
+  const Base_Url = import.meta.env.VITE_backend_url;
   const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
 
   const submitOrder = async () => {
@@ -53,7 +53,7 @@ const CheckoutForm: React.FC = () => {
         paymentMethod: formState.paymentMethod,
       };
       try {
-        const response = await fetch(`${Base_Url}/orders`, {
+        const response = await fetch(`${Base_Url}orders`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -137,9 +137,8 @@ const CheckoutForm: React.FC = () => {
 
   return (
     <div
-      className={`checkout-form-container ${
-        isCheckoutComplete ? "thank-you-background" : ""
-      }`}
+      className={`checkout-form-container ${isCheckoutComplete ? "thank-you-background" : ""
+        }`}
     >
       {isCheckoutComplete ? (
         <div className="thank-you-message">

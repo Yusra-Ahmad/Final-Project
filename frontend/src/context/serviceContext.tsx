@@ -9,18 +9,18 @@ const ServiceContext = createContext<{
   addService: () => void;
   removeService: (id: string) => void;
   summary: [];
-  bookingDetail:[];
+  bookingDetail: [];
   updateSummary: (data: any[]) => void;
 }>({
   services: [],
   loading: false,
   error: null,
-  fetchServices: () => {},
-  addService: () => {},
-  removeService: () => {},
-  summary:[],
-  setBookingDetail:()=>{},
-  updateSummary: () => {}, 
+  fetchServices: () => { },
+  addService: () => { },
+  removeService: () => { },
+  summary: [],
+  setBookingDetail: () => { },
+  updateSummary: () => { },
 });
 
 
@@ -29,20 +29,20 @@ export const ServiceProvider: React.FC = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [summary, setSummary] = useState<any[]>([]);
-const [bookingDetail, setBookingDetail]=useState<any[]>([]);
+  const [bookingDetail, setBookingDetail] = useState<any[]>([]);
 
   const updateSummary = (data) => {
 
     // console.log("updated summary", data);
     setSummary(data);
   };
-// console.log("this is Summary", summary);
+  // console.log("this is Summary", summary);
 
   // Function to fetch services
   const fetchServices = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3020/services");
+      const response = await fetch(`${import.meta.env.VITE_backend_url}services`);
       if (!response.ok) {
         throw new Error("Failed to fetch services");
       }
@@ -58,12 +58,12 @@ const [bookingDetail, setBookingDetail]=useState<any[]>([]);
   // Function to add a new service
   const addService = async () => {
     try {
-      const response = await fetch("http://localhost:3020/services", {
+      const response = await fetch(`${import.meta.env.VITE_backend_url}services`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({}), 
+        body: JSON.stringify({}),
       });
       if (!response.ok) {
         throw new Error("Failed to add service");
@@ -78,7 +78,7 @@ const [bookingDetail, setBookingDetail]=useState<any[]>([]);
   // Function to remove a service
   const removeService = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3020/services/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_backend_url}services/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
