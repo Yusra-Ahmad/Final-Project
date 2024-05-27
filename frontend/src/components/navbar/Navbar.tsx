@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
   let firstLetter = "";
   if (user) {
-    firstLetter = user.firstname.charAt(0).toUpperCase();
+    firstLetter = user!.firstname.charAt(0).toUpperCase();
   }
 
   const handleDropMenu = () => {
@@ -78,9 +78,15 @@ const Navbar: React.FC = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/orders">Order History</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/bookingConfirm">Booking History</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/logout">Logout</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/orders">
+                  Order History
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/bookingConfirm">
+                  Booking History
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/logout">
+                  Logout
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
@@ -90,8 +96,12 @@ const Navbar: React.FC = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/register">Register</Dropdown.Item>
-                <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/register">
+                  Register
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/login">
+                  Login
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           )}
@@ -102,7 +112,10 @@ const Navbar: React.FC = () => {
             )}
           </Link>
 
-          <MdOutlineCalendarMonth className="cart-icon" onClick={handleAppointment} />
+          <MdOutlineCalendarMonth
+            className="cart-icon"
+            onClick={handleAppointment}
+          />
         </ul>
       </div>
     </div>

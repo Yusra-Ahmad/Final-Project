@@ -4,14 +4,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 
-const ResetPassword = () => {
-  const { token } = useParams();
+interface ResetPasswordProps {}
+
+const ResetPassword: React.FC<ResetPasswordProps> = () => {
+  const { token } = useParams<{ token: string }>();
   const newPasswordInput = useRef<HTMLInputElement>(null);
   const confirmPasswordInput = useRef<HTMLInputElement>(null);
-  const [resetError, setResetError] = useState("");
-  const [resetSuccess, setResetSuccess] = useState(false);
+  const [resetError, setResetError] = useState<string>("");
+  const [resetSuccess, setResetSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   const handleShowPassword = () => {
@@ -27,6 +29,7 @@ const ResetPassword = () => {
       setResetError("Passwords do not match");
       return;
     }
+
     setShowSpinner(true);
     setResetError("");
 
@@ -53,7 +56,7 @@ const ResetPassword = () => {
       }
     } catch (error) {
       setShowSpinner(false);
-      console.error("Reset password error:", error.message);
+      console.error("Reset password error:", error);
       setResetError("An unexpected error occurred");
     } finally {
       setShowSpinner(false);
@@ -118,16 +121,16 @@ const ResetPassword = () => {
           </div>
 
           <button type="submit">Reset Password</button>
-          <RotatingLines
-            visible={showSpinner}
-            height="35"
-            width="35"
-            color="grey"
-            strokeWidth="3"
-            animationDuration="0.75"
-            ariaLabel="rotating-lines-loading"
-            wrapperStyle={{ marginLeft: "10px" }}
-          />
+
+          <div style={{ marginLeft: "10px" }}>
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="3"
+              animationDuration="0.75"
+              width="35"
+              visible={showSpinner}
+            />
+          </div>
         </form>
       )}
     </div>

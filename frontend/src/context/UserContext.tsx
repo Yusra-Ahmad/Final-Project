@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   SetStateAction,
   createContext,
@@ -10,6 +10,8 @@ import React, {
 interface User {
   id: number;
   email: string;
+  firstname: string;
+  lastname: string;
 }
 
 interface UserContexType {
@@ -22,7 +24,9 @@ interface UserContexType {
 }
 
 const defaultToken = localStorage.getItem("token");
-const defaultUser = JSON.parse(localStorage.getItem("user"));
+const defaultUser = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user")!)
+  : null;
 
 export const UserContext = createContext<UserContexType>({
   user: defaultUser,
@@ -33,7 +37,7 @@ export const UserContext = createContext<UserContexType>({
   isLoggedIn: false,
 });
 
-export const UserProvider: React.FC = ({ children }) => {
+export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState(defaultUser);
   const [token, setToken] = useState(defaultToken);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

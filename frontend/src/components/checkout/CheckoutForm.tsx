@@ -87,7 +87,7 @@ const CheckoutForm: React.FC = () => {
     const { fullName, telephone, address, city, country, postcode } = formState;
     const isValidTelephone = /^\d+$/.test(telephone); // Check if the telephone contains only numbers
     return (
-      fullName && isValidTelephone && address && city && country && postcode
+      !!fullName && isValidTelephone && !!address && !!city && !!country && !!postcode
     );
   };
 
@@ -272,16 +272,12 @@ const CheckoutForm: React.FC = () => {
             >
               <span>Pay now</span>
               <RotatingLines
-                visible={showSpinner}
-                height="35"
-                width="35"
-                color="grey"
-                strokeWidth="3"
-                animationDuration="0.75"
-                ariaLabel="rotating-lines-loading"
-                wrapperStyle={{ marginLeft: "10px" }}
-                wrapperClass=""
-              />
+              strokeColor="grey"
+              strokeWidth="3"
+              animationDuration="0.75"
+              width="35"
+              visible={showSpinner}
+            />
             </button>
           </div>
         </div>
