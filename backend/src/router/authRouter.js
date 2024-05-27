@@ -7,6 +7,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import { config } from "dotenv";
 import validatePassword from "../middlewares/validatePassword.js";
+import validateUserEmail from "../middlewares/validateUserEmail.js";
 
 config();
 
@@ -31,15 +32,20 @@ authRouter
       next({ status: 500, message: error.message });
     }
   })
-  .post("/register", validateUser, async (req, res, next) => {
-    try {
-      const newUser = await User.register(req.body);
+  .post(
+    "/register",
+    validateUser,
+    validateUserEmail,
+    async (req, res, next) => {
+      try {
+        const newUser = await User.register(req.body);
 
-      res.status(201).json(newUser);
-    } catch (error) {
-      next({ status: 401, message: error.message });
+        res.status(201).json(newUser);
+      } catch (error) {
+        next({ status: 401, message: error.message });
+      }
     }
-  })
+  )
 
   .post("/login", validateUser, async (req, res, next) => {
     try {
@@ -82,7 +88,7 @@ authRouter
         subject: "Password Reset",
         text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
                Please click on the following link, or paste this into your browser to complete the process:\n\n
-               http://${req.headers.host}/reset-password?token=${token}\n\n
+               http://localhost:5173/resetPassword/${token}\n\n
                If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       };
 
@@ -100,9 +106,9 @@ authRouter
   .post("/reset-password/:token", validatePassword, async (req, res, next) => {
     try {
       const { token } = req.params;
-      const { password, confirmPassword } = req.body;
+      const { newPassword, confirmPassword } = req.body;
 
-      if (password !== confirmPassword) {
+      if (newPassword !== confirmPassword) {
         next({ status: 400, message: "Passwords do not match." });
         return;
       }
@@ -120,16 +126,15 @@ authRouter
         return;
       }
 
-      const hashed = await hash(user.password, 10);
+      const hashed = await hash(newPassword, 10);
 
       user.password = hashed;
-      user.confirmPassword = confirmPassword;
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
 
       await user.save();
 
-      res.status(200).json({ message: "Password has been reset!" });
+      res.status(200).json({ message: "Password has been reset!", user });
     } catch (error) {
       next({ status: 500, message: error.message });
     }

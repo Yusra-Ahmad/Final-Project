@@ -1,7 +1,7 @@
 import { body, validationResult } from "express-validator";
 
 const validatePassword = [
-  body("password")
+  body("newPassword")
     .isLength({ min: 8 })
     .withMessage("password must be  at leasst 8 character long")
     .matches(/\d/)

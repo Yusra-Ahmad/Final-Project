@@ -7,6 +7,9 @@ import Services from "./components/services/Services";
 import Navbar from "./components/navbar/Navbar";
 import Products from "./components/products/products";
 import Cart from "./components/cart/Cart";
+import ForgotPassword from "./components/forgotPassword/ForgotPassword";
+import ResetPassword from "./components/resetPassword/ResetPassword";
+import ConfirmationPage from "./components/confirmationPge/ConfirmationPage";
 import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
 import Contact from "./components/contact/Contact";
@@ -32,8 +35,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/services" element={<Services />} />
             <Route path="/book-appointment" element={<Appointment />} />
-            <Route path="/bookingConfirm" element={<ConfirmedBooking/>}/>
-            <Route path="/bookingDetails"  element={<BookingDetail/>}/>
+            <Route path="/bookingConfirm" element={<ConfirmedBooking />} />
+            <Route path="/bookingDetails" element={<BookingDetail />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
@@ -42,7 +45,9 @@ function App() {
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/about" element={<About />} />
             <Route path="/orders" element={<OrderList />} />
-
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/resetPassword/:token" element={<ResetPassword />} />
+            <Route path="/confirmationPage" element={<ConfirmationPage />} />
 
             {/* <Route path="/thank-you" element={<ThankYou/>} /> */}
           </Routes>
