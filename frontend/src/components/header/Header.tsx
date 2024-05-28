@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./header.scss";
 import Navbar from "../navbar/Navbar";
 import logo from "../../assets/logo.svg";
-import bliss from "../../assets/bliss2.png";
 
 const App = () => {
   const pagesRef = useRef<HTMLDivElement[]>([]);
@@ -118,7 +117,7 @@ const App = () => {
         className="page page1"
         style={{
           transform: "translateY(0px)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         ref={(el: HTMLDivElement): void => {
           if (pagesRef.current.length < 1) {
@@ -131,7 +130,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page2"
         ref={(el: HTMLDivElement): void => {
@@ -155,7 +154,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page3"
         ref={(el: HTMLDivElement): void => {
@@ -179,7 +178,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page4"
         ref={(el: HTMLDivElement): void => {
@@ -205,7 +204,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page5"
         ref={(el: HTMLDivElement): void => {

@@ -17,9 +17,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 1s ease, opacity 0.7s ease;
+  animation: slideDown 1.5s ease-out forwards;
+  // transition: transform 0.7s ease, opacity 0.7s ease;
   transform-origin: top;
-  overflow: hidden;
 
   ul {
     display: flex;
@@ -43,6 +43,7 @@
           left: 0;
           width: 0;
           height: 2px;
+
           background-color: #b08568;
           transition: width 0.3s ease;
         }
@@ -55,11 +56,20 @@
 }
 
 .active {
-  transform: translateY(0%);
   opacity: 1;
 }
 
 .hidden {
-  transform: translateY(-90%);
   opacity: 0;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
