@@ -13,10 +13,11 @@
     flex-direction: column;
     box-shadow: none;
     border-radius: 0;
+    width: 90vw;
   }
-  @media screen and (max-width: 1080px) {
-  width: 100vw;
-  }
+  
+  padding: 0;
+
 
   .appointment-form {
     border-right: #b08568 double 6px;
@@ -44,9 +45,7 @@
       h1 {
         font-size: 2rem;
         @media screen and (max-width: 1080px) {
-
           font-size: 1.2rem;
-
         }
       }
     }
@@ -77,9 +76,12 @@
 
 
     @media screen and (max-width: 680px) {
-  
+
+      
       height: 100vh;
-     
+     h3{
+      font-size: 12px;
+     }
     }
 
     .calendar-container {
@@ -88,7 +90,6 @@
       // font-size: 16px;
       @media screen and (max-width: 1080px) {
        width: 50%;
-
        height: 100%;
       }
       @media screen and (max-width: 580px) {
@@ -99,9 +100,6 @@
         }
         
        }
-
-      }
-
       
       .react-calendar {
         font-size: 1.2rem;
@@ -139,13 +137,10 @@
         span{
  font-size: 20px;
  @media screen and (max-width: 1080px) {
-
   abbr{
     font-size: 10px;
     padding: 1px;
   }
-
-
   font-size: 10px;
 }
         }
@@ -337,7 +332,7 @@
     margin-top: 8.5rem;
   }
   button {
-    position: relative; /* Ensure relative positioning for pseudo-elements */
+    position: relative; 
     background-color: transparent;
     border: none;
     font-size: 1.5rem;
@@ -420,12 +415,6 @@
 
     .display-data {
       width: 90%;
-  
-      // .number{
-
-      //   display: flex;
-      //   justify-content: space-between;
-      // }
       @media screen and (max-width: 1080px) {
         width: 50%;
       }
@@ -435,10 +424,17 @@
       font-size: 1.2em;
       color: #fbe2d1;
       margin-bottom: -1rem;
+      @media screen and (max-width: 1080px) {
+        font-size: 0.8rem;
+        margin: 2px;
+      }
       span {
         color: #bd7646;
         font-weight: bolder;
         font-size: 1.5rem;
+        @media screen and (max-width: 1080px) {
+          font-size: 1rem;
+        }
       }
     }
     h3 {
