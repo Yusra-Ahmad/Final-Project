@@ -13,7 +13,11 @@
     flex-direction: column;
     box-shadow: none;
     border-radius: 0;
+    width: 90vw;
   }
+  
+  padding: 0;
+
 
   .appointment-form {
     border-right: #b08568 double 6px;
@@ -41,7 +45,7 @@
       h1 {
         font-size: 2rem;
         @media screen and (max-width: 1080px) {
-          font-size: 1.8rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -58,9 +62,26 @@
         gap: 0;
         flex-direction: column;
         h3 {
-          font-size: 1.1rem;
+          font-size: 14px;
         }
       }
+   
+    }
+    @media screen and (max-width: 680px) {
+      height: 100vh;
+     h3{
+      font-size: 12px;
+     }
+    }
+
+
+    @media screen and (max-width: 680px) {
+
+      
+      height: 100vh;
+     h3{
+      font-size: 12px;
+     }
     }
 
     .calendar-container {
@@ -68,9 +89,18 @@
       // overflow: hidden;
       // font-size: 16px;
       @media screen and (max-width: 1080px) {
-        height: 50%;
+       width: 50%;
+       height: 100%;
       }
-
+      @media screen and (max-width: 580px) {
+        width: 80%;
+        height: 100vh;
+        h3{
+          font-size: 16px;
+        }
+        
+       }
+      
       .react-calendar {
         font-size: 1.2rem;
         font-family: serif;
@@ -95,7 +125,7 @@
         padding: 0.5rem;
         @media screen and (max-width: 1080px) {
           padding: 5px;
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -103,16 +133,33 @@
         border: 2px solid #b08568;
         border-radius: 20px;
       }
+      .react-calendar__navigation{
+        span{
+ font-size: 20px;
+ @media screen and (max-width: 1080px) {
+  abbr{
+    font-size: 10px;
+    padding: 1px;
+  }
+  font-size: 10px;
+}
+        }
 
+      }
       .react-calendar__navigation button {
         background-color: transparent;
         color: #efe6e6;
-        font-size: 1rem;
+        font-size: 10px;
         border: none;
         margin-left: 1.3rem;
 
         @media screen and (max-width: 1080px) {
           padding: 0;
+          font-size: 14px;
+        }
+        @media screen and (max-width: 580px) {
+          padding: 0;
+          margin: 5px;
           font-size: 12px;
         }
       }
@@ -186,6 +233,10 @@
       border-radius: 10px;
       font-size: 1rem;
       font-family: serif;
+      @media screen and (max-width: 580px) {
+     padding: 0.5rem;
+        font-size: 12px;
+      }
     }
     #service-date {
       padding: 1rem;
@@ -270,13 +321,18 @@
   position: relative; /* Ensure relative positioning for containing pseudo-elements */
 
   @media screen and (max-width: 1080px) {
-    width: 15rem;
+    width: 12rem;
     align-items: center;
     margin-top: 7.5rem;
   }
 
+  @media screen and (max-width: 680px) {
+    width: 12rem;
+    align-items: center;
+    margin-top: 8.5rem;
+  }
   button {
-    position: relative; /* Ensure relative positioning for pseudo-elements */
+    position: relative; 
     background-color: transparent;
     border: none;
     font-size: 1.5rem;
@@ -359,12 +415,6 @@
 
     .display-data {
       width: 90%;
-  
-      // .number{
-
-      //   display: flex;
-      //   justify-content: space-between;
-      // }
       @media screen and (max-width: 1080px) {
         width: 50%;
       }
@@ -374,10 +424,17 @@
       font-size: 1.2em;
       color: #fbe2d1;
       margin-bottom: -1rem;
+      @media screen and (max-width: 1080px) {
+        font-size: 0.8rem;
+        margin: 2px;
+      }
       span {
         color: #bd7646;
         font-weight: bolder;
         font-size: 1.5rem;
+        @media screen and (max-width: 1080px) {
+          font-size: 1rem;
+        }
       }
     }
     h3 {
