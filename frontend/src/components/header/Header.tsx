@@ -4,6 +4,7 @@ import "./header.scss";
 import Navbar from "../navbar/Navbar";
 import logo from "../../assets/logo.svg";
 
+
 const App = () => {
   const pagesRef = useRef<HTMLDivElement[]>([]);
   const currentPageRef = useRef<number>(0);
