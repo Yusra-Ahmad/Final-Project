@@ -6,7 +6,7 @@ The Bliss Salon and Spa full stack website is a comprehensive platform designed 
 1. **Service Booking**: Users can browse available services and book appointments. :woman-getting-haircut::nail_care:
 2. **Product Purchase**: Users can explore and buy salon and spa products. :shopping_bags::lotion_bottle:
 3. **User Authentication**: Users can register and log in to access personalized features. :closed_lock_with_key::busts_in_silhouette:
-4. **Admin Dashboard**: Admins can manage services, products, and user accounts. :hammer_and_wrench::bar_chart:
+
 ## Technologies Used :computer:
 ### Frontend
 - **HTML5** :memo:
