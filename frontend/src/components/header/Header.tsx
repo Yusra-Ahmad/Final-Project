@@ -112,7 +112,7 @@ const App = () => {
       onTouchMove={wheelEnabled ? handleTouchMove : undefined}
       onWheel={wheelEnabled ? handleWheel : undefined}
     >
-      <Navbar />
+     
 
       <div
         className="page page1"
