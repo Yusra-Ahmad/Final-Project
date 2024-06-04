@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
-import Navbar from "../navbar/Navbar";
 import logo from "../../assets/logo.svg";
-
 
 const App = () => {
   const pagesRef = useRef<HTMLDivElement[]>([]);
@@ -112,13 +110,11 @@ const App = () => {
       onTouchMove={wheelEnabled ? handleTouchMove : undefined}
       onWheel={wheelEnabled ? handleWheel : undefined}
     >
-     
-
       <div
         className="page page1"
         style={{
           transform: "translateY(0px)",
-          transition: "transform ease-out 1.5s",
+          transition: "transform ease-out 1s",
         }}
         ref={(el: HTMLDivElement): void => {
           if (pagesRef.current.length < 1) {
@@ -131,7 +127,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1.5s",
+          transition: "transform ease-out 1s",
         }}
         className="page page2"
         ref={(el: HTMLDivElement): void => {
@@ -155,7 +151,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1.5s",
+          transition: "transform ease-out 1s",
         }}
         className="page page3"
         ref={(el: HTMLDivElement): void => {
@@ -179,7 +175,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1.5s",
+          transition: "transform ease-out 1s",
         }}
         className="page page4"
         ref={(el: HTMLDivElement): void => {
@@ -205,7 +201,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1.5s",
+          transition: "transform ease-out 1s",
         }}
         className="page page5"
         ref={(el: HTMLDivElement): void => {
