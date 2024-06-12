@@ -7,10 +7,6 @@ body.menu-open::-webkit-scrollbar {
 }
 
 .navbar-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-
   .navbar {
     position: fixed;
     top: 0;
@@ -26,10 +22,27 @@ body.menu-open::-webkit-scrollbar {
     list-style: none;
     padding-inline: 2rem;
     z-index: 10;
-
+    .flex-item {
+      width: 33%;
+      span {
+        font-size: 1.5rem;
+      }
+      .icon {
+        font-size: 1.5rem;
+        @media screen and (max-width: 576px) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    @media screen and (max-width: 576px) {
+      .logo {
+        display: block;
+        text-align: center;
+      }
+    }
     img {
       width: 80%;
-      max-width: 10rem;
+      max-width: 8rem;
 
       @media screen and (max-width: 768px) {
         width: 100%;
@@ -59,7 +72,9 @@ body.menu-open::-webkit-scrollbar {
       margin-right: 7px;
 
       .cross-icon {
-        transform: rotate(90deg);
+        @media screen and (min-width: 768px) {
+          margin-block: 0.9rem;
+        }
       }
 
       @media screen and (max-width: 768px) {
@@ -120,7 +135,6 @@ body.menu-open::-webkit-scrollbar {
 
         &:hover {
           color: #e0ab88;
-          background-color: black;
         }
 
         @media screen and (max-width: 768px) {
